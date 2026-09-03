@@ -16,41 +16,11 @@ import pandas as pd
 from datetime import datetime
 
 # ─────────────────────────────────────────────────────────────
-# CUSTOM BRAND MARK (hand-built SVG, no stock photography)
-# ─────────────────────────────────────────────────────────────
-def logo_svg(size: int = 80) -> str:
-    """A single sprout/leaf mark in a rounded badge — the app's own
-    geometric mark rather than a generic photo or emoji."""
-    return f"""<svg width="{size}" height="{size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="mkLogoGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#388E3C"/>
-          <stop offset="100%" stop-color="#1B5E20"/>
-        </linearGradient>
-      </defs>
-      <rect x="2" y="2" width="96" height="96" rx="26" fill="url(#mkLogoGrad)"/>
-      <path d="M50 80 C50 80 28 62 28 40 C28 24 41 14 60 15 C60 15 63 35 49 50 C40 59 50 80 50 80 Z"
-            fill="#FFFFFF"/>
-      <path d="M49 50 C49 50 38 41 37 29" stroke="#1B5E20" stroke-width="2.4"
-            fill="none" stroke-linecap="round" opacity="0.45"/>
-    </svg>"""
-
-UPLOAD_ICON_SVG = """<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#558B2F" stroke-width="1.6">
-  <path d="M4 16.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M12 3v12m0-12 4 4m-4-4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>"""
-
-SCAN_ICON_SVG = """<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.6">
-  <path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0 1 12 4a7 7 0 0 1 7 6.5C19 14.5 16 18 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="12" cy="11" r="2.3"/>
-</svg>"""
-
-# ─────────────────────────────────────────────────────────────
 # PAGE CONFIG (FIGMA DASHBOARD LAYOUT)
 # ─────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="MahaKrishi AI | महाकृषि",
-    page_icon="",
+    page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -69,14 +39,12 @@ st.markdown("""
 
     /* Main Header Figma Banner */
     .figma-header {
-    background: linear-gradient(120deg, #1B5E20 0%, #2E7D32 45%, #388E3C 70%, #2E7D32 100%);
-    background-size: 200% 200%;
-    animation: headerShift 10s ease-in-out infinite;
+    background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
     padding: 20px 28px;
     border-radius: 20px;
     margin-bottom: 24px;
     color: white;
-    box-shadow: 0 14px 34px rgba(27, 94, 32, 0.32), inset 0 1px 0 rgba(255,255,255,0.12);
+    box-shadow: 0 10px 30px rgba(27, 94, 32, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: flex-start;
@@ -84,26 +52,9 @@ st.markdown("""
     flex-wrap: wrap;
     gap: 12px;
 }
-    @keyframes headerShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
     .figma-header-title { font-size: 2.2rem; font-weight: 700; margin: 0; color: #FFFFFF; }
     .figma-header-sub { font-size: 1rem; color: #C8E6C9; margin-top: 6px; }
-
-    /* Status dot — replaces the old colored emoji circles */
-    .status-dot {
-        display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-        background: #A5D6A7; margin-right: 6px; vertical-align: middle;
-        box-shadow: 0 0 0 rgba(165,214,167,0.7);
-        animation: statusPulse 2s infinite;
-    }
-    @keyframes statusPulse {
-        0%   { box-shadow: 0 0 0 0 rgba(165,214,167,0.6); }
-        70%  { box-shadow: 0 0 0 7px rgba(165,214,167,0); }
-        100% { box-shadow: 0 0 0 0 rgba(165,214,167,0); }
-    }
-
+    
   .figma-badge {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
@@ -126,19 +77,11 @@ st.markdown("""
         margin-bottom: 20px;
         border: 1px solid #E0E0E0;
         box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s ease;
-        transform-style: preserve-3d;
-        will-change: transform;
-        animation: cardRiseIn 0.5s cubic-bezier(0.2,0.8,0.2,1) both;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .figma-card:hover {
-        transform: perspective(800px) rotateX(1.5deg) translateY(-6px) scale(1.008);
-        box-shadow: 0 18px 38px rgba(27,94,32,0.16);
-    }
-
-    @keyframes cardRiseIn {
-        from { opacity: 0; transform: translateY(16px); }
-        to   { opacity: 1; transform: translateY(0); }
+        transform: translateY(-2px);
+        box-shadow: 0 8px 26px rgba(46,125,50,0.12);
     }
 
     /* Login Card */
@@ -157,6 +100,61 @@ st.markdown("""
     .badge-warning   { background: #FFF3E0; color: #EF6C00; border: 1px solid #FFE0B2; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; }
     .badge-success   { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; }
     .badge-low-conf  { background: #FFF9C4; color: #F57F17; border: 1px solid #FFF176; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; }
+
+    /* Profile Icon Button */
+    .profile-icon-btn {
+        background: rgba(255,255,255,0.2);
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 50%;
+        width: 46px; height: 46px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.4rem; cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none; color: white;
+        flex-shrink: 0;
+    }
+    .profile-icon-btn:hover { background: rgba(255,255,255,0.35); }
+
+    /* Clickable header avatar overlay (photo or default PFP sits behind an invisible button) */
+    .st-key-profile_icon_wrap { position: relative; height: 46px; }
+    .st-key-profile_icon_wrap button {
+        position: absolute !important; top: 0; left: 0;
+        width: 100% !important; height: 100% !important;
+        opacity: 0; cursor: pointer; padding: 0 !important; margin: 0 !important;
+    }
+
+    /* Profile Page */
+    .profile-hero {
+        background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #388E3C 100%);
+        border-radius: 20px; padding: 32px; margin-bottom: 24px;
+        color: white; display: flex; align-items: center; gap: 24px;
+        box-shadow: 0 8px 30px rgba(27,94,32,0.3);
+    }
+    .profile-avatar {
+        width: 90px; height: 90px; background: rgba(255,255,255,0.2);
+        border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-size: 2.8rem;
+        border: 3px solid rgba(255,255,255,0.5); flex-shrink: 0;
+        overflow: hidden;
+    }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .profile-stat-card {
+        background: #FFFFFF; border: 1px solid #E0E0E0;
+        border-radius: 16px; padding: 20px; text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.2s;
+    }
+    .profile-stat-card:hover { transform: translateY(-3px); }
+    .profile-stat-num { font-size: 2.2rem; font-weight: 700; color: #1B5E20; margin: 0; }
+    .profile-stat-label { color: #558B2F; font-size: 0.85rem; font-weight: 500; margin: 4px 0 0; }
+    .history-row {
+        background: #F9FBE7; border: 1px solid #DCEDC8;
+        border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
+        display: flex; align-items: center; gap: 14px;
+    }
+    .history-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .history-badge { font-size: 0.78rem; font-weight: 600; padding: 3px 10px;
+        border-radius: 20px; white-space: nowrap; }
 
     /* Remedy Container */
     .remedy-chemical {
@@ -230,6 +228,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins...');
+
+html, body, [class*="css"] { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; }
+
+.figma-header { ... }
+.figma-header-title { ... }
+... (all your existing rules, unchanged) ...
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
 /* ───────────── MOBILE RESPONSIVENESS ───────────── */
 @media (max-width: 768px) {
   .figma-header { padding: 14px 16px; border-radius: 14px; flex-direction: column; align-items: flex-start; }
@@ -246,69 +255,11 @@ st.markdown("""
   h3 { font-size: 1.1rem !important; }
   .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; }
   .stTabs [data-baseweb="tab-list"] { overflow-x: auto; flex-wrap: nowrap; }
-
-  /* Profile page mobile layout */
-  .profile-avatar { width: 70px !important; height: 70px !important; font-size: 1.7rem !important; }
-  .profile-name { font-size: 1.15rem !important; }
-  .profile-meta { font-size: 0.82rem !important; }
-  div[data-testid="stMetric"] { padding: 6px 2px !important; }
-  div[data-testid="stMetricValue"] { font-size: 1.3rem !important; }
-  div[data-testid="stMetricLabel"] { font-size: 0.72rem !important; }
 }
 
 @media (max-width: 380px) {
   .figma-header-title { font-size: 1.2rem; }
   img { max-width: 100%; height: auto; }
-}
-
-/* Profile icon button (top-right) */
-div[data-testid="column"]:nth-of-type(2) button[kind="secondary"] {
-    border-radius: 50% !important;
-    width: 46px !important;
-    height: 46px !important;
-    padding: 0 !important;
-    font-size: 1.3rem !important;
-    background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
-    color: white !important;
-    border: 2px solid #A5D6A7 !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-div[data-testid="column"]:nth-of-type(2) button[kind="secondary"]:hover {
-    transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 8px 18px rgba(27,94,32,0.35) !important;
-}
-div[data-testid="column"]:nth-of-type(2) button[kind="secondary"]:active {
-    transform: translateY(0) scale(0.96) !important;
-}
-
-/* Buttons — subtle 3D lift + press feedback across the whole app */
-.stButton > button {
-    transition: transform 0.18s ease, box-shadow 0.18s ease !important;
-}
-.stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 16px rgba(27,94,32,0.22) !important;
-}
-.stButton > button:active {
-    transform: translateY(0) scale(0.98) !important;
-}
-
-/* Tabs — animated underline instead of a flat highlight */
-.stTabs [data-baseweb="tab-list"] button {
-    transition: color 0.2s ease;
-}
-.stTabs [data-baseweb="tab-highlight"] {
-    transition: left 0.3s cubic-bezier(0.4,0,0.2,1), width 0.3s cubic-bezier(0.4,0,0.2,1) !important;
-    background-color: #1B5E20 !important;
-}
-
-/* Page-level fade-in on load */
-.main .block-container {
-    animation: pageFadeIn 0.45s ease both;
-}
-@keyframes pageFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -318,11 +269,11 @@ div[data-testid="column"]:nth-of-type(2) button[kind="secondary"]:active {
 # TRANSLATIONS & CONFIG
 # ─────────────────────────────────────────────────────────────
 LANGUAGE_MAP   = {
-    "मराठी (Marathi)": "mr",
-    "हिंदी (Hindi)": "hi",
-    "English": "en",
-    "ગુજરાતી (Gujarati)": "gu",
-    "ਪੰਜਾਬੀ (Punjabi)": "pa"
+    "🌾 मराठी (Marathi)": "mr",
+    "🇮🇳 हिंदी (Hindi)": "hi",
+    "🌍 English": "en",
+    "🌻 ગુજરાતી (Gujarati)": "gu",
+    "🌟 ਪੰਜਾਬੀ (Punjabi)": "pa"
 }
 LANGUAGE_NAMES = {
     "mr": "Marathi",
@@ -336,92 +287,92 @@ UI_TEXT = {
     "en": {
         "title": "MahaKrishi AI",
         "subtitle": "Smart Crop Disease & Pest Detection",
-        "signin_tab": "Sign In",
-        "register_tab": "Register",
-        "mobile": "Mobile Number",
-        "name": "Full Name",
-        "district": "District",
-        "signin_btn": "Sign In",
-        "register_btn": "Register & Sign In",
-        "sel_lang": "Select Language",
-        "tab_detect": "AI Detection",
-        "tab_chat": "Treatment Chatbot",
-        "tab_contacts": "Specialist Contacts",
-        "tab_map": "Outbreak Map & Alerts",
-        "tab_schemes": "Govt Schemes",
-        "signout": "Sign Out"
+        "signin_tab": "🔑 Sign In",
+        "register_tab": "📝 Register",
+        "mobile": "📱 Mobile Number",
+        "name": "👤 Full Name",
+        "district": "📍 District",
+        "signin_btn": "✅ Sign In",
+        "register_btn": "📝 Register & Sign In",
+        "sel_lang": "🌐 Select Language",
+        "tab_detect": "🔍 AI Detection",
+        "tab_chat": "🤖 Treatment Chatbot",
+        "tab_contacts": "📞 Specialist Contacts",
+        "tab_map": "🗺️ Outbreak Map & Alerts",
+        "tab_schemes": "🏛️ Govt Schemes",
+        "signout": "🚪 Sign Out"
     },
     "mr": {
         "title": "महाकृषि AI",
         "subtitle": "स्मार्ट पीक रोग आणि कीड ओळख",
-        "signin_tab": "लॉग इन",
-        "register_tab": "नोंदणी",
-        "mobile": "मोबाईल नंबर",
-        "name": "पूर्ण नाव",
-        "district": "जिल्हा",
-        "signin_btn": "लॉग इन करा",
-        "register_btn": "नोंदणी करा",
-        "sel_lang": "भाषा निवडा",
-        "tab_detect": "AI रोग निदान",
-        "tab_chat": "कृषी चॅटबॉट",
-        "tab_contacts": "विशेषज्ञ संपर्क",
-        "tab_map": "रोग अलर्ट नकाशा",
-        "tab_schemes": "शासकीय योजना",
-        "signout": "लॉग आउट"
+        "signin_tab": "🔑 लॉग इन",
+        "register_tab": "📝 नोंदणी",
+        "mobile": "📱 मोबाईल नंबर",
+        "name": "👤 पूर्ण नाव",
+        "district": "📍 जिल्हा",
+        "signin_btn": "✅ लॉग इन करा",
+        "register_btn": "📝 नोंदणी करा",
+        "sel_lang": "🌐 भाषा निवडा",
+        "tab_detect": "🔍 AI रोग निदान",
+        "tab_chat": "🤖 कृषी चॅटबॉट",
+        "tab_contacts": "📞 विशेषज्ञ संपर्क",
+        "tab_map": "🗺️ रोग अलर्ट नकाशा",
+        "tab_schemes": "🏛️ शासकीय योजना",
+        "signout": "🚪 लॉग आउट"
     },
      "hi": {
         "title": "महाकृषि AI",
         "subtitle": "स्मार्ट फसल रोग और कीट पहचान",
-        "signin_tab": "साइन इन",
-        "register_tab": "पंजीकरण",
-        "mobile": "मोबाइल नंबर",
-        "name": "पूरा नाम",
-        "district": "जिला",
-        "signin_btn": "साइन इन करें",
-        "register_btn": "रजिस्टर करें",
-        "sel_lang": "भाषा चुनें",
-        "tab_detect": "AI रोग पहचान",
-        "tab_chat": "कृषि चैटबॉट",
-        "tab_contacts": "विशेषज्ञ संपर्क",
-        "tab_map": "रोग अलर्ट मैप",
-        "tab_schemes": "सरकारी योजनाएं",
-        "signout": "लॉग आउट"
+        "signin_tab": "🔑 साइन इन",
+        "register_tab": "📝 पंजीकरण",
+        "mobile": "📱 मोबाइल नंबर",
+        "name": "👤 पूरा नाम",
+        "district": "📍 जिला",
+        "signin_btn": "✅ साइन इन करें",
+        "register_btn": "📝 रजिस्टर करें",
+        "sel_lang": "🌐 भाषा चुनें",
+        "tab_detect": "🔍 AI रोग पहचान",
+        "tab_chat": "🤖 कृषि चैटबॉट",
+        "tab_contacts": "📞 विशेषज्ञ संपर्क",
+        "tab_map": "🗺️ रोग अलर्ट मैप",
+        "tab_schemes": "🏛️ सरकारी योजनाएं",
+        "signout": "🚪 लॉग आउट"
     },
     "gu": {
         "title": "મહાકૃષિ AI",
         "subtitle": "સ્માર્ટ પાક રોગ અને જીવાત શોધ",
-        "signin_tab": "સાઇન ઇન",
-        "register_tab": "નોંધણી",
-        "mobile": "મોબાઇલ નંબર",
-        "name": "પૂરું નામ",
-        "district": "જિલ્લો",
-        "signin_btn": "સાઇન ઇન કરો",
-        "register_btn": "નોંધણી કરો",
-        "sel_lang": "ભાષા પસંદ કરો",
-        "tab_detect": "AI રોગ શોધ",
-        "tab_chat": "કૃષિ ચેટબોટ",
-        "tab_contacts": "નિષ્ણાત સંપર્ક",
-        "tab_map": "રોગ એલર્ટ નકશો",
-        "tab_schemes": "સરકારી યોજનાઓ",
-        "signout": "લૉગ આઉટ"
+        "signin_tab": "🔑 સાઇન ઇન",
+        "register_tab": "📝 નોંધણી",
+        "mobile": "📱 મોબાઇલ નંબર",
+        "name": "👤 પૂરું નામ",
+        "district": "📍 જિલ્લો",
+        "signin_btn": "✅ સાઇન ઇન કરો",
+        "register_btn": "📝 નોંધણી કરો",
+        "sel_lang": "🌐 ભાષા પસંદ કરો",
+        "tab_detect": "🔍 AI રોગ શોધ",
+        "tab_chat": "🤖 કૃષિ ચેટબોટ",
+        "tab_contacts": "📞 નિષ્ણાત સંપર્ક",
+        "tab_map": "🗺️ રોગ એલર્ટ નકશો",
+        "tab_schemes": "🏛️ સરકારી યોજનાઓ",
+        "signout": "🚪 લૉગ આઉટ"
     },
     "pa": {
         "title": "ਮਹਾਕ੍ਰਿਸ਼ੀ AI",
         "subtitle": "ਸਮਾਰਟ ਫਸਲ ਰੋਗ ਅਤੇ ਕੀਟ ਪਛਾਣ",
-        "signin_tab": "ਸਾਈਨ ਇਨ",
-        "register_tab": "ਰਜਿਸਟ੍ਰੇਸ਼ਨ",
-        "mobile": "ਮੋਬਾਈਲ ਨੰਬਰ",
-        "name": "ਪੂਰਾ ਨਾਮ",
-        "district": "ਜ਼ਿਲ੍ਹਾ",
-        "signin_btn": "ਸਾਈਨ ਇਨ ਕਰੋ",
-        "register_btn": "ਰਜਿਸਟਰ ਕਰੋ",
-        "sel_lang": "ਭਾਸ਼ਾ ਚੁਣੋ",
-        "tab_detect": "AI ਰੋਗ ਪਛਾਣ",
-        "tab_chat": "ਖੇਤੀ ਚੈਟਬੋਟ",
-        "tab_contacts": "ਮਾਹਰ ਸੰਪਰਕ",
-        "tab_map": "ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
-        "tab_schemes": "ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
-        "signout": "ਲੌਗ ਆਉਟ"
+        "signin_tab": "🔑 ਸਾਈਨ ਇਨ",
+        "register_tab": "📝 ਰਜਿਸਟ੍ਰੇਸ਼ਨ",
+        "mobile": "📱 ਮੋਬਾਈਲ ਨੰਬਰ",
+        "name": "👤 ਪੂਰਾ ਨਾਮ",
+        "district": "📍 ਜ਼ਿਲ੍ਹਾ",
+        "signin_btn": "✅ ਸਾਈਨ ਇਨ ਕਰੋ",
+        "register_btn": "📝 ਰਜਿਸਟਰ ਕਰੋ",
+        "sel_lang": "🌐 ਭਾਸ਼ਾ ਚੁਣੋ",
+        "tab_detect": "🔍 AI ਰੋਗ ਪਛਾਣ",
+        "tab_chat": "🤖 ਖੇਤੀ ਚੈਟਬੋਟ",
+        "tab_contacts": "📞 ਮਾਹਰ ਸੰਪਰਕ",
+        "tab_map": "🗺️ ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
+        "tab_schemes": "🏛️ ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
+        "signout": "🚪 ਲੌਗ ਆਉਟ"
     }
 }
 
@@ -437,10 +388,9 @@ DEVICE   = torch.device("cpu")
 
 EXCEL_SIGNIN_FILE = os.path.join(os.path.dirname(__file__), "farmer_signins.xlsx")
 EXCEL_ALERTS_FILE = os.path.join(os.path.dirname(__file__), "disease_alerts.xlsx")
-EXCEL_HISTORY_FILE = os.path.join(os.path.dirname(__file__), "detection_history.xlsx")
 
-CONF_THRESHOLD_LOW  = 45.0   # Below this show low-confidence warning
-CONF_THRESHOLD_ALERT = 60.0  # Above this show "Alert Nearby Farmers" button
+CONF_THRESHOLD_LOW  = 45.0   # Below this → show low-confidence warning
+CONF_THRESHOLD_ALERT = 60.0  # Above this → show "Alert Nearby Farmers" button
 
 ALL_DISTRICTS = [
     "Pune", "Nashik", "Kolhapur", "Solapur", "Chhatrapati Sambhajinagar",
@@ -536,40 +486,30 @@ def phone_exists(phone: str) -> dict | None:
     return None
 
 
-def append_detection_history(phone: str, name: str, district: str, category: str,
-                              crop_or_pest_type: str, result_name: str, confidence: float):
-    """Log every AI detection (disease or pest) for the logged-in farmer's profile history."""
-    new_row = {
-        "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "Phone": phone,
-        "Name": name,
-        "District": district,
-        "Category": category,          # "Disease" or "Pest"
-        "Crop_Type": crop_or_pest_type,
-        "Result": result_name,
-        "Confidence_Pct": round(confidence, 1)
-    }
-    if os.path.exists(EXCEL_HISTORY_FILE):
-        try:
-            existing = pd.read_excel(EXCEL_HISTORY_FILE, dtype=str)
-            updated = pd.concat([existing, pd.DataFrame([new_row])], ignore_index=True)
-        except Exception:
-            updated = pd.DataFrame([new_row])
-    else:
-        updated = pd.DataFrame([new_row])
-    updated.to_excel(EXCEL_HISTORY_FILE, index=False)
-
-
-def get_user_history(phone: str) -> pd.DataFrame:
-    """Return this farmer's past detections, most recent first."""
-    if not os.path.exists(EXCEL_HISTORY_FILE):
-        return pd.DataFrame()
-    try:
-        df = pd.read_excel(EXCEL_HISTORY_FILE, dtype=str)
-        df = df[df["Phone"] == phone.strip()]
-        return df.sort_values("Timestamp", ascending=False)
-    except Exception:
-        return pd.DataFrame()
+# ─────────────────────────────────────────────────────────────
+# PROFILE AVATAR HELPER
+# (Shows the farmer's uploaded photo; falls back to a plain
+#  grey silhouette PFP — like Instagram's default — if none uploaded)
+# ─────────────────────────────────────────────────────────────
+def get_avatar_html(size_px: int = 46, icon_scale: float = 0.55) -> str:
+    photo_b64 = st.session_state.get("farmer_photo_b64")
+    if photo_b64:
+        return (
+            f"<img src='data:image/png;base64,{photo_b64}' "
+            f"style='width:{size_px}px;height:{size_px}px;border-radius:50%;"
+            f"object-fit:cover;display:block;' />"
+        )
+    icon_px = int(size_px * icon_scale)
+    # Default Instagram-style plain grey PFP (generic person silhouette on light background)
+    return f"""
+    <div style='width:{size_px}px;height:{size_px}px;border-radius:50%;
+                background:#DBDBDB;display:flex;align-items:center;justify-content:center;'>
+        <svg width='{icon_px}' height='{icon_px}' viewBox='0 0 24 24' fill='#8E8E8E'>
+            <circle cx='12' cy='8' r='4'/>
+            <path d='M4 20c0-4.418 3.582-7 8-7s8 2.582 8 7v1H4v-1z'/>
+        </svg>
+    </div>
+    """
 
 
 # ─────────────────────────────────────────────────────────────
@@ -579,7 +519,7 @@ def get_user_history(phone: str) -> pd.DataFrame:
 def show_login_page():
     st.markdown("""
     <div style='text-align:center;padding:30px 0 10px'>
-        <div style="display:flex;justify-content:center;margin-bottom:10px">""" + logo_svg(96) + """</div>
+        <img src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAIAAgADASIAAhEBAxEB/8QAHgABAAEEAwEBAAAAAAAAAAAAAAcFBggJAwQKAQL/xABYEAABAwMCAwUEBAcKCgYLAAAAAQIDBAURBgcIEiEJEzFBURQiYYEycZGhFSM2QnKywRckJTNSYmRzsbMWJjVjdIKio7TRGBlTZZKkKDQ4Q1VmdoS1wsP/xAAbAQEAAgMBAQAAAAAAAAAAAAAABAUBAwYCB//EADIRAQABBAECAgkDBAMBAAAAAAABAgMEEQUhMRJBBhRRYXGBkbHBIqHREzQ18BUyckP/2gAMAwEAAhEDEQA/ANVQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC4NCaK1BuPrSxbf6VpmVF51FcILZQxSSJGx08z0YxHOXo1MqmVXwQ2WaD7GzSulLYzUnErv5SW6ij5faKay93SwRu9FravoqL4fxLV+IGrMG3bfzsmNiqnZe6644eb/AHpt8tlskutvSW5Mr6K7xxsWRY0cjUw57UVGPa7lyqZRUXKaiQBl1sT2YfEjv/t7a9zdN1mj7LZL2x8tA69XKaOWaJr3M5+SCCVWoqtXHNhVTrjCopiKb4eB3c+g0T2c+idx7wmaDTlBXOuCr4xUsF0njmf8VbE1z0TzwiAag7Zwp7tVfEpT8K1wt1LbtaTXL8Hv7+VXUzGd0sy1PO1FV0XcIsqKiZVuOmehlNvR2Qeq9otn9VbpN3rt16l0ra5btLbW2OSBJoYmq+ZGzLM7Co1FVPc6468ps1ufDlpS78UenOKKnWBLja9MVtjla1uVqJJHx+zToqdPdhfVxqviqSRp4NKRrHW1u374Mdw9V2bkfQaj0pqmmonMXKPhY2rp4n/WrY2u+tQPOsAAJ+2V4G+JPiD0HU7j7VaIp7pZ4Kt9DG6a501LJUysRFekbZntRUbzNRXKqJlcIqqi46Gv+Cniq2xtFbqDWexupKO2W6J89ZWU8TKyGniamXSPfTuejWInVXKuETqq4NwXAfYbzt32fWlanT1ulrL5NYLpfqWniYjpKmpnlqJ6djWr0VVRYmoi+PQwK3d4+e0N0Jo65be716Dp7CzUtvqLWlxu+k5aOeRkjOSR0D0c2B70a5eqMciZ8PADAMAAAZebf9mHxJ7o7IWnerR0Wn6ht7idV0Finrlgr56XKoyVqvakKc+OZrXSJ7qtXPXCY3bhbXbi7T3t2m9y9EXnTNyblW09yo3wLIiLhXRq5MSN/nNVWr5KBagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3Hgi03s1wscCsnGdqfQX+E2oa3vqmonggjmq4IEuK0MMFO6T3Ym8yJJI5ML1dnm5Gogajgbwt19gOHTtKtiod4NpY6G0avlhelBeEp2w1EVYxEV9BcmMzzplUTK8yt5mvYrmrh+lbVelNQaG1NddH6rtU9rvFlq5aKuo50w+GaNytc1fJeqeKdFTqmUA/OkdTXXROq7LrKxTd1crDcKe50cn8ieCRsjF+Tmob5+LTZ1eOnhItMW3NRbo7lePwTqnT01fKrIGLI1OZJHta5zf3vPMnRqrzIiYNAJvK7Kbcil3V4QI9CXWrfLWaNrKzT1S1JFbL7JL+Ogcip1anJM6Nqp1/Er6AX5ofY/d/hs4JXbMbWT0ut9e0FsrYaN9RUpR0ramqkkkcsayfmRd6vI1yt53NTKsRy8ugzUenb7pC/XDS+prVU2y7WqpkpK2jqY1ZLBMxytcxzV8FRUUzs4N+NafhC3r1ptLu9rS8ai26Zcq23MrGyPrloqumndGyqiblV7qVrVR7WeOY3Ii8q5hrtBN9doOInf525GztkuFHQzWmmpLlVVtO2B9xrI3SJ36Roqqid0sMeXKir3fgmMqGMpuW4LqZNY9lDq/SzXIr0ser7e3r9F72TyN+xZUU00kjaO4hN6tvNBXza7RW494tGltStkS6WynlRIp+8YkcmMormc7ERruRW8zURFygGzTbPtEtv6Ls9qpt917Q0+6Wn9O1Gl6W1yyqtbVVTY+4o6pjPpSM7t0T3v8ABHMkRVyhLfZ711DqHs4LNbqqth5KW2ajoKt7npiFFq6t2H+mI5GL18lRTRUV21631nY7JX6asmrr1b7PdM+3W+luEsVNVZTC97E1yNf06e8i9AKEAAPRDral3W2S4L6Cy7EacmvGuNLaYs1rs9DDTNqHSSx+zwyuWN3R3LH3r19cL5mpvjU4nuLrdrSdh224ldqoNHU9puK3GmkXTtZbpq2obE6PmV88jmPRGyu/ikanvIq56Y/O3Xam8Ye3tro7IutbVqWioImQQMvtrjmekbUwjXTR93K/on0nvV3xKZxS9oXuvxZ7eWjbvXWktKWmktl0Zd3z2qCdsks7IpImoneyv5Gcsz1VEyqrjrhMKGK5eG0O3F23e3R0ttjZEd7Zqa7U1tY9rc902R6I+VU/ksZzPX4NUs82GdjFtXZ9Wb5an3PucsD59C2mNlvp3KnOlTXLJGs7U9GRRTMX+uaBnLx2b7Xbg14ZLMmz9NDR3VlXbtP2RH0qTw0dJA1Fer2qnLy91CkPXC5lRUwqZSq6It9k47ODSyXriM2/oLVPqW3VNQ9Gxq1aCRkkkcVwpXSZfDzMY2VuVX3X8qq9q+9bFBx1OvnH5VcIlHp+33LTMlHJbluDMrNFdYKSWqqEd1Vr4uVvcq3lRWvjVcqmUIa7WTib322efR7O6QqrJbdH6+sUqSV9PSyNubUa/u6mmSRZFjaxzHM95saO5ZFblMcyhqHciNcqNdlEXCL6nzK+Z8XxOxR0k9dVQ0sDFfLO9sbGp5uVcIhiZiI3LEzERuXEmOuVwfOuPEkLU2jrPo7T8b6qlmr62pyzv+95I4X4ymGp1d5+PjhfDwI/Xm6ZXCoacfIoyqPHb7e32tGNk0ZdHjt9t637XGADekAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXZtjtnrfeTXVq2426sUt3v94lWKlpo3I1MIiue97lwjGNajnOcqoiIiqBaYNyWiNi+FvsxtpHbjb8VNu1duDe6aSmZGtMyofUvVqc9Jb4JEw2NMokk70TKL7ytRzYzUNqiupb1qC6ahtdhZZrZc7hU1FJQw5dDSxuer0gY5UTmSNr2t9cY9QKMbfOy21FpTf/hF1xwr6zej22l9XSPha7D/AMG3FHvbKzP57Kj2hcp9Fe7Xz66gyfuCLiQk4Xt/7JuBXPndp2sa606hhiRXOfb5lbzPRqfSdG9scqJ4r3fL+cBsu4Pdgrf2dVuu963/AOIuwUEWtqiGgpLE2Xu6R1Q2XliqGrJ+MfNyuw/kYjGNVVe5yNRzYe7Zrh503av8HeJOyOpqK5Xasj07e6fKI6tekL309SiebmshdG9eqq3uvDlXMA9p/vzsPxA7v6e1Xsrcqi8SUNk9hu91Wmmp4KhUkV8LGMma1/MxHyI53KiLzNRFXl6Yt6y3P3H3GjtsOvte6g1HFZ6dKW3Mutxmqm0kSIickSSOVGJhrc4xnCZAtYr2ndb610hBX0ukdX3qyQ3SJIa9luuEtM2qjTKIyVI3Ij2pzO6OynvL6lBAAAAAAAAAAAAAAAKtp3VOp9IV/wCFtJ6judlruRY/ardWSU0vIvi3njVFwuE6Z8ikgCW+GbiCuvDjvnY964LJFqGe2PqUqqOqnVjqmOoifFLiXDla/EiqjsL1TqioqoSZx78ZFr4wta6ZvVg0hWaftemrdLSxxVlQyWaaaWRHSPXkTla3DWIidV6Kq+OExYABfE56aplo5o6mCRzJYnI9jmrhWuRcoqHB1VRhRMRMaliYiekrh1DrO86mhgp7nJGrIUVURjeXmcvTmX4/cUDKr8T54/E+p8TxatUWafBRGo9kPNq1RZp8FuNR7IfkG5zY7hX4P+FzhRtm8/EbpTT1/rLpaqS6Xe5Xm3JcUjkq2NWKkpIHNciK3vGty1vM5yOeqo1E5cfuMDgf2T1PsivF/wAG1zbNpNkK1t0skb3uhZTo9WyzwJL+MhdE7PeQP6IiOVvLy8rvb21yAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIewu9mreHndew7s6KdC64WWZVfTzZ7qrp3tVk0EmPzXsc5Mp1RcOTqiEeAD0Hy2Hhu7SnYbT2ortRSXC0JWRVbWxTJDcLTWxq1aije9uVZzN9x6J0exzXtX+LemB3anb/6Et1vtvBjtttjFYbXoesp6ypqZbelMyNyQuSOKiYqZ7tWyq50356+GUVXOxt4KOMHVPCPuU28xJUXLR16dHBqKzskx30SL7tREi9EnjyqtzhHIrmKqI7mblP2q+9HCfvbtzoXU+2uq7XqPXslQ10FTbVzLT2l0b1khrUxmN3erGrInoj2r3ioiIrshrMAAAAAAAAAAAAAAAAAAAAYX0AAAAAAAAAGfvCtwCbbb9cGOs95Ljdr07W1JLdFszLfK1YoXUdOj44JIVaqyLK9VzhUXlczlwuc4BYX0MnuCbjg1pwg6mqadtB+HtD3yZkl5svOjJEeicqVNO9ejJUb0VF916IjXYVGuaGb3CDWQcevARqTht1q9aa96Jjp7Pbro9rnNjRje8tsy46/i+6WF7U6rGzxy8gyXjd0jstwU6i4L/3N7vbNyLfHddIXdzkidb0dLUTMq6lZebvFk5XyNRnJhHYw5WoZXR9qJwLaH0RedXbd0M8OoLo91fPp2i0y+gq6+tc1ER9RO2P2dXdGo6RZXuwnRHYRF017ja4u+5mvtSbiX9I23LU91qrvVNiTDGyzyukc1qeTUV2E+CIBbgAAAAAAAAA8fAABhfRRhQAAAAAAAAAAAAAAAAP0ckMT55WRRtVXPciIieKqvgcXh4F67VWVLnqFtZM3MVAnfLnwV/gxPt6/I05N+nGtVXavKGjKv041mq9V2iHT1vpJ+l3UCNRysqKZFkd5d6n0k+9C10yZEaq07BqW0SW6VUZJ9OGRU+g5PD5L4L8FIFu1qrbNXSW+vhdHNGuFynRU8lRfNF9St4fkozbWq5/XHf3x7VZw3J051rw1z+uO/vj2qeoBeG0Gk6DXu7GitDXOSRlHqLUVttNS6NcObFUVMcT1RfXD1wXC6WeD1EaM0No/brT1JpPQumbdYbPQxtjgo6GBsUbUaiIiqifSdhEy5cqviqqp+9W6M0lr2y1OnNa6atl9tdZG6KekuFMyeJ7VTqitcip8/FAPLoCd+Nfh8Zw0cRGpdtba2b8Aucy6WF8rlc51vnRXRtVy9XLG5JIVcvisSr5mQPZM8LelN7Nyb/uZuPp+C76d0PHBHSUNXCklNVXKZXKxZGr7sjYmRucrFRU5pI1XomFDAcHqhpqWlooGUtHTxQQxpysjiYjWtT0RE6IRPxRbK6E3v2X1ZpjWWn6KtlSz1clurZYWrUUFU2JzopoZFTmYrXtaq4XDkRUXKKqKHm2AAAAAACo6fpYK6/W2jrGq6Coq4YpURcZY56IqZTw6KoE3bccB3Fru1pKm1xoTZa51lkrYmzUtVVVtJQ+0xO6tkiZUyxvkYqdUc1FRUVFRVRUIn3C2215tPqmr0TuPpW4aevlDhZqKti5Ho1fovavg9i+KPaqtXyVT080lLT0FLDRUdOyGnp42xRRRtRrY2NTDWtROiIiIiIhqW7b+3UUWuNq7vHTsbV1NpudPLMie8+OOaFzGqvoiyyKn6SgayAAAAAAAAAAB+0RXYwiqFa5PFFT6ybtrrPQ0umaW5sgYtTVc7nSK3LkRHOaiIvkmE+9Tn3Hs9DXaYrKySnZ7RSsSSOTl95MKmUz6KmehQzztEZfq3g6b1vfn27a/LnqvSC3GZ6r4Om9b357121+UE9E6KmT9I17vJfsOWjp5aypipIWqr5XtY1PVVXCGRdms1DZKCKio4GN7tqI56NRHPd5q5fNVJXJ8nTxtNMzT4pny3pM5TlaONindPimfLemNz2q3xRUX4n5+pST95KK3xPoKmGKOOqmWTvFaiIr2py4V3r1Xx+v0Iy6KhLwsqMyzTeiNb8kvCy4zbFN+I1vyfgAYUkpT9ImfFSXNu9EWGqsUF6uVEyqnquZWo9ctY1HK3HL4KvTOV9SJERfFUXCF+6N3LTT1ubabhRPngjcqxvjciOairlW4XoqZVV8fMrOWtZN3G8ON335TqdKrmbWTexvDi78W+up1Ol93zb/TNxt80dNbIaadGOWOSL3OV2OmUToqfWQO5Oq4TwUlG9bwU9TQy01pt8zJZmKxJJXInJlMZREzlSLVXKq5fNTRwtnKs26oyd+7c7+KPwdnLsW6oy9941udz735A6n3ld/JX7C6Xr4BhU8UUAVG1Wa5Xuo9mtdG+ol8VRqeCeqqvRE+s7t30XqSx0/tVytj4okVEV6Oa9qZ8Mq1Vx8yQ9momJZ62ZGp3jp2tVfNURMon3r9peOoo2S2C5MkaitWkl8f0FOcyucuWM31eKY8MTEe9zGXz1yxm+r00x4YmInvtjaD65PeVE9RyuTxRfsOjdPt+sLnyUkfbDR9pvFLPdrrTpUJHJ3UcauVG5REVVVE8fpJ8PEjhV6JlfAu/Q+u5NKd7SzUq1FNO5HcqO5XMVExlPJcp5fBCDyVF+5jVU48/q+iv5S3fu41VOPP6volOs0LpOtgdBJZKePmTo+JORyfFFQgq80H4KutXbefm9mmfErv5XKqpn7iTqzea2pA5aG1VD5ce73qo1qL6rhVVSKqyqnrqyatqHc0s73SPX1c5cqv2qV/CWMyz4/Wd68omdq7gsfNseP1reumomd9XFz8ycrvXJeGg9IpqaguzpG4WOFrKd7vKZV5v/1wvwcWzarVWXiuht9DE6SaZ3KiIn2qvoieamQGmLDT6bs8Frhwqt96V+PpvXxX9ifBENnNcj6naimif1zrXuj2/ht5zkvUrMU0T+uda90b7seKmnlpp5KeZFbJG5WuRU6oqLhUU4lypIG7Wn20F1ZeaZmI65F7zHgkieP2phfryR8qqmCyxMinKs03qfP7+azw8mnLsU3qfOP383wAEhJAAAAAAAIA8CZtnqNsOnqitVvv1FQrf9VrUx96uIbX+wm/amRrtJMa3GY55Gr9eEX+xUKT0hqmnCmI85hQ+kdVUYMxHnMLwR7VerEX3kRFVPguf+Slq7kaehvWn56pkKe10LFljenRVYnVzV9UxlceqIXFI9IrjGiu6VEat6+rFyiJ9aOcv+qdhzWvarHtRzXJhUVMoqHF492rEvUXafLr/LiMa9ViXqLtHl1/n+GL6t8c+KEk8NK44jtql9NbWP8A4+EsK60iUVxqaVruZIZnxovqiOVM/cX3w2LjiK2rX01rY/8AjoT6dTVFURMPqlNUVRFUPS+dajr6K4NldRVMc6QTPp5eR2eSRi4c1fRUVPA7Ritw17tLW8U/EZsdX1KrLZ79RajtrHOy5YKihp4qhrU8mtkjhd6ZnX1MsoD7aLZNL/tppbfa1UnNV6UrFs91e1vVaGqXMT3L6MnRGp8alSduzH2i/cm4RdKSVdL3Nz1ksmqaxcdXJUo1Kfx6/wDqzKdceqqT7u9tlp/ebbLUu1uqUf8AgvUtvloJnsRFfCrk9yVmenOx6Ne3PTLULhp4LTpexRUsDIaC12ikbGxueWOCniZhPqa1rfsQDnpbhRVc9XT0tTHLLQzJT1LGOysUixskRjvReSRjsejkXzKTuAvLoPUjvS0Vi/7l5jZ2de7dRvrordjdSeVzo77uldZaRHoqOjo20NvZTMVF82wNib8jJHcVcbf6nX0s1b/cPA8vJs04C+y505udoi1718Q0lc+1Xtjaux6cpJ1g9ppF6sqKqVvvo2RPeYyNWry8rld73Kmss3wcMPaF8K+qtoNK2u+bj2XRN7s9opbfXWi8y+yNgkhibGvdSvRI5I15ctVrs4VEVGrlECbNLcJHDBouJItO7A6Dgc1vIk0tjp6idW+iyytc9U6J4uOzfOFnhn1JCsV84f8AbuqynL3jtNUbZGp8HtjRzfkqGrntJu0Dm3U1DBtNw/65rYtF2xird7rbKiSnS9VTv/dI5MOfTxonT8173OXCo1jlvvsYN4NcXnWeu9qr/qa5XS0MtEV7ooKypfM2lmZO2KRY+ZV5EekzOZE6KrGqB948uy30rpDRl33q4cKapooLLDJX3nS8kjpo0pWorpJ6R7lV7VYmXOicrkVqLyq3lRjtYNlk7m8UEqfmVMTvseh6k6ykp6+lmoKyFstPURuiljcmWvY5MOavwVFVDy/6wsrdJa7venYOZyWa71NEzK5VUhmcxOvr7oHqIMLOM3g3uXGFv1t1bLpcKiz6K0lZ6uqvtwgRO/lWonYkVLT8yKneO7h6q5UVGN6qiqrWuzTMVePTjZpOD/Rlp/A1igvesdUPmbaKSr50pIYoeXvZ51YqOVqLJG1GI5quVy9URqgX9t7wZ8Le2NqbaNLbHaSciRpHJVXK3R3CqmRPHnmqEe9cr1VMonwToRNxSdmtsHvPom6z7d6Csuidcw075bVXWanbRUs06JlIqiCPETmvVOVX8vO3PMir1a6I+ArtMNyuIjepmzm7emdNwSXqjqam0Vtmgmp1jmgjWV8MjJJJEe1Y2SKjkVFRWYXm5st2QgeWG526us9xqrRcqV9NWUM76aohkTDopWOVrmr8UVFT5GfnZ+dmxQcQ2mo9596K6vo9Gzzvis9soZEinuvdvVkkskmFWOBHtcxEbh7la7CsREV2NnHFYKbTXF1uxbaONGQu1PV1iNRMIi1Du/VET0zIps44D+Pbhnp+H3R22mtNd2zROotJ22K1VVLd1WngqEjyiVEU6p3bkenvKiuRyOV2UxhzgyW0dwbcK2g4Y49NbA6IjdE3lZPV2iKtnRMY/jqhHyfWvN1KzeOGThxv8KwXrYLbysaqYRZNM0Sub+i7u8tX4oqGubtKu0RoNSUlJsvw1biTSUTlWfUmobLO6Ns6YwyignbhXM6q6RzFwvuM5lTvGll9kBvLr5nEXX7bXPVV0uFh1BYaud1DV1Uk0UdXA6N7JmI5VRruTvGqqeKO65wmAnDjP7KLQd50rdNxuGa1vsOordE+sn0yyR0lHcmNTLm06OVXQTYRVa1FWNy4aiMzzGoNUVFVFTCp4oeqc81nFZpim0ZxMbpaZoY2x0lDq66tpo2+DIXVL3Rt+THNT5AXPtv+RVs/Rk/vHnb1x+SVz/qF/YdTbf8AIq2/oy/3jyt3e3Mu9uqLdLIrGTt5XOROqJnrg+cX64tcjVXV2iuZ/d8yyK4s8nVXV2iuZ/dEm1Wnn3K8pdp2fveg99FVOiyL9FPl9L5J6kzKqNRXPVEROqqp1LVaaGy0LKC3QpHCzwTxVV81VfNVLY3MuF/p7PJS2qglWCVq+01TFzys80REXKIvmqpjH3SMm9PM5kU0zqO0b8o/n3JGTfnm82KaZ8Mdo35R/PuRrr7UCah1BNUQuV1ND+JhXyVrfP5qqr80Ovoyxxah1DTW2okc2F6udIrfHlaiqqJ9eMfMoaplVynXzLt2t93WdInrHL+op2N+n1TDqi108NM6+UO2v0+p4VVNnp4aZ18oSfPtxo+amWmbaGR4bytkY93O1fXOeq/XktvQ23NCxJbne4G1Ctleynjd9BUaqorlTzyqLhF6Y69c9JJ+ooF91bYNJsjpq171e5uWxQtRzuX1XKoiJn1XqcXj5+ZcoqsWqpqmrXnMz7/g4XFz829RVYtTVVNWvOZn369jo600hZazT9ZLTW+npqimhdLHJFGjF91FXlXHiioip19Sz9stHWq/QVFzu0PfshekccXMqNV2EVVXHVfFOnh4lS1RulaK+x1FDaI6j2irYsS94xGoxq9HeCrlVTKdPU7mzaY0/VZ86pV/2WlpTObicbXN2Zidxr2681tTVnYfGXJuzNM7jXt15vuuNAWFljqbjbKJtLUUkfefi1Xle1PFFRVx4Z6p16EU2u31N2robdSR88070YxM9Ez5qT5q78l7r/osn6qkT7UoxdXw8+MpFKrc+vKv7Mkjic296jcu1z4pp3rfwSuHzr3/AB9y7XPimnet9fJINk2x01bIGe20vt1TjLpJFXlz5ojU6Y+vKlfZp6wxt5Y7HQInwpmf8jvkIavu2sKK/VcdVX10KJK5YUY9zWcmeitwvhjH7epT4dOVy1yqKrupjr1mf2hS4NOVzF2qKr2pjr3n9oSjc9CaVucbmzWmGJ7uiPgTu3Ivr7vRfmikOax0tUaWuq0T5FkgkbzwyYxzN9F+KL0X7fMvbR+6VLFQpQ6nmlSaH6FRyK7vG+jsdcp6+f1+Nu7jauoNUVlLHbY3LBSNdh728qvc7GenomE8fiXHF0Z+NkzZvbmjr1nt7pifwuuJtchi5U2b25t9es9Y90xP4XXs0v8AA9cn+fT9VC9r2x8tmroYmq98lNIxrU8VVWqiIn1qqFj7M/5Jr/69v6pIU80dNC+omdiOJiyPd6NRMqpR8pVNPJVTHtj7QoeWmqnk6ppjzj7Qs7TG2VmtUDJ7tAytrHZVyP6xsX0Rvgv1r9xcFTpbTdZEsVRY6JWuTGWwta5Pqc1EVPkpHNbvFdFrl9gt9Myla/CJIiuerc+a5wi/UnT4knWm4R3e2UtyiarW1MaSYVc4ynVPkvQ28hRyGPMX79U9fZPb3dGzkaOSx9ZF+qY8Xsnt7unZCu4GkW6XubPZHOdR1SK6FV6q1U+kxV88ZTr6Khybb6YpNSXaVtyRXU9LHzuYiq3nVVwiKqdUTxXp6F6bx07H2ClqXJ70VVyp9TmOVf1UKNsuq+33JF/7Fv8AaXlOdeucTN/f646b+evsv6M+9c4eb+/1x0389b+i67vtvpiuoJYqS3MpqhGL3UkblTDsdMpnCp9ZBj2o17mJ1wpk8Ywv+mqZ6K5TX6OZN29TcpuVTOta379tfozlXr9FyLtUzEa1vr32mDaOyxUtlkvMkSd9Vvcxj1/7NvTp6Zcjs/Uhfrno1Wovi5cJ9eFX9hSdH00NHpe1wwp7q0sb1/Se3md97lO/O7NVSwt9XSL+i1vKv3uac1yF2cnLuVT7Z+kdnL8jdqysu5VPtn6R2W9uZQNrtI1buXL6ZWTs+GFwv+yriCF+JkJriVkOk7o969Fgc35r0T71Qx76r1Oo9GqpqxZie0T+IdZ6MVVTi1Uz2ifxD8gA6J0gAAAAA+4Xr1OxRUlTWTpT0sT5ZXIqtaxMquEVVwnn0RTr9eqHfs1xdarpS3FiczqeVkmM4zhcqnz8DFczFMzT38nmuZimZp7+Tpq1yKqOYqKnj0JD2l1FHRV8tkqno2Orw6FV8EkRPD5p96ISTNZ7BeoW1M9tpKllQxJEkdE3mc1Uyio7GfAoNftdpud6T27v7fO3qx8UiuRHJ4Lh2V+xUOXv81i5lqrHyKZp389T9/2cpf5zEzrVWPfpmnfn31P37+5cV5R8dF7bCirJRubUI1PFWt+kifFWq5PmdxJY1i79Hosat5+ZF6YxnJ0aB1wpKf2a9SxTcqYSpanK17f56L4O9fFvxTwKRLWLbtO3m2SuXvLZDIyNVXqsTmKsS/JOn1tU56ixNz9FM71Pf3T0/adfVzlvHm5q3E71PePOJ6ftOvqgytqHVVXNO7xkkc9fmuSQOGtM8Rm1aeutbGn/AJ6Ejl2eZVT1JH4aE/8ASO2qT/52sf8Ax8J9JiIiNQ+n0xqNQ9L5qIuW7H7jPbKXm51dR3Ns1FdaLTdxyuEWKtt9KyNXL5NbP3D1VemGL9Zt3NAXaa+02zjt3HqKeWSCZk1oqIpWKrXNd+CqNyOaqeCovmnmhllv9MV+0r3j/cd4SdWSUdV3N21ajdL2/DsOzVI5J1THVFSmbOqKngvKSrwz7yW3fzYvR+6dvqopZ7xbIvwkyNyL3FwY3kqYlRPDlla/GcZbyr4Khq77ZTfCl1lvBp7ZiyXBs9HoaifVXNsb8tS5VXKvdux4rHCyJfgsz09QMnOxbZy8K2o3ZVefXlcv1fvCgT9hmzuImdv9TJ62et/uHmFvYxx8nCfeXY/jNb17v/KUSfsM1NwE5tCakT1tFYn+5eB5dzZ/wh9kVDqvTdt3F4l7ncaGK5QsqqPS1vd3M6Qvbli1kyoqxuVFz3TERzenM9FyxMIOELTdn1bxRbW6d1BFHNbqzVVvSoik+jK1szXd271RytRqp8T0kAYv13CN2f8AshYorjq7bLbixW1iJG2s1TUska9U8lkrZHczvnnqXBsFqPglrdZV9l4aWbWM1LHbny1v+CdupIah1E2WNHK+WBiK+NJHw5TmVMq30NUvajaP3uj4qNTX/XFqv9Xpurkp49MVzoJH0CUixRo2CByZY1yScyPYmHK9Vcqe8irP/Y88OG72jtxNRb46x0jW2HTdfpqWx25blC6CeullqqabvIo3Ijlia2mVFeqIiq9vLzYdyhtbPMluuzvN8tYx4+nqy4N+2seem08z+5tMv/SL1ZRub1/w1r41T/756AemA1KduIv+Nm0qf93Xdf8Ae0xtrNS3bisxqjaOT+VQXhv2SUv/ADAxp7LlM8de2XX/AOM//h603/mgjssokk45dvHqme6ivLk+H8FVaftN+4Hne7Qhyv4zt1nf99In2QRIZGcFHZV1282mLZu3vtea6w6Xukbaq1WWgRGV1wp16tmkkcipBE5MK1Ear3tXOWJyq6GuMOw27UHaKat03eFxQXbWVuo6r3lb+JmSna/qnVPdcvVDflS01PRU0NHRwMhggjbFFGxvK1jGphGoieCIiImAMZoeCTgM2W07+FdSbW6It1rpExNctVVnfR5XK5fLWSKxFXCrjonToiIhUdmdQ8A37olLY9gotn26yfBP7O7S9uokrFhRirKjZ4GZ5eVFynNhUNeXbB6S3qn39p9S3W3X2t0ClnpWWSeKGSSgpJERUqGOVuWMmWTLlVcOVqx+KImOfsl+HLeBu/VFvfddG19o0fZrdWxJX3GB9OlbLPCsbGU7XIiy45lcrkTkRGqmeZURQ3LHnJ45P/a/3c/+qq39c9Gx5zuOuFYeMHdtqphV1NVP/wDEqL+0Dm22/Im2foy/3jysXm5JZ7VU3JYe8SmZzqzm5c/DOFwUbbb8ibZ+jJ/ePO3rj8k7p/UL+w+c3qIucjVRV2mufu+Z36IucnVRV2muY/dSdJbkUmpbgtrmo/Zp1aro8SczZMdVTwTC46/JS8VRHIrXIiovRUXzMbrHcX2m70lwYi/veVr+nmmeqfPwMkGuRzUc1UVFTKKnmS+cwKMK7TVZjVNUfvCXz3H28C7TVZjVNUfvH+wgncPTzLBqCSOmajaapb38TU/NRVVFb8lRflg5drExrOjX+ZL/AHbi8d4rektpo7o1MuppVjcqfyXJnr82/eWbtZ11nSfCOVf9hS+s5M5XFVV1T1imYn5Q6KzlTlcRVcqnrFMxPyhOZj9rueWo1ZcnSyK5W1DmIq+TWryonyREMgTHnWqY1VdPhVSfrKVPoxEf1q5935U/otEf1q5935URSY9m/wAn6tP6Uv6jSG18EJi2ZX+AqxP6Sn6qFzz/APY1fL7rz0h/sKvl910aw/Je6f6K/wDsIHsV3qLHdqe60qIslO7mRF8HJ5ovwVFVPmTxrH8lrp/or/7CE9I6eXU95jtaz9yzlc978ZVGp6J6+CED0fqoow7lVz/rvr8NK30dqt0YV2q7/wBd9fhrqmKya/01eoWuSvjpZse9FUORqovwcvR3yX5IV1W0tbD7zYqiJ3XqiPav7CPNQbSW+K2SVFiqKpaqJvNySORySIniiYRML6fYRtS1d2tdWvsdRUQTNdheRVauUXzRP7CNa4rFzom7h3JjXlMdka1w+JnxN3CuzGvKfL/fmne46L0vdY+Sqs1Oi+Tom90768txn5kSa70bJpOujdTyulo6lFWF7vpNVPFrsefVOvmTJpypuFXYqOpu0Sx1b4syNVMLn1VPJVTC4+Jae8b4U07SsdjvVqkVvryo1c/2tNXE5eRazIx6qtxMzExvcfGGrh83Js5sY1VXipmZiY3uPjDi2ZT+B69f8+39UvO//wCQbl/ok36ilm7NJ/AlYv8ASE/VLyv6ZsVyT1pJv1FI3I/5Sf8A1H4ReT/yk/8AqPwxtXx+ZkJoX8krX/UftUx7Xx+ZkNohP8U7Yv8AR0Lz0l/tqPj+F/6Uf2tHx/ChbwL/AIrRfGsZ+o8t/Zbrcbin+Zb+sXDu+mdKxr/TGfqPLd2X/wAp3BP8wn6yEbH/AMJV/vnCLjf4Ov8A3zhLLuiKvwMX3/xjv0lMnnfRX6jGF/03fWpn0X7Xfl+WfRX/AOvy/KfNuq/2/SFC5VzJE10DvhyqqJ/s8pV6d/f3WpemeWmY2Fq/znJzO+5Y/sLB2eurY7bc6SeXljpnJUZXwRFaqOX7kLst1wlZRxw00LZrlW5qnx5w2JJFVzVkVPBERURE8Vx081StzsWbeTdiI8/v1+kR0+aqz8Sq3lXvD7fv1+kR0+a293b/ABQUEVhgeizVDklmRF+ixPoov1r1/wBUi2itlfc5UhoKGad6/mxsVyk20231nfVvud7V1zrJHc73y+63PwanTHlhcly09NTUsSQ0sEcMTfBkbUa1PkhNscxY46xFjHp8U+cz0jf3TrHN2ONx4sY9Pinzmekb+/2Y+X7S9x07HSvuSMjkqkc5sSuRXtamOrkTomc9OvkpRVzjGPgXjunc23DVUtOxyOZRRtgRUXKKqZc77FcqfIs3KrhDqcS5cu2KblzvMb+rrcO5XesU3LneY39XwAEhJAAAAAEoba69gpoWafvU6RsauKaZy9G5X6Ll8k9F+XoSLXsuUae1Wt0cr0T3qeVcNen81ydWL9qfDzMbEVW9Wrgrtp1pqWzMbDQ3SVIm+Eb8PYieiI5Fx8jn87g4vXZvWJiJnvE9p/hznIcDF+7N+xMRM94ntP8ACZF1fbIF9lv0E1tld7vJUsyx3ryvblHJ8yzq6z3ZbpUx2OdLjZq+nfTN7qZJO4a5Mo3GVVEa/r08lXzUtmv3J1Tcad1LNVQJG5MOT2di8315RfuLXV7+qcypn4nrC4ivG3VuKZny7x8Y7THu6y9YPD1426omKZny7x8Y7THu6y5K2iqaCofS1cD4pY1w5j24VFK9tpq79z/cfSuvPZVqV03e6G79yi4WX2edkvLnyzyY+ZbjnudhFXonhlfA/GVzkvY3rq6CN66vRlpvjg4S9TaTptYU/EBoihpqmBKhaO53qnpa+HplWPpZHpKj08MI1cqnTPiaQeNnejT3EBxN613R0kyZLHcJ6eltz5Y1Y+aCmp46dsytXqnOsSvRFwqI5EVEVFQgsGWUj7WcRG9+ydPXUO1G5t90zS3J6S1VNRVKpDLIiYR6xuy3nxhOZE5sIiZ6FiXO53G93Gqu94uFTXV9bM+oqaqpldLNPK9Vc573uVXOcqqqqqqqqqnTAG0jsleLjZ/bXb/UOye6ms7ZpSrdepL5bK+7VDaajqI5YYY5IlneqMY9joUdh6pzJJ0zyrjLPia47+G7b3ZrU9bp3d3SerL9W2yporTa7DeKe4SzVUsasj5+4c5Io0VyOc52E5UXGXYaugQAVbSmprzorU9o1jp2rWlutiroLlQzome6qIZGyRux54c1FN9fDD2huwfELpmh/Cer7Vo/WTYG/hGxXeqbTYmRMOWmlkVGTxquVTlXnRPpNaef4Aen287q7Yadtb75f9xtMW23RsWR1XV3enhhRvrzuejcfMxytvad8K113pbtVR64pY7SlBNNLq2rk9mtXtjHsRlKx8iJzIrFlcsq8seWNRqv58t0HgD0Y6344+ErQdgqdQXDf7RVzZTRue2ksl4gudXM5E6MZFTve5XKuETOE69VRMqnn11jrap1RuRe9xoqZtNUXe+VN7bCq8yRPlqHTI34oiux8i2AB6Itq+PLhZ3O0Na9YS71aP0zU1kDH1dpv97prfWUc+PfidHM9qu5XZRHty1yIioqopq/7Vbia264gd1tN2La+8RXqy6KoKiCS7QZ7iqq6h7HSJCq/TjY2KNOdOjnK7GURHLg6AJu4Md6bFw+cS2id1tTxzustrqZ6e5LDGr3sp6mmlp3yI1OruTve8wnVeTCZzg3n1fGpwlUWnn6nl4jNAPpI4PaFiivtPLVq3GcJStcs6v/AJiM5vgecIASpxKbvQbz8QWtd37HDUUFLfLy+qtyOXlmjgZhkDnY+i/kjY5URejlXCrjJuE4O+0j2e3w0badPbmautuktw6WnZBcKe5zNpaW4ysbhZ6aZ+I/fxzLEqo9qqqIjkRHLonAHqBq9ytuqG3OvFbr7TlPb2tV7qqW6wMhRqdVVXq7lx8zHDUHac8Ktp3csW11BrqludJcJZornqWGTFotitic6NFnxibnejWczMxt5suemFQ0GgD0e6g40eEzTdpmvdw4jNvp4IGLI6O33+nrqhyImcNgp3PkcvwRqqaDeJLc6h3m3513uha6aSCg1Fe6iro43ph6U3NyxK9PJysa1VTyVVI0AEx7a6usrNPQ2muroaWalV6fjnI1r2ucrsoq9PNUx8Dn3C1hY26eqLdR3GCpqKtqMakL0ejW5TKqqdE6fPqQxzKmOU+cyrlF6lNPCWJyfWdz33r391HPA2JyvWdz33r3936R2Pex1yTfo7XFjrbNTQV1xhpqunibFI2d6M5uVMIqKvRcomSD+vgnT4H5RcdfD6iXn8fb5CiKLk612mE3kOOt8jbii5OtdphMO5mqrHUafktNHXQ1U87mriF6Oa1qLzZ5k6eWMePUj3RF5p7DqWkuVXzdy3mZIrU6ojmqmfkqovyKCjnZyq9R9vUxjcdaxsecaJmYne/m84vGWcbGqxYmZire/n0ZDz600tT03tT75SObjPLHIj3r/qp1+4gi/wBwS73isuLGK1tRM+RE9EVVVE+wp69ExlT5zKa+P4u1x81TRMzM+1r43ibXGzVNuZmZ9r5kkranVFstLKm2XKoZTpM5skcj1wzOMKir5eWM/EjVUwfpFc1eikrLxqMy1NqvtKXmYtGbZmzX2lNmu9Y2OOwVVDSXKCqqKqPumthekiNRfFVVOidMkUacvc2nrvTXaBqP7pffYvg5qphU+xSlKqqnXqPI04fG2sOzVYp6xV339GjC4yzh2KrEdYq77+jIaz6y07eoGy01yhjeqe9DK9GPavphV6/WmUKis9ua7vnTUyO/lq5uftMaEcqL7uUPqud5qpUV+jVuat27kxHw3+YVFz0YtzVM27kxH1/MMh7lrLTFpiWWqu9Ork/Mjekjl/1W5X7ehDut9Yy6ruLZGsWGkgRUhjVcr18XL8Vwn2J9ZbKu9VCqvQsMDh7GDV/UiZqq9s+XwT+O4Wxx9f8AUiZqq9s+XwSTtTqi12qOqtVzqWUyTOSWOR64Yq4wqKvl4JjPxLs1frSw0djq46a5QVU9RE+GKOCRr+rkVMrhVRETOepBS5z4n1FeqJlfqMXuFsX8n1iqZ8p18C/wljIyfWapnvEzHwEyq+8vj4E06A1hZH6dpqGtuEFLUUre7ck0iMRyIvRWqvRemPmQs70RMfA/KKufElZ+Dbz7UW651qd7hL5Dj7fIWot1zrU7iYShupqq1XCgitFtqo6hySpNI+NyOa3DVRE5k6Kq5z09ChbZ6ioLBepEuMndwVUfd955MXKKir8PFPmWav3BFPNvjrVGLOJG9T5+bxb4y1bxJw4mfDPn5/FkBetb6ctlBLUsu1LUS8qpHHDK17nOx0TDVXCfFSAHuRzl5fDKhVVF69VPmOvQxx/G2+Opqi3MzM99+5jjuMtcbTVFuZmau+/cu3S9Bf32a5LaaKeVa9GUjVY1ccueZ658EREREXP8skKzXWx6PtEdLcblHPcpnK+oZC7vpXyr5e76JhOuE6ENPrq6WNsM1XM9jeiNV6rhPTxOW23q6WeZZ7ZWy071TCq1fE15fHTlxMVT0md6jpvpqNz16fJqzeMnMiYrmNTO9R0301G569PknSjnv18kSaopXWqhzlGOd++JU9Fx/Fp64974lM1nr23abppLfbpWTXDl5GsZhWwfF3xTyb9vQiyr1vqqtjWKovlSrV8UY/lz9eMFCc5XLzOXKr5kDH4GP6kVX5jwx2pjt85nrKBj+j0f1IrvzHhjtTHb5zPWX7mmknkdNK9XPe5XOcq5VVXxVTizgBEydH2dNEa6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADIzgM4b5eJniGsmlblRPl0tZVS9ajfyryLRxOTECr6zSKyPGc8rnuT6KgZGbK9kNfd1+Hq1bk3XcaTTWsNRUqXK22qqoOekipX9YGzuRe8a6RmH8zUXkR6IrXKimHu/HDHvVw235LJuxoqptscsiso7nF+OoK3GVzDO33XLhM8i4eifSahu747m8UMWzFNScJttmW+RXKCevloJ4462Cih99GU8b8Nk5ntYjmoqqrEc3lcj1xrG307SveLdzYi9cO+7O2NhZfp546S53iWGSCohfTztcuaNyYhqEdHyucioiZciMavgGE4BXNL6L1jrermt2i9J3i/1dPCtRLBa6CWqkjiRURXubG1VRuVRMr06oBQwc9VS1NFUS0dbTy088LlZJFKxWPY5Oio5F6oqeinAAAAAAAAAAAAAAADmp6eepqI6WmhklmmekccbGq5z3KuEaiJ1VVXpg4TNDsntcbe6R4raC3a4tFFNVajt81qsFwqWI5aC5Oc17OTPRrpWsfEjk97L2tRcOcBSdo+y14ud17dHeJdJ2zRdBPEksEuqqx1JJKiplE7iKOWdi/pxtIs4kuEzefhWvtHZ907JStpbm1zrfdrdMs9DWK1E52skVrXI5uUyx7Wu88Kioq7QO08324reG656L3C2g1nBbtD1r/YbhSraKao/hFiuka2aSVjnd3LFzIiMVqosT1zlWqkn2us0D2l/BbI6uoKajrrzTSQvjyrlsmoKdvuvY7x5UerXJ5uhlwv0lQDQSDt3S3VtnuVXaLnTvp6yhnkpqiF/wBKORjla5q/FFRUOoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaF2XnE3wpbBbKarg3A1ZDpzWk9yfXXBaune6S4UkcaJTx0zmNVH8uZU7vPNzvcuMKimr0AZb/8AWccU9o3b1RuTpbWz47XqK4vqmacuUaVlvpoERGQxMY7rGrY2saronMV6tVXZVVMZ9da01BuPrO+a/wBV1bam86ir57nXytYjGvnler3q1qdGplVwidETCFAAA3QdjRtbFpXh+1BurX07Y6rWt5fFDMqYzQUSLG3qvl376rPl7qGmWmp6iqqI6WmhfLNM9GRxsarnPcq4RqInVVVemD0IyXHbbgl4M7Datz46t1g03ZqCx3SK3NzPU1NU5sdS6NEe1esk00i8rkcjUcqZVEyEW7bb08HXaRal1VthqbZtlZd7DBNUQ11fSxpLUUDZkhSopq2FUmiXL4lViq36bcc2Fxq945OG62cLW/lx230/dqi4WOqooLxapKnCzx00yvakUqoiI5zHxvbzIiZRGrhFVUNt2hNKcKPBxsleuJzYTa+9XfTt7tVNdKqos9S+trHW1U52vRK6dqxxM5kdI1F50xlzV5Pd03cVfENeOKDeu9bs3S2pbIKxsVJbbeknP7HRRN5Y41dhOZy+89y+HM92MJhECHyUNmuGjfPiDbeJNndva3UkdhZG+4SQzwQsh50crG80z2I56ox2GNy7p4EXm5nsU7C6k4etZ6iczldctYSUzVVPpMgo6dUX6uaZyfJQNOt5s9107d66wXy3TUNytlTLR1lLUMVktPPG5WSRvavVrmuRUVF8FQ6BJXEve26l4i90dQMcjo7hrK81Eap4cjq2VWp/4cEagSjtvwxcQe71oTUW22z+p7/aXSOhbX0tA72Z72rhzWyuwxyovRcKuF8S5NbcEPFXt1o24bga02XvNssNqjSatq3y07+4jVUTndGyRXo1FVMry4ROq4RMm3Xs27tcqjs/dHS2dqOudBS3yGmRGc2Zm3CrdH7vn4s6efzNenELxI9pVqHaS7UO9OltT6Y0NeHNoLlLNo78GMex69IXyPiSRjHKmPFOb6OVRcKGEBKnDDtBat/N+dH7RXrUjrDRakrJIJq+OJJHxoyGSXlY1VROd6xpG1V6Ir0XC4wsVlzbZ62uG2u4mmdw7Wjlq9M3aku0LUdy87oJmycufReXC/BVA2Z8VfZFaS0ztM7VXDbUahuGpNPQrNXWy5VLamS8QNTL1i5WNRs6Y5kY1OV6ZaiI7Ga7rzQmgd/OyRs2pdHaRtNFd9Eafp69Fp6NkctPWW1/dXJVVE5kWSOOpkXK5dztcufEyl4g+JqHYWTbfd64udW7WatqG2e91MUavfb3VMST0NexE6rGiMmbI3rlHsVPeajXSLpPajbums2rmaV9nm0ruY592q6Sle19JLLV06R1E8Cty1GTxpG9Ub7qv539VkUDzPnctVzuNjulHe7PWyUdfb6iOqpaiJ3K+GaNyOY9q+So5EVF9UKvuLoy47c6+1Jt/ds+26bu1XaahVby8z4JXRquPRVblPrLcA386Tumk+0c4Hn01zfSxXHUVsdQV6o3P4Lv9NhUkRE6takqRyoidVikRPzlLU4Vdurd2bnCvf77xBa3tsU9bcpb3VU1LLzMZMsEccVFT82FnnckP5qImVx9FivXVnwucbG8fCRDqGh26ZZq+36iYx09DeIJJoYaliKjKiNI5GK1+FwvVUciNyi8rVSxd6uIPeLiE1AzUe7uua++zwc60lO9UjpaNrl6thgYiRx5wiKqJlcJzKqoBaWtNST6z1jfdYVVOyCa+XOquckTOrY3TSukVqL6IrsFEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADv2S71+n7xQX61zJFW22pirKaRWo7kljejmLhei4VE6KZLcUfaE7wcV231j271vYtPWigtdalyqn2mOZi11S1j2RuckkjuVrWyPXlTKK5c+SImLQA217T8cnDHR9ntWbSXzWS0OrLboO4aelsVVRTLLV1UlPLExInI1Y3tkc9PzvdRV5kaiGpQAAb2eyroafSnA1Y9RVLeSGurrzdpXeGWx1MkKr9lP9xomMgdv+ObiO2x2Vqtg9H6upaXStRDV08SOt8T6mlhqXPdOyGVUy1HOkkdlcuar1Vqt6YCCbrcam8XSsu9Y5HVFdUSVMqp5ve5XO+9VOoABvT7Ii4e2cG9tps59g1BdKfHpmRsn/wDQw14i93+0t3/27v8Atprjh/v1v0oyZKi5vt+iq6lWqhppUlZl8yuVzEfGyT8XhV5U6qnQhzhW7QveDhN0XdNv9H6f01fLNcK91zjju0U6vpqhzGMerHRSMyxzY2ZaueqZRUyuZF1L2xvFjfbbV2+3WrQNhfUxPiZVW+1VLp4MpjnYs1RIzmTxRVaqZ8gMFAABtUod/tk93uyjrtvtw9xrBQ6t01YvwTTWmpr4218lZQSo63dzCq949JI44Gq5qKmFkRVw1xCHBd2nWp+GjRNRtlrzS9ZrPTdLmWxJHXJDU25yrl0HM9rkdAqqrkTxYquxlFRG4NAC/wDfndep3z3h1Xu1V2Oms8mp7g6t9hgkWRtO3CNa3nVE53crU5nYTmdlcJnBYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//Z' width='140' style='border-radius:15px; margin-bottom:10px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2)'/>
         <h1 style='color:#1B5E20;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
         <p style='color:#2E7D32;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
     </div>
@@ -593,7 +533,7 @@ def show_login_page():
         if "lang_name" not in st.session_state:
             st.session_state["lang_name"] = "Marathi"
         if "sel_lang_display" not in st.session_state:
-            st.session_state["sel_lang_display"] = "मराठी (Marathi)"
+            st.session_state["sel_lang_display"] = "🌾 मराठी (Marathi)"
         
         def on_lang_change():
             chosen = st.session_state["lang_selector"]
@@ -654,7 +594,7 @@ def show_login_page():
 
     st.markdown("""
     <div style='text-align:center;padding:30px;color:#558B2F;font-size:0.82rem;margin-top:20px'>
-        <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
+        🌾 <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
         Maharashtra Government Agri-Tech Initiative
     </div>
     """, unsafe_allow_html=True)
@@ -668,69 +608,253 @@ if not st.session_state["logged_in"]:
     show_login_page()
     st.stop()   # Stop here — rest of app not shown until logged in
 
-if "page" not in st.session_state:
-    st.session_state["page"] = "main"
+# ── PROFILE PAGE SESSION STATE ──
+if "show_profile" not in st.session_state:
+    st.session_state["show_profile"] = False
+if "detection_history" not in st.session_state:
+    st.session_state["detection_history"] = []
+if "farmer_photo_b64" not in st.session_state:
+    st.session_state["farmer_photo_b64"] = None
 
 
+# ─────────────────────────────────────────────────────────────
+# PROFILE PAGE FUNCTION
+# ─────────────────────────────────────────────────────────────
 def show_profile_page():
-    """Farmer profile & detection-history dashboard. Built mobile-first —
-    single-column stack that widens gracefully on larger screens."""
-    back_l, _ = st.columns([1, 3])
-    with back_l:
-        if st.button("Back", use_container_width=True):
-            st.session_state["page"] = "main"
-            st.rerun()
+    farmer_name    = st.session_state.get("farmer_name", "Farmer")
+    farmer_phone   = st.session_state.get("farmer_phone", "—")
+    farmer_district= st.session_state.get("farmer_district", "—")
+    reg_number     = f"MK-{abs(hash(farmer_phone)) % 900000 + 100000}"
+    history        = st.session_state.get("detection_history", [])
 
-    name = st.session_state.get("farmer_name", "Farmer")
-    phone = st.session_state.get("farmer_phone", "")
-    district = st.session_state.get("farmer_district", "")
+    # Back button
+    if st.button("← Back to Dashboard", key="back_from_profile"):
+        st.session_state["show_profile"] = False
+        st.rerun()
 
+    # ── HERO CARD ──
     st.markdown(f"""
-    <div class='login-card' style='text-align:center;'>
-        <div class='profile-avatar' style='width:90px;height:90px;border-radius:50%;
-             background:linear-gradient(135deg,#2E7D32,#1B5E20);
-             display:flex;align-items:center;justify-content:center;
-             margin:0 auto 14px;font-size:2.2rem;color:white;'></div>
-        <h2 class='profile-name' style='color:#1B5E20;margin:0;word-wrap:break-word;'>{name}</h2>
-        <p class='profile-meta' style='color:#558B2F;margin:6px 0 0;font-size:0.95rem;'>
-            {phone}<br>{district}
-        </p>
+    <div class='profile-hero'>
+        <div class='profile-avatar'>{get_avatar_html(90, icon_scale=0.5)}</div>
+        <div style='flex:1'>
+            <h2 style='margin:0 0 4px;font-size:1.8rem'>{farmer_name}</h2>
+            <p style='margin:0;opacity:0.85;font-size:1rem'>📱 {farmer_phone}</p>
+            <p style='margin:4px 0 0;opacity:0.8;font-size:0.9rem'>📍 {farmer_district} District, Maharashtra</p>
+            <p style='margin:6px 0 0;'>
+                <span style='background:rgba(255,255,255,0.25);border-radius:20px;
+                             padding:4px 14px;font-size:0.82rem;font-weight:600'>
+                    🪪 Reg. No: {reg_number}
+                </span>
+            </p>
+        </div>
+        <div style='text-align:right;opacity:0.8'>
+            <p style='margin:0;font-size:0.8rem'>Member Since</p>
+            <p style='margin:0;font-weight:700;font-size:1.1rem'>{datetime.now().strftime("%b %Y")}</p>
+            <span style='background:#4CAF50;color:white;border-radius:20px;
+                         padding:3px 12px;font-size:0.78rem;font-weight:600'>✅ Verified Farmer</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    history_df = get_user_history(phone)
-    total = len(history_df)
-    disease_count = int((history_df["Category"] == "Disease").sum()) if total else 0
-    pest_count = int((history_df["Category"] == "Pest").sum()) if total else 0
+    # ── PROFILE PHOTO UPLOAD ──
+    with st.expander("📷 Change Profile Photo / प्रोफाइल फोटो बदला"):
+        pu1, pu2 = st.columns([1, 3])
+        with pu1:
+            st.markdown(
+                f"<div style='width:70px'>{get_avatar_html(70, icon_scale=0.5)}</div>",
+                unsafe_allow_html=True
+            )
+        with pu2:
+            new_photo = st.file_uploader(
+                "Upload a clear photo (jpg/png)", type=["jpg", "jpeg", "png", "webp"],
+                key="profile_photo_uploader"
+            )
+            if new_photo is not None:
+                st.session_state["farmer_photo_b64"] = base64.b64encode(new_photo.read()).decode("utf-8")
+                st.rerun()
+            if st.session_state.get("farmer_photo_b64"):
+                if st.button("🗑️ Remove Photo", key="remove_profile_photo"):
+                    st.session_state["farmer_photo_b64"] = None
+                    st.rerun()
+
+    # ── STATS ROW ──
+    disease_count = sum(1 for h in history if h.get("type") == "disease")
+    pest_count    = sum(1 for h in history if h.get("type") == "pest")
+    healthy_count = sum(1 for h in history if h.get("healthy"))
+    total_scans   = len(history)
+
+    s1, s2, s3, s4 = st.columns(4)
+    with s1:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🔍 {total_scans}</p>
+            <p class='profile-stat-label'>Total AI Scans</p>
+        </div>""", unsafe_allow_html=True)
+    with s2:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🦠 {disease_count}</p>
+            <p class='profile-stat-label'>Diseases Detected</p>
+        </div>""", unsafe_allow_html=True)
+    with s3:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🐛 {pest_count}</p>
+            <p class='profile-stat-label'>Pests Identified</p>
+        </div>""", unsafe_allow_html=True)
+    with s4:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🌱 {healthy_count}</p>
+            <p class='profile-stat-label'>Healthy Crops</p>
+        </div>""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### Your Activity")
-    # 3 equal columns — Streamlit stacks these to full-width rows on narrow
-    # screens automatically, and stMetric font sizes shrink via the CSS
-    # media query above, so this stays readable on a phone.
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Total Scans", total)
-    c2.metric("Diseases", disease_count)
-    c3.metric("Pests", pest_count)
 
-    st.markdown("### Detection History")
-    if history_df.empty:
-        st.info("No detections yet. Run a scan from the AI Detection tab to see your history here.")
-    else:
-        # On mobile, a wide dataframe forces horizontal scroll — so instead
-        # of st.dataframe (bad on small screens), render each entry as a
-        # stacked card that reads top-to-bottom naturally on a phone.
-        for _, row in history_df.iterrows():
-            badge_cls = "badge-warning" if row["Category"] == "Pest" else "badge-emergency"
-            st.markdown(f"""
-            <div class='contact-card'>
-                <span class='{badge_cls}'>{row['Category']}</span>
-                <span style='float:right;color:#888;font-size:0.8rem'>{row['Timestamp']}</span>
-                <h4 style='margin:8px 0 2px;color:#1B5E20;word-wrap:break-word;'>{row['Result']}</h4>
-                <p style='margin:0;font-size:0.88rem;color:#558B2F;word-wrap:break-word;'>
-                    <b>Mode:</b> {row['Crop_Type']} &nbsp;|&nbsp; <b>Confidence:</b> {row['Confidence_Pct']}%
-                </p>
+    # ── TWO COLUMN LAYOUT ──
+    col_left, col_right = st.columns([1.1, 1], gap="large")
+
+    with col_left:
+        # Farmer Info Card
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 👤 Farmer Information")
+        st.markdown(f"""
+        <table style='width:100%;border-collapse:collapse;font-size:0.92rem'>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Full Name</td>
+                <td style='padding:10px 0;color:#1B5E20;font-weight:700'>{farmer_name}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Mobile Number</td>
+                <td style='padding:10px 0;color:#1B5E20'>{farmer_phone}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>District</td>
+                <td style='padding:10px 0;color:#1B5E20'>{farmer_district}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>State</td>
+                <td style='padding:10px 0;color:#1B5E20'>Maharashtra</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Registration No.</td>
+                <td style='padding:10px 0'>
+                    <span style='background:#E8F5E9;color:#1B5E20;font-weight:700;
+                                 padding:3px 10px;border-radius:10px'>{reg_number}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Account Status</td>
+                <td style='padding:10px 0'>
+                    <span style='background:#C8E6C9;color:#1B5E20;font-weight:700;
+                                 padding:3px 10px;border-radius:10px'>✅ Active</span>
+                </td>
+            </tr>
+        </table>
+        """, unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Quick Stats Mini Dashboard
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 📊 Activity Dashboard")
+        if total_scans > 0:
+            # Simple bar chart data
+            import pandas as pd
+            chart_data = {
+                "Category": ["🦠 Disease", "🐛 Pest", "🌱 Healthy"],
+                "Count": [disease_count, pest_count, healthy_count]
+            }
+            df_chart = pd.DataFrame(chart_data)
+            st.bar_chart(df_chart.set_index("Category"), color="#2E7D32", use_container_width=True)
+        else:
+            st.markdown("""
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+                <div style='font-size:2.5rem'>📊</div>
+                <p style='color:#558B2F;margin:8px 0 0'>No scan data yet.<br>
+                   <small>Start detecting crop diseases to see your activity chart here.</small></p>
             </div>""", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with col_right:
+        # Detection History
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 🕐 Detection History")
+
+        if not history:
+            st.markdown("""
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+                <div style='font-size:2.5rem'>🌾</div>
+                <p style='color:#558B2F;margin:8px 0 0'>No detections yet.<br>
+                   <small>Upload a crop photo on the AI Detection tab to get started.</small></p>
+            </div>""", unsafe_allow_html=True)
+        else:
+            for h in reversed(history[-10:]):  # Show last 10
+                icon  = "🦠" if h.get("type") == "disease" else ("🐛" if h.get("type") == "pest" else "🌱")
+                badge_color = "#FFEBEE" if h.get("type") == "disease" else (
+                              "#FFF3E0" if h.get("type") == "pest" else "#E8F5E9")
+                badge_text_color = "#C62828" if h.get("type") == "disease" else (
+                                   "#EF6C00" if h.get("type") == "pest" else "#2E7D32")
+                label = "Disease" if h.get("type") == "disease" else (
+                        "Pest" if h.get("type") == "pest" else "Healthy")
+                st.markdown(f"""
+                <div class='history-row'>
+                    <div class='history-icon'>{icon}</div>
+                    <div style='flex:1;min-width:0'>
+                        <p style='margin:0;font-weight:600;color:#1B5E20;
+                                  white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
+                            {h.get("name","Unknown")}
+                        </p>
+                        <p style='margin:2px 0 0;font-size:0.78rem;color:#558B2F'>
+                            🕐 {h.get("time","—")} &nbsp;|&nbsp; 🎯 {h.get("conf",0):.1f}% confidence
+                        </p>
+                    </div>
+                    <span class='history-badge'
+                          style='background:{badge_color};color:{badge_text_color}'>{label}</span>
+                </div>""", unsafe_allow_html=True)
+
+            if st.button("🗑️ Clear History", key="clear_hist"):
+                st.session_state["detection_history"] = []
+                st.rerun()
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # AI Model Info Card
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 🤖 AI Models Used")
+        st.markdown("""
+        <div style='display:flex;flex-direction:column;gap:10px'>
+            <div style='background:#E8F5E9;border-radius:10px;padding:12px'>
+                <b style='color:#1B5E20'>🌾 Crop Disease Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#33691E'>
+                    EfficientNet-B0 · 39 Classes · TTA ×4<br>
+                    Rice, Sugarcane, Cotton, Wheat, Tomato, Potato
+                </p>
+            </div>
+            <div style='background:#FFF3E0;border-radius:10px;padding:12px'>
+                <b style='color:#E65100'>🐛 Pest Detection Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#BF360C'>
+                    EfficientNet-B0 · 14 Classes · TTA ×4<br>
+                    Bollworm, Aphids, Stem Borer, Whitefly, Armyworm
+                </p>
+            </div>
+            <div style='background:#E3F2FD;border-radius:10px;padding:12px'>
+                <b style='color:#1565C0'>🧠 AI Advisory Engine</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#0D47A1'>
+                    Google Gemini 1.5 Flash + gTTS Voice<br>
+                    Supports: Marathi, Hindi, English, Gujarati, Punjabi
+                </p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # ── SIGN OUT ──
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("🚪 Sign Out", type="secondary", use_container_width=False, key="profile_signout"):
+        for key in ["logged_in", "farmer_name", "farmer_phone", "farmer_district",
+                    "show_profile", "detection_history"]:
+            st.session_state.pop(key, None)
+        st.rerun()
 
 
 # ─────────────────────────────────────────────────────────────
@@ -740,7 +864,7 @@ def show_profile_page():
 def load_disease_model():
     model_path = os.path.join(os.path.dirname(__file__), "crop_disease_model.pth")
     if not os.path.exists(model_path):
-        return None, None, "Model file 'crop_disease_model.pth' not found."
+        return None, None, "❌ Model file 'crop_disease_model.pth' not found."
     try:
         checkpoint  = torch.load(model_path, map_location=DEVICE)
         class_names = checkpoint["class_names"]
@@ -759,7 +883,7 @@ def load_disease_model():
         base.eval().to(DEVICE)
         return base, class_names, None
     except Exception as e:
-        return None, None, f"Error loading disease model: {e}"
+        return None, None, f"❌ Error loading disease model: {e}"
 
 
 @st.cache_resource(show_spinner=False)
@@ -785,7 +909,7 @@ def load_pest_model():
         base.eval().to(DEVICE)
         return base, class_names, None
     except Exception as e:
-        return None, None, f"Error loading pest model: {e}"
+        return None, None, f"❌ Error loading pest model: {e}"
 
 
 # ─────────────────────────────────────────────────────────────
@@ -847,7 +971,7 @@ def check_image_quality(pil_image: Image.Image) -> tuple[bool, str]:
     brightness = img_array.mean()
     if brightness < 40:
         return False, (
-            "**Image too dark for accurate detection!**\n\n"
+            "⚠️ **Image too dark for accurate detection!**\n\n"
             "Please retake the photo in bright daylight or good lighting. "
             "Dark images cause the AI to give wrong predictions."
         )
@@ -856,7 +980,7 @@ def check_image_quality(pil_image: Image.Image) -> tuple[bool, str]:
     laplacian_var = np.var(np.gradient(img_array.astype(float)))
     if laplacian_var < 50:
         return False, (
-            "**Image appears blurry or out of focus!**\n\n"
+            "⚠️ **Image appears blurry or out of focus!**\n\n"
             "Please hold the camera steady and retake the photo closer to the leaf/plant. "
             "Blurry images significantly reduce detection accuracy."
         )
@@ -900,7 +1024,7 @@ def predict_crop_issue(model, class_names, pil_image: Image.Image):
 def clean_text_for_speech(text):
     """Regex-based text cleaner for gTTS to produce clean Marathi/Hindi speech."""
     clean = re.sub(r'[*#`_~]', '', text)
-    clean = re.sub(r'[]', '', clean)
+    clean = re.sub(r'[🔴🤒🦠💊🌿🛡️☎️✅❌🌾🔊👀💧🥇🥈🥉🎉📁📐🐛🏛️🗺️🚨]', '', clean)
     clean = re.sub(r'https?://\S+', '', clean)
     clean = re.sub(r'\s+', ' ', clean).strip()
     return clean if clean else "पिकाचे विश्लेषण पूर्ण झाले आहे."
@@ -1000,35 +1124,35 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
         CRITICAL REQUIREMENT — COMPREHENSIVE, ELABORATIVE & STEP-BY-STEP ADVISORY:
         Provide a detailed, thorough, highly elaborative advisory covering all of the following sections:
 
-        1. **नमस्कार व कृषी मित्राचे मनोगत (GREETING & EMPATHETIC INTRODUCTION)**
+        1. 🙏 **नमस्कार व कृषी मित्राचे मनोगत (GREETING & EMPATHETIC INTRODUCTION)**
            - Respectful warm greeting to the farmer.
 
-        2. **पिकावर होणारा विघातक परिणाम (HOW THE DISEASE/PEST AFFECTS THE PLANT)**
+        2. 🦠 **पिकावर होणारा विघातक परिणाम (HOW THE DISEASE/PEST AFFECTS THE PLANT)**
            - Detail plant physiological damage: leaf chlorosis, sap-sucking damage, photosynthesis blockage, stem vascular clogging, fruit/boll boring, root rot, or severe yield reduction.
 
-        3. **कीड / रोग येण्याची मुख्य कारणे (WHY THE PEST/DISEASE OCCURS)**
+        3. 🌧️ **कीड / रोग येण्याची मुख्य कारणे (WHY THE PEST/DISEASE OCCURS)**
            - Explain triggers: high atmospheric humidity (>80%), cloudy monsoon weather, excessive nitrogen/urea fertilizer use, stubble residue, temperature fluctuations, and lack of natural beneficial insects.
 
-        4. **रोगाचे / कीडीचे ३ मुख्य टप्पे (STAGES OF DISEASE / PEST INFESTATION)**
-           - Describe Early Stage (प्राथमिक टप्पा - 1-5% infestation, mild leaf spotting, easily controlled by Neem Oil).
-           - Describe Moderate Stage (मध्यम टप्पा - 10-30% infestation, active lesions & caterpillars, target chemical spray needed within 48 hours).
-           - Describe Critical/Severe Stage (गंभीर / तीव्र टप्पा - 50%+ foliage damage, wilt/rot/boring, emergency systemic spray & burning infected plants required).
+        4. 📊 **रोगाचे / कीडीचे ३ मुख्य टप्पे (STAGES OF DISEASE / PEST INFESTATION)**
+           - Describe Early Stage (🌱 प्राथमिक टप्पा - 1-5% infestation, mild leaf spotting, easily controlled by Neem Oil).
+           - Describe Moderate Stage (🌿 मध्यम टप्पा - 10-30% infestation, active lesions & caterpillars, target chemical spray needed within 48 hours).
+           - Describe Critical/Severe Stage (🥀 गंभीर / तीव्र टप्पा - 50%+ foliage damage, wilt/rot/boring, emergency systemic spray & burning infected plants required).
 
-        5. **टप्पा १: प्रभावी रसायनिक फवारणी (STEP 1: CHEMICAL SPRAY SOLUTION WITH DOSAGES)**
+        5. 💊 **टप्पा १: प्रभावी रसायनिक फवारणी (STEP 1: CHEMICAL SPRAY SOLUTION WITH DOSAGES)**
            - Recommend specific chemical pesticides/fungicides (e.g., Profenofos 50% EC, Emamectin Benzoate 5% SG, Hexaconazole 5% EC, Chlorantraniliprole 18.5% SC).
            - Provide EXACT dosage per Liter of water AND per Acre (e.g., 2 ml/Liter or 400 ml/Acre in 200 Liters water).
            - Specify best spraying time (evening/early morning) and safety gear (mask, gloves).
 
-        6. **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (STEP 2: ORGANIC & BIOLOGICAL SOLUTIONS)**
+        6. 🌿 **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (STEP 2: ORGANIC & BIOLOGICAL SOLUTIONS)**
            - Detailed recipe for 5% Neem Oil (कडुनिंब तेल - 5 ml/L), Jeevamrut (जीवामृत), or Dashparni Ark (दशपर्णी अर्क - 5 ml/L).
            - Bio-control agents (Trichoderma viride @ 5g/L for soil diseases or Beauveria bassiana for insect pests).
            - Mechanical traps: Yellow and blue sticky traps (10-15 traps/Acre) or Pheromone traps (5 traps/Acre for bollworm/borer).
 
-        7. **टप्पा ३: दीर्घकालीन शेत स्वच्छता व सुपीकता (STEP 3: LONG-TERM PREVENTION & FIELD HYGIENE)**
+        7. 🛡️ **टप्पा ३: दीर्घकालीन शेत स्वच्छता व सुपीकता (STEP 3: LONG-TERM PREVENTION & FIELD HYGIENE)**
            - Cultural practices: Removing & burning infected plant parts.
            - Soil health management, crop rotation, and subsoil drainage.
 
-        8. **मोफत कृषी हेल्पलाइन (HELPLINE SUPPORT)**
+        8. ☎️ **मोफत कृषी हेल्पलाइन (HELPLINE SUPPORT)**
            - Toll-Free Kisan Call Center: 1800-180-1551.
         """
     try:
@@ -1043,145 +1167,150 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
     # Elaborative Fallback Response
     if is_healthy:
              if lang_name == "Marathi":
-                 return "**रामराम शेतकरी दादा!** \n\nतुमचे पीक पूर्णपणे निरोगी आहे!..."
+                 return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आहे!..."
              elif lang_name == "Hindi":
-                  return "**नमस्कार किसान भाई!** \n\nआपकी फसल पूरी तरह स्वस्थ है!..."
+                  return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ है!..."
              elif lang_name == "Gujarati":
-                  return "**નમસ્કાર ખેડૂત ભાઈ/બહેન!** \n\nતમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n**કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
+                  return "🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾\n\n✅ તમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n💧 **કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
              elif lang_name == "Punjabi":
-                  return "**ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** \n\nਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n**ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
+                  return "🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾\n\n✅ ਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n💧 **ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
              else:
-                  return "**Greetings Dear Farmer!** \n\nYour crop is completely healthy and growing strong!\n\n**Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
+                  return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
     else:
         if lang_name == "Marathi":
-            return f"""**रामराम शेतकरी दादा!** 
-**आढळलेला विकार / कीड:** **{issue_name}**
+            return f"""🙏 **रामराम शेतकरी दादा!** 🌾
 
-**पिकावर होणारा विघातक परिणाम (How it Affects Plant):**
+🔴 **आढळलेला विकार / कीड:** **{issue_name}**
+
+🦠 **पिकावर होणारा विघातक परिणाम (How it Affects Plant):**
 • हा विकार किंवा कीड पानांमधील रस शोषून घेते, ज्यामुळे पानातील हरितद्रव्य (Photosynthesis) नष्ट होते.
 • झाडाची वाढ खुंटते, पाने पिवळी पडून वाळतात आणि उत्पादनात ३०% ते ५०% पर्यंत घट येऊ शकते.
 
-**प्रादुर्भावाची मुख्य कारणे (Why it Attacks):**
+🌧️ **प्रादुर्भावाची मुख्य कारणे (Why it Attacks):**
 • हवेतील वाढलेला दमटपणा, सततचे ढगाळ हवामान आणि युरियाचा (नत्र) अतिवापर यांमुळे कीड व रोगाचा प्रसार वेगाने होतो.
 
-**रोगाचे / कीडीचे ३ मुख्य टप्पे (Stages of Disease / Infestation):**
-• **१. प्राथमिक टप्पा (Early Stage):** पानांवर बारीक डाग (१-५% प्रादुर्भाव). ५% कडुनिंब तेल व चिकट सापळ्यांनी सहज नियंत्रण शक्य.
-• **२. मध्यम टप्पा (Moderate Stage):** १०-३०% पानांवर डाग किंवा कीड. ४८ तासांत रसायनिक फवारणी (प्रोफेनोफॉस/इमॅमेक्टिन/हेक्झाकोनॅझोल) आवश्यक.
-• **३. गंभीर / तीव्र टप्पा (Critical Stage):** ५०% पेक्षा जास्त पीक बाधित, पाने वाळणे, खोड सडणे. तातडीची सिस्टेमिक औषध फवारणी व बाधित भाग जाळणे आवश्यक.
+📊 **रोगाचे / कीडीचे ३ मुख्य टप्पे (Stages of Disease / Infestation):**
+• **🌱 १. प्राथमिक टप्पा (Early Stage):** पानांवर बारीक डाग (१-५% प्रादुर्भाव). ५% कडुनिंब तेल व चिकट सापळ्यांनी सहज नियंत्रण शक्य.
+• **🌿 २. मध्यम टप्पा (Moderate Stage):** १०-३०% पानांवर डाग किंवा कीड. ४८ तासांत रसायनिक फवारणी (प्रोफेनोफॉस/इमॅमेक्टिन/हेक्झाकोनॅझोल) आवश्यक.
+• **🥀 ३. गंभीर / तीव्र टप्पा (Critical Stage):** ५०% पेक्षा जास्त पीक बाधित, पाने वाळणे, खोड सडणे. तातडीची सिस्टेमिक औषध फवारणी व बाधित भाग जाळणे आवश्यक.
 
-**टप्पा १: रसायनिक फवारणी उपाय (Chemical Treatment):**
+💊 **टप्पा १: रसायनिक फवारणी उपाय (Chemical Treatment):**
 • **औषध:** प्रोफेनोफॉस ५०% EC (२ मिली प्रति लिटर पाणी) किंवा इमॅमेक्टिन बेन्झोएट ५% SG (०.५ ग्रॅम प्रति लिटर पाणी).
 • **प्रमाण:** एका एकरासाठी २०० लिटर पाण्यात ४०० मिली औषध मिसळून फवारणी करा.
 • **सुरक्षा:** फवारणी नेहमी संध्याकाळी व तोंडाला मास्क लावूनच करा.
 
-**टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (Organic Treatment):**
+🌿 **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (Organic Treatment):**
 • **कडुनिंब तेल (Neem Oil):** ५ मिली कडुनिंब तेल (1500 PPM) + १ मिली डिटर्जंट लिक्विड प्रति लिटर पाण्यात मिसळून फवारा.
 • **दशपर्णी अर्क:** ५ मिली दशपर्णी अर्क प्रति लिटर पाण्यात मिसळून फवारल्यास कीड पळून जाते.
 • **चिकट सापळे:** कीडींच्या नियंत्रणासाठी शेतात एकरी १०-१२ पिवळे व निळे चिकट सापळे (Sticky Traps) लावा.
 
-**टप्पा ३: दीर्घकालीन शेत स्वच्छता व बचाव:**
+🛡️ **टप्पा ३: दीर्घकालीन शेत स्वच्छता व बचाव:**
 • बाधित पाने व झाडांचे अवशेष तात्काळ गोळा करून नष्ट करा.
 • पिकांची आलटून-पालटून (Crop Rotation) लागवड करा.
 
-**मोफत कृषी हेल्पलाइन:** 1800-180-1551 (कृषी सल्ला केंद्र)"""
+☎️ **मोफत कृषी हेल्पलाइन:** 1800-180-1551 (कृषी सल्ला केंद्र)"""
         elif lang_name == "Hindi":
-            return f"""**नमस्कार किसान भाई!** 
-**पहचाना गया रोग / कीट:** **{issue_name}**
+            return f"""🙏 **नमस्कार किसान भाई!** 🌾
 
-**फसल पर प्रभाव (How it Affects Plant):**
+🔴 **पहचाना गया रोग / कीट:** **{issue_name}**
+
+🦠 **फसल पर प्रभाव (How it Affects Plant):**
 • यह कीट या रोग पत्तियों का रस चूसता है, जिससे प्रकाश संश्लेषण (Photosynthesis) बाधित होता है और पत्तियां पीली पड़कर सूख जाती हैं।
 
-**प्रकोप का कारण (Why it Attacks):**
+🌧️ **प्रकोप का कारण (Why it Attacks):**
 • मौसम में अत्यधिक नमी, बादल छाए रहना और नाइट्रोजन (यूरिया) का अत्यधिक उपयोग कीटों के पनपने का मुख्य कारण है।
 
-**बीमारी / कीट प्रकोप के 3 चरण (Stages of Disease / Infestation):**
-• **1. प्रारंभिक चरण (Early Stage):** पत्तियों पर छोटे धब्बे (1-5% प्रभाव)। 5% नीम तेल एवं स्टिकी ट्रैप से नियंत्रण संभव।
-• **2. मध्यम चरण (Moderate Stage):** 10-30% प्रभाव। 48 घंटे के भीतर रसायनिक छिड़काव आवश्यक।
-• **3. गंभीर चरण (Critical Stage):** 50%+ फसल प्रभावित, पत्तियां सूखना व सड़ना। तुरंत आपातकालीन सिस्टमिक स्प्रे व रोगग्रस्त पौधों को जलाना आवश्यक.
+📊 **बीमारी / कीट प्रकोप के 3 चरण (Stages of Disease / Infestation):**
+• **🌱 1. प्रारंभिक चरण (Early Stage):** पत्तियों पर छोटे धब्बे (1-5% प्रभाव)। 5% नीम तेल एवं स्टिकी ट्रैप से नियंत्रण संभव।
+• **🌿 2. मध्यम चरण (Moderate Stage):** 10-30% प्रभाव। 48 घंटे के भीतर रसायनिक छिड़काव आवश्यक।
+• **🥀 3. गंभीर चरण (Critical Stage):** 50%+ फसल प्रभावित, पत्तियां सूखना व सड़ना। तुरंत आपातकालीन सिस्टमिक स्प्रे व रोगग्रस्त पौधों को जलाना आवश्यक.
 
-**चरण 1: रासायनिक छिड़काव (Chemical Treatment):**
+💊 **चरण 1: रासायनिक छिड़काव (Chemical Treatment):**
 • **दवा:** प्रोफेनोफॉस 50% EC (2 मिली प्रति लीटर पानी) या इमामेक्टिन बेंजोएट (0.5 ग्राम/लीटर)।
 • **मात्रा:** 1 एकड़ के लिए 200 लीटर पानी में 400 मिली दवा मिलाकर छिड़काव करें।
 • **सावधानी:** शाम के समय सुरक्षा मास्क पहनकर छिड़काव करें।
 
-**चरण 2: जैविक एवं देसी उपाय (Organic Treatment):**
+🌿 **चरण 2: जैविक एवं देसी उपाय (Organic Treatment):**
 • **नीम तेल (Neem Oil):** 5 मिली नीम तेल प्रति लीटर पानी में मिलाकर स्प्रे करें।
 • **दशपर्णी अर्क:** 5 मिली दशपर्णी अर्क का स्प्रे करें।
 • **स्टिकी ट्रैप:** खेत में प्रति एकड़ 10-12 पीले व नीले स्टिकी ट्रैप लगाएं।
 
-**चरण 3: दीर्घकालिक बचाव:**
+🛡️ **चरण 3: दीर्घकालिक बचाव:**
 • प्रभावित पत्तियों को खेत से बाहर नष्ट करें।
 
-**हेल्पलाइन:** 1800-180-1551"""
-        elif lang_name == "Gujarati":        # ADD FROM HERE
-            return f"""**નમસ્કાર ખેડૂત ભાઈ/બહેન!** 
-**શોધાયેલ રોગ / જીવાત:** **{issue_name}**
+☎️ **हेल्पलाइन:** 1800-180-1551"""
+        elif lang_name == "Gujarati":        # ← ADD FROM HERE
+            return f"""🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾
 
-**પાક પર અસર:**
+🔴 **શોધાયેલ રોગ / જીવાત:** **{issue_name}**
+
+🦠 **પાક પર અસર:**
 - આ રોગ અથવા જીવાત પાંદડાનો રસ ચૂસે છે, જેથી પ્રકાશ-સંશ્લેષણ અટકે છે અને ઉત્પાદન ૩૦-૫૦% ઘટે છે.
 
-**ઉત્પત્તિનાં કારણો:**
+🌧️ **ઉત્પત્તિનાં કારણો:**
 - ભેજ, વાદળછાયું હવામાન અને વધુ પડતા નાઇટ્રોજનનો ઉપયોગ.
 
-**રાસાયણિક સ્પ્રે:**
+💊 **રાસાયણિક સ્પ્રે:**
 - પ્રોફેનોફોસ ૫૦% EC (૨ ml/લિટર) અથવા ઇમામેક્ટિન (૦.૫ ગ્રામ/લિટર).
 - સાંજે માસ્ક પહેરીને છંટકાવ કરો.
 
-**જૈવિક ઉપાય:**
+🌿 **જૈવિક ઉપાય:**
 - લીમડાનું તેલ ૫ ml/લિટર અથવા દશપર્ણી અર્ક ૫ ml/લિટર.
 - ચીકણા પીળા-વાદળી ટ્રેપ એકર દીઠ ૧૦-૧૨ લગાવો.
 
-**હેલ્પલાઇન:** 1800-180-1551"""
+☎️ **હેલ્પલાઇન:** 1800-180-1551"""
 
         elif lang_name == "Punjabi":
-            return f"""**ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 
-**ਪਛਾਣਿਆ ਗਿਆ ਰੋਗ / ਕੀਟ:** **{issue_name}**
+            return f"""🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾
 
-**ਫਸਲ ਉੱਤੇ ਅਸਰ:**
+🔴 **ਪਛਾਣਿਆ ਗਿਆ ਰੋਗ / ਕੀਟ:** **{issue_name}**
+
+🦠 **ਫਸਲ ਉੱਤੇ ਅਸਰ:**
 - ਇਹ ਰੋਗ ਪੱਤਿਆਂ ਦਾ ਰਸ ਚੂਸਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਝਾੜ ੩੦-੫੦% ਘੱਟਦਾ ਹੈ.
 
-**ਕਾਰਨ:**
+🌧️ **ਕਾਰਨ:**
 - ਵੱਧ ਨਮੀ, ਬੱਦਲਵਾਈ ਮੌਸਮ ਅਤੇ ਜ਼ਿਆਦਾ ਯੂਰੀਆ ਦੀ ਵਰਤੋਂ.
 
-**ਰਸਾਇਣਕ ਸਪ੍ਰੇ:**
+💊 **ਰਸਾਇਣਕ ਸਪ੍ਰੇ:**
 - ਪ੍ਰੋਫੇਨੋਫੋਸ ੫੦% EC (੨ ml/ਲਿਟਰ) ਜਾਂ ਇਮਾਮੇਕਟਿਨ (੦.੫ ਗ੍ਰਾਮ/ਲਿਟਰ).
 - ਸ਼ਾਮ ਨੂੰ ਮਾਸਕ ਪਾ ਕੇ ਸਪ੍ਰੇ ਕਰੋ.
 
-**ਜੈਵਿਕ ਉਪਾਅ:**
+🌿 **ਜੈਵਿਕ ਉਪਾਅ:**
 - ਨਿੰਮ ਤੇਲ ੫ ml/ਲਿਟਰ ਜਾਂ ਦਸ਼ਪਰਣੀ ਅਰਕ ੫ ml/ਲਿਟਰ.
 - ਪੀਲੇ-ਨੀਲੇ ਸਟਿੱਕੀ ਟਰੈਪ ਏਕੜ ਪਿੱਛੇ ੧੦-੧੨ ਲਗਾਓ.
 
-**ਹੈਲਪਲਾਈਨ:** 1800-180-1551"""
+☎️ **ਹੈਲਪਲਾਈਨ:** 1800-180-1551"""
             
         else:
-            return f"""**Hello Dear Farmer!** 
-**Detected Issue:** **{issue_name}**
+            return f"""🙏 **Hello Dear Farmer!** 🌾
 
-**How it Affects the Crop:**
+🔴 **Detected Issue:** **{issue_name}**
+
+🦠 **How it Affects the Crop:**
 • This pest/disease disrupts photosynthesis, causes chlorosis, saps leaf nutrients, and clogs stem vascular tissues, leading to potential 30-50% yield loss.
 
-**Why it Occurs (Triggers):**
+🌧️ **Why it Occurs (Triggers):**
 • High relative atmospheric humidity (>80%), prolonged cloudy weather, and excessive nitrogenous fertilizer application create favorable conditions for pest outbreaks.
 
-**3 Stages of Disease / Infestation:**
-• **1. Early Stage (1-5% Damage):** Mild leaf spotting or initial egg clusters. Easily controlled with 5% Neem Oil spray & sticky traps.
-• **2. Moderate Stage (10-30% Damage):** Active lesions & caterpillar feeding. Requires targeted chemical spray (Profenofos / Emamectin) within 48 hours.
-• **3. Critical Stage (50%+ Damage):** Severe defoliation, stem rot, or boll boring. Requires emergency systemic sprays and destruction of infected plant debris.
+📊 **3 Stages of Disease / Infestation:**
+• **🌱 1. Early Stage (1-5% Damage):** Mild leaf spotting or initial egg clusters. Easily controlled with 5% Neem Oil spray & sticky traps.
+• **🌿 2. Moderate Stage (10-30% Damage):** Active lesions & caterpillar feeding. Requires targeted chemical spray (Profenofos / Emamectin) within 48 hours.
+• **🥀 3. Critical Stage (50%+ Damage):** Severe defoliation, stem rot, or boll boring. Requires emergency systemic sprays and destruction of infected plant debris.
 
-**Step 1: Chemical Spray Treatment:**
+💊 **Step 1: Chemical Spray Treatment:**
 • **Recommended Pesticide:** Spray Profenofos 50% EC (2 ml / Liter of water) or Emamectin Benzoate 5% SG (0.5g / Liter).
 • **Dosage:** 400 ml in 200 Liters of water per Acre.
 • **Safety:** Always spray in the late afternoon wearing protective gloves and face mask.
 
-**Step 2: Organic & Biological Control:**
+🌿 **Step 2: Organic & Biological Control:**
 • **Neem Oil Spray:** Mix 5 ml Neem Oil (1500 PPM) + 1 ml liquid soap per Liter of water and spray thoroughly.
 • **Dashparni Ark:** Spray 5 ml Dashparni Ark per Liter of water.
 • **Traps:** Install 10-12 Yellow and Blue Sticky Traps per Acre.
 
-**Step 3: Field Management & Prevention:**
+🛡️ **Step 3: Field Management & Prevention:**
 • Collect and burn infected crop residues to eliminate spore inoculum.
 
-**Toll-Free Kisan Helpline:** 1800-180-1551"""
+☎️ **Toll-Free Kisan Helpline:** 1800-180-1551"""
 
 
 # ─────────────────────────────────────────────────────────────
@@ -1194,37 +1323,37 @@ with st.sidebar:
     st.markdown(f"""
     <div style='text-align:center;padding:16px;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);
                 border-radius:14px;margin-bottom:15px;border:1px solid #A5D6A7'>
-        <div style="display:flex;justify-content:center;margin-bottom:5px">""" + logo_svg(64) + f"""</div><h2 style='color:#1B5E20;margin:0;font-weight:700'>महाकृषि</h2>
+        <img src='data:image/jpeg;base64,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' width='80' style='border-radius:10px; margin-bottom:5px;'/><h2 style='color:#1B5E20;margin:0;font-weight:700'>महाकृषि</h2>
         <p style='color:#2E7D32;font-size:0.88rem;margin:3px 0 0;font-weight:600'>MahaKrishi AI</p>
         <span class='figma-badge' style='background:#1B5E20;color:white;margin-top:6px;display:inline-block'>
             Govt. Agri-Tech Initiative
         </span>
     </div>
     <div style='background:#F1F8E9;border-radius:10px;padding:10px 14px;margin-bottom:12px;border:1px solid #C8E6C9'>
-        <small><b>{farmer_name_display}</b><br>{farmer_dist_display}</small>
+        <small>👤 <b>{farmer_name_display}</b><br>📍 {farmer_dist_display}</small>
     </div>
     """, unsafe_allow_html=True)
 
     lang_code = st.session_state.get("app_lang", "mr")
     lang_name = st.session_state.get("lang_name", "Marathi")
 
-    enable_voice = st.toggle("Voice Output / आवाज उत्तर", value=True)
+    enable_voice = st.toggle("🔊 Voice Output / आवाज उत्तर", value=True)
 
     st.markdown("---")
-    st.markdown("### AI Model Directory")
+    st.markdown("### 📊 AI Model Directory")
     st.markdown("""
     <div class='contact-card'><small>
-    <b>Crop Diseases:</b> 39 Classes (Rice, Sugarcane, Cotton, Wheat, Tomato, Potato)<br>
-    <b>Crop Pests:</b> 14 Classes (Bollworm, Stem Borer, Aphids, Whitefly, Armyworm, etc.)<br>
-    <b>AI Advisory:</b> Gemini AI + gTTS Voice Output<br>
-    <b>Accuracy:</b> Test-Time Augmentation (TTA ×4)
+    🌾 <b>Crop Diseases:</b> 39 Classes (Rice, Sugarcane, Cotton, Wheat, Tomato, Potato)<br>
+    🐛 <b>Crop Pests:</b> 14 Classes (Bollworm, Stem Borer, Aphids, Whitefly, Armyworm, etc.)<br>
+    🤖 <b>AI Advisory:</b> Gemini AI + gTTS Voice Output<br>
+    🎯 <b>Accuracy:</b> Test-Time Augmentation (TTA ×4)
     </small></div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <div style='background:#FFF3E0;border-left:4px solid #FF9800;padding:10px;border-radius:6px'>
-    <small><b>Emergency Agri Helpline:</b><br>
-    Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
+    <small><b>🚨 Emergency Agri Helpline:</b><br>
+    📞 Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
     </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -1237,35 +1366,46 @@ with st.sidebar:
 # ─────────────────────────────────────────────────────────────
 # PROFILE PAGE ROUTING
 # ─────────────────────────────────────────────────────────────
-if st.session_state["page"] == "profile":
+if st.session_state.get("show_profile", False):
     show_profile_page()
     st.stop()
 
-# Profile icon (top-right corner). Column ratio [6,1] keeps the icon
-# reachable with a thumb on narrow phone widths instead of being pushed
-# too far into the corner.
-top_l, top_r = st.columns([6, 1])
-with top_r:
-    if st.button("", key="profile_icon_btn", help="My Profile"):
-        st.session_state["page"] = "profile"
-        st.rerun()
+# ─────────────────────────────────────────────────────────────
+# FIGMA DYNAMIC HEADER (with Profile Icon)
+# ─────────────────────────────────────────────────────────────
+farmer_name_header = st.session_state.get("farmer_name", "Farmer")
 
-# ─────────────────────────────────────────────────────────────
-# FIGMA DYNAMIC HEADER
-# ─────────────────────────────────────────────────────────────
-st.markdown("""
-<div class='figma-header'>
-    <div style='flex: 1; min-width: 0;'>
-        <h1 class='figma-header-title'>MahaKrishi AI | महाकृषि</h1>
-        <p class='figma-header-sub'>
-            AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
-        </p>
+header_col, profile_col = st.columns([10, 1])
+with header_col:
+    st.markdown("""
+    <div class='figma-header'>
+        <div style='flex: 1; min-width: 0;'>
+            <h1 class='figma-header-title'>🌾 MahaKrishi AI | महाकृषि</h1>
+            <p class='figma-header-sub'>
+                AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
+            </p>
+        </div>
+        <div style='flex-shrink: 0;'>
+            <span class='figma-badge'>🟢 System Active | महाराष्ट्र शासन</span>
+        </div>
     </div>
-    <div style='flex-shrink: 0;'>
-        <span class='figma-badge'><span class='status-dot'></span>System Active | महाराष्ट्र शासन</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+with profile_col:
+    st.markdown("<div style='padding-top:8px'>", unsafe_allow_html=True)
+    # Avatar shows the farmer's uploaded photo, or a default plain PFP (like Instagram's) if none uploaded.
+    # The (invisible) button sits inside the same container, exactly over the avatar, so clicking it opens the profile.
+    with st.container(key="profile_icon_wrap"):
+        st.markdown(
+            f"<div style='display:flex;justify-content:center'>{get_avatar_html(46)}</div>",
+            unsafe_allow_html=True
+        )
+        if st.button(" ", key="open_profile",
+                     help=f"View Profile — {farmer_name_header}",
+                     use_container_width=True):
+            st.session_state["show_profile"] = True
+            st.rerun()
+    st.markdown(f"<p style='text-align:center;font-size:0.65rem;color:#2E7D32;margin:0'>{farmer_name_header.split()[0]}</p>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
@@ -1285,8 +1425,8 @@ with tab_detect:
     col_mode, _ = st.columns([2, 1])
     with col_mode:
         model_mode = st.radio(
-            "Select AI Target Mode / काय ओळखायचे आहे?",
-            ["Crop Disease Detection (पिकांचे रोग)", "Pest Identification (कीड ओळख)"],
+            "🎯 Select AI Target Mode / काय ओळखायचे आहे?",
+            ["🌾 Crop Disease Detection (पिकांचे रोग)", "🐛 Pest Identification (कीड ओळख)"],
             horizontal=True
         )
 
@@ -1294,19 +1434,19 @@ with tab_detect:
 
     with col_img:
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### Upload Crop / Pest Photo")
+        st.markdown("### 📷 Upload Crop / Pest Photo")
         uploaded = st.file_uploader("Choose leaf or pest photo...", type=["jpg","jpeg","png","bmp","webp"],
                                     label_visibility="collapsed")
 
         if uploaded:
             pil_image = Image.open(uploaded).convert("RGB")
-            st.image(pil_image, caption="Uploaded Image", use_container_width=True)
-            analyze_btn = st.button("Analyze with AI | निदान करा", type="primary", use_container_width=True)
+            st.image(pil_image, caption="📸 Uploaded Image", use_container_width=True)
+            analyze_btn = st.button("🔍 Analyze with AI | निदान करा", type="primary", use_container_width=True)
         else:
             st.markdown("""
             <div style='background:#F9FBE7;border:2px dashed #8BC34A;border-radius:14px;
                         padding:40px;text-align:center'>
-                <div style="display:flex;justify-content:center">""" + UPLOAD_ICON_SVG + """</div>
+                <div style='font-size:3rem'>📸</div>
                 <p style='color:#33691E;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
                 <small style='color:#558B2F'>Supports JPG, PNG, WEBP</small>
             </div>""", unsafe_allow_html=True)
@@ -1315,12 +1455,12 @@ with tab_detect:
 
     with col_res:
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### AI Diagnosis & Advisory")
+        st.markdown("### 🧠 AI Diagnosis & Advisory")
 
         if not uploaded:
             st.markdown("""
             <div style='background:#E8F5E9;border-radius:12px;padding:30px;text-align:center'>
-                <div style="display:flex;justify-content:center">""" + SCAN_ICON_SVG + """</div>
+                <div style='font-size:2.5rem'>🌱</div>
                 <h4 style='color:#1B5E20;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
                 <p style='color:#2E7D32;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
             </div>""", unsafe_allow_html=True)
@@ -1329,12 +1469,12 @@ with tab_detect:
             is_pest_mode = "Pest" in model_mode
 
             # ── IMAGE QUALITY CHECK FIRST ──
-            with st.spinner("Checking image quality..."):
+            with st.spinner("🔎 Checking image quality..."):
                 quality_ok, quality_msg = check_image_quality(pil_image)
 
             if not quality_ok:
                 st.warning(quality_msg)
-                st.info("**Tip:** Take photo in bright natural light, hold camera steady, and ensure the leaf fills most of the frame.")
+                st.info("💡 **Tip:** Take photo in bright natural light, hold camera steady, and ensure the leaf fills most of the frame.")
             else:
                 with st.spinner("⏳ Loading AI model & analyzing features (TTA ×4)..."):
                     if is_pest_mode:
@@ -1351,31 +1491,21 @@ with tab_detect:
                     conf = top["confidence"]
                     healthy = "healthy" in name.lower() or "निरोगी" in name.lower()
 
-                    append_detection_history(
-                        st.session_state.get("farmer_phone", ""),
-                        st.session_state.get("farmer_name", ""),
-                        st.session_state.get("farmer_district", ""),
-                        "Pest" if is_pest_mode else "Disease",
-                        model_mode,
-                        name,
-                        conf
-                    )
-
                     # ── LOW CONFIDENCE WARNING ──
                     if conf < CONF_THRESHOLD_LOW:
                         st.markdown(f"""
                         <div class='alert-box'>
-                            <span class='badge-low-conf'>Low Confidence Detection</span>
+                            <span class='badge-low-conf'>⚠️ Low Confidence Detection</span>
                             <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
                             <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                             <p style='margin:6px 0 0;font-size:0.88rem;color:#6D4C41'>
-                            <b>Suggestions:</b> Retake the photo in bright natural light, ensure leaf fills the frame, 
+                            📌 <b>Suggestions:</b> Retake the photo in bright natural light, ensure leaf fills the frame, 
                             avoid shadows, and make sure the image is sharp/in-focus.
                             </p>
                         </div>""", unsafe_allow_html=True)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
-                        status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
+                        status_txt = "Healthy Crop! 🎉" if healthy else ("Pest Detected! 🐛" if is_pest_mode else "Disease Detected! 🔴")
 
                         st.markdown(f"""
                         <div style='background:#FAFAFA;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #E0E0E0'>
@@ -1385,9 +1515,9 @@ with tab_detect:
                         </div>""", unsafe_allow_html=True)
                         st.progress(conf / 100)
 
-                        with st.expander("Probable AI Top 3 Matches"):
+                        with st.expander("📊 Probable AI Top 3 Matches"):
                             for i, r in enumerate(results):
-                                st.markdown(f"{''[i]} **{r['name']}** — `{r['confidence']:.1f}%`")
+                                st.markdown(f"{'🥇🥈🥉'[i]} **{r['name']}** — `{r['confidence']:.1f}%`")
                                 st.progress(r["confidence"] / 100)
 
                         # ── ALERT NEARBY FARMERS (only for disease/pest, conf >= threshold) ──
@@ -1401,7 +1531,7 @@ with tab_detect:
 
                             st.markdown(f"""
                             <div class='alert-box'>
-                                <b>{name} detected in {farmer_district} district!</b><br>
+                                <b>🚨 {name} detected in {farmer_district} district!</b><br>
                                 <small>There are <b>{nearby_count}</b> registered farmers in your district 
                                 who could be at risk. Alert them instantly.</small>
                             </div>""", unsafe_allow_html=True)
@@ -1412,7 +1542,7 @@ with tab_detect:
 
                             if not st.session_state[alert_key]:
                                 if st.button(
-                                    f"Alert {nearby_count} Farmers in {farmer_district} | शेतकऱ्यांना अलर्ट पाठवा",
+                                    f"🚨 Alert {nearby_count} Farmers in {farmer_district} | शेतकऱ्यांना अलर्ट पाठवा",
                                     type="primary",
                                     use_container_width=True,
                                     key=f"btn_alert_{alert_key}"
@@ -1430,13 +1560,29 @@ with tab_detect:
                                     st.rerun()
                             else:
                                 st.success(
-                                    f"Alert successfully sent to **{nearby_count}** registered farmers "
+                                    f"✅ Alert successfully sent to **{nearby_count}** registered farmers "
                                     f"in **{farmer_district}** district! "
                                     f"Disease alert for **{name}** recorded in system."
                                 )
 
+                        # ── SAVE TO DETECTION HISTORY ──
+                        history_entry = {
+                            "name":    name,
+                            "type":    "pest" if is_pest_mode else "disease",
+                            "healthy": healthy,
+                            "conf":    conf,
+                            "time":    datetime.now().strftime("%d %b %Y, %I:%M %p"),
+                            "district": st.session_state.get("farmer_district", "")
+                        }
+                        if "detection_history" not in st.session_state:
+                            st.session_state["detection_history"] = []
+                        # Avoid duplicate consecutive entries
+                        if not st.session_state["detection_history"] or \
+                           st.session_state["detection_history"][-1]["name"] != name:
+                            st.session_state["detection_history"].append(history_entry)
+
                         # Generate AI Advisory
-                        with st.spinner(f"Generating {lang_name} advisory & remedies..."):
+                        with st.spinner(f"💬 Generating {lang_name} advisory & remedies..."):
                             ai_resp = get_ai_advisory(name, is_pest_mode, lang_name, conf)
 
                             audio_bytes = None
@@ -1449,7 +1595,7 @@ with tab_detect:
                             st.markdown(f"<div class='chat-box'>{ai_resp.replace(chr(10),'<br>')}</div>", unsafe_allow_html=True)
 
                             if enable_voice and audio_bytes:
-                                st.markdown("#### Marathi/Hindi Voice Advisory (आवाज उत्तर)")
+                                st.markdown("#### 🔊 Marathi/Hindi Voice Advisory (आवाज उत्तर)")
                                 st.audio(audio_bytes, format="audio/mp3")
 
         st.markdown("</div>", unsafe_allow_html=True)
@@ -1460,14 +1606,14 @@ with tab_detect:
 # ─────────────────────────────────────────────────────────────
 with tab_chat:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### Krishi AI Specialist Chatbot / कृषी उपचार चॅटबॉट")
+    st.markdown("### 🤖 Krishi AI Specialist Chatbot / कृषी उपचार चॅटबॉट")
     st.markdown(" Ask any crop disease, pest issue, or treatment query. Get **Chemical (रसायनिक)** and **Organic (जैविक)** solutions instantly!")
 
     # Preset quick chips (Dynamic Language)
-    st.markdown("#### Quick Questions / जलद प्रश्न / शीघ्र प्रश्न:")
+    st.markdown("#### 💡 Quick Questions / जलद प्रश्न / शीघ्र प्रश्न:")
     c1, c2, c3, c4 = st.columns(4)
     quick_q = None
-    if c1.button("Rice Stem Borer Spray?", use_container_width=True):
+    if c1.button("🌾 Rice Stem Borer Spray?", use_container_width=True):
         if lang_name == "English":
             quick_q = "What is the chemical and organic treatment for Rice Stem Borer?"
         elif lang_name == "Hindi":
@@ -1475,7 +1621,7 @@ with tab_chat:
         else:
             quick_q = "धान्य / तांदूळ पिकावरील खोड कीडीसाठी रसायनिक आणि सेंद्रिय उपाय सांगा."
 
-    if c2.button("Organic Control for Aphids?", use_container_width=True):
+    if c2.button("🌿 Organic Control for Aphids?", use_container_width=True):
         if lang_name == "English":
             quick_q = "How to prepare organic pesticide and Neem oil for Aphids control?"
         elif lang_name == "Hindi":
@@ -1483,7 +1629,7 @@ with tab_chat:
         else:
             quick_q = "मावा (Aphids) साठी जैविक आणि सेंद्रिय औषध कसे तयार करावे?"
 
-    if c3.button("Sugarcane Red Rot Remedy?", use_container_width=True):
+    if c3.button("🎋 Sugarcane Red Rot Remedy?", use_container_width=True):
         if lang_name == "English":
             quick_q = "What chemical spray and organic remedy is recommended for Sugarcane Red Rot?"
         elif lang_name == "Hindi":
@@ -1491,7 +1637,7 @@ with tab_chat:
         else:
             quick_q = "उसावरील तांबेरा व तांबड्या रोगासाठी कोणते औषध फवारावे?"
 
-    if c4.button("Cotton Pink Bollworm Spray?", use_container_width=True):
+    if c4.button("🌸 Cotton Pink Bollworm Spray?", use_container_width=True):
         if lang_name == "English":
             quick_q = "Tell effective chemical and bio-control remedies for Cotton Pink Bollworm."
         elif lang_name == "Hindi":
@@ -1541,9 +1687,9 @@ with tab_chat:
 
             Greet the farmer warmly with respect (e.g. 'रामराम शेतकरी दादा / ताई!' in Marathi, 'नमस्कार किसान भाई!' in Hindi, 'Greetings dear farmer!' in English).
             Introduce yourself as Krishi Mitra (कृषी मित्र) and state in 3 simple points how you can guide them:
-            1. Crop Disease & Pest Diagnosis (पिकांचे रोग व कीड निदान)
-            2. Chemical Spray & Organic Remedies (फवारणी व सेंद्रिय घरगुती उपाय)
-            3. Government Schemes & Helplines (शासकीय योजना व हेल्पलाइन)
+            1. 🌾 Crop Disease & Pest Diagnosis (पिकांचे रोग व कीड निदान)
+            2. 💊 Chemical Spray & 🌿 Organic Remedies (फवारणी व सेंद्रिय घरगुती उपाय)
+            3. 🏛️ Government Schemes & Helplines (शासकीय योजना व हेल्पलाइन)
 
             Invite them warmly to ask any crop or farming query! Max 100 words.
             """
@@ -1570,10 +1716,10 @@ with tab_chat:
             1. Speak like a caring, experienced human agricultural expert (empathetic, respectful, practical).
             2. TYPO AUTO-CORRECTION: If there are typos in crop or pest names (e.g. 'sugrcan', 'pnik bolworm', 'tomto'), auto-correct them naturally and answer for the intended crop.
             3. CROP ADVISORY: For disease or pest questions, provide structured solutions:
-               ओळख व कारण / Identified Issue & Cause: [Simple human explanation]
-               रसायनिक फवारणी (Chemical Spray): [Recommended spray name, exact dosage per Liter/Acre, best spraying time & safety mask]
-               सेंद्रिय व जैविक उपचार (Organic Remedy): [Neem oil / Jeevamrut / Dashparni Ark / Sticky traps recipe & dosage]
-               शेतकरी मित्रासाठी विशेष सल्ला (Expert Human Advice): [Field management & encouragement]
+               🔴 ओळख व कारण / Identified Issue & Cause: [Simple human explanation]
+               💊 रसायनिक फवारणी (Chemical Spray): [Recommended spray name, exact dosage per Liter/Acre, best spraying time & safety mask]
+               🌿 सेंद्रिय व जैविक उपचार (Organic Remedy): [Neem oil / Jeevamrut / Dashparni Ark / Sticky traps recipe & dosage]
+               🛡️ शेतकरी मित्रासाठी विशेष सल्ला (Expert Human Advice): [Field management & encouragement]
             Keep simple, practical, and compassionate. Max 250 words.
             """
 
@@ -1585,62 +1731,62 @@ with tab_chat:
             else:
                 if is_gibberish:
                     if lang_name == "Marathi":
-                        bot_ans = "**मला आपला संदेश स्पष्टपणे समजला नाही.**\n\nकृपया आपले पीक, रोग किंवा शेतीविषयीचा प्रश्न औपचारिक व स्पष्टपणे सांगावा ही नम्र विनंती. उदा. *'उसावरील तांबेरा रोगासाठी उपाय काय?'*"
+                        bot_ans = "🙏 **मला आपला संदेश स्पष्टपणे समजला नाही.**\n\nकृपया आपले पीक, रोग किंवा शेतीविषयीचा प्रश्न औपचारिक व स्पष्टपणे सांगावा ही नम्र विनंती. उदा. *'उसावरील तांबेरा रोगासाठी उपाय काय?'*"
                     elif lang_name == "Hindi":
-                        bot_ans = "**मुझे आपका संदेश स्पष्ट रूप से समझ नहीं आया।**\n\nकृपया अपनी फसल, बीमारी या खेती से जुड़ा प्रश्न स्पष्ट रूप से लिखें। जैसे: *'धान के खोड कीट का उपचार क्या है?'*"
+                        bot_ans = "🙏 **मुझे आपका संदेश स्पष्ट रूप से समझ नहीं आया।**\n\nकृपया अपनी फसल, बीमारी या खेती से जुड़ा प्रश्न स्पष्ट रूप से लिखें। जैसे: *'धान के खोड कीट का उपचार क्या है?'*"
                     else:
-                        bot_ans = "**I could not understand your message.**\n\nCould you please state your crop, disease, or farming question more clearly in a formal manner?"
+                        bot_ans = "🙏 **I could not understand your message.**\n\nCould you please state your crop, disease, or farming question more clearly in a formal manner?"
                 elif is_greeting:
                     if lang_name == "Marathi":
-                        bot_ans = "**नमस्कार! मी महाकृषि AI सहाय्यक आहे.** \n\nमी तुम्हाला शेतीविषयक खालील बाबतीत मदत करू शकतो:\n\n• **पिकांचे रोग व कीड ओळख** (Crop Disease & Pest Diagnosis)\n• **रसायनिक फवारणी व सेंद्रिय उपाय** (Chemical & Organic Spray Remedies)\n• **शासकीय कृषी योजना व तज्ज्ञ हेल्पलाइन** (Govt Schemes & Helplines)\n\nतुमच्या पिकाची समस्या किंवा प्रश्न खाली विचारा!"
+                        bot_ans = "🙏 **नमस्कार! मी महाकृषि AI सहाय्यक आहे.** 🌾\n\nमी तुम्हाला शेतीविषयक खालील बाबतीत मदत करू शकतो:\n\n• 🌾 **पिकांचे रोग व कीड ओळख** (Crop Disease & Pest Diagnosis)\n• 💊 **रसायनिक फवारणी व 🌿 सेंद्रिय उपाय** (Chemical & Organic Spray Remedies)\n• 🏛️ **शासकीय कृषी योजना व तज्ज्ञ हेल्पलाइन** (Govt Schemes & Helplines)\n\nतुमच्या पिकाची समस्या किंवा प्रश्न खाली विचारा!"
                     elif lang_name == "Hindi":
-                        bot_ans = "**नमस्ते! मैं महाकृषि AI सहायक हूँ।** \n\nमैं आपकी खेती में निम्नलिखित सहायता कर सकता हूँ:\n\n• **फसलों के रोग एवं कीट पहचान**\n• **रासायनिक छिड़काव एवं जैविक उपचार**\n• **सरकारी कृषि योजनाएं एवं हेल्पलाइन**\n\nकृपया अपनी फसल का प्रश्न नीचे लिखें!"
+                        bot_ans = "🙏 **नमस्ते! मैं महाकृषि AI सहायक हूँ।** 🌾\n\nमैं आपकी खेती में निम्नलिखित सहायता कर सकता हूँ:\n\n• 🌾 **फसलों के रोग एवं कीट पहचान**\n• 💊 **रासायनिक छिड़काव एवं 🌿 जैविक उपचार**\n• 🏛️ **सरकारी कृषि योजनाएं एवं हेल्पलाइन**\n\nकृपया अपनी फसल का प्रश्न नीचे लिखें!"
                     else:
-                        bot_ans = "**Hello! I am MahaKrishi AI Assistant.** \n\nI can assist you with:\n\n• **Crop Disease & Pest Diagnosis**\n• **Chemical Spray & Organic Remedies**\n• **Government Schemes & Helplines**\n\nPlease ask any crop question or problem below!"
+                        bot_ans = "🙏 **Hello! I am MahaKrishi AI Assistant.** 🌾\n\nI can assist you with:\n\n• 🌾 **Crop Disease & Pest Diagnosis**\n• 💊 **Chemical Spray & 🌿 Organic Remedies**\n• 🏛️ **Government Schemes & Helplines**\n\nPlease ask any crop question or problem below!"
                 elif not is_agri_related:
                     if lang_name == "Marathi":
-                        bot_ans = "**कृपया तुमचे पीक, रोग किंवा कीड कोणती आहे ते सांगू शकाल का?**"
+                        bot_ans = "❓ **कृपया तुमचे पीक, रोग किंवा कीड कोणती आहे ते सांगू शकाल का?**"
                     elif lang_name == "Hindi":
-                        bot_ans = "**क्या आप कृपया बता सकते हैं कि आपकी फसल का रोग या कीट कौन सा है?**"
+                        bot_ans = "❓ **क्या आप कृपया बता सकते हैं कि आपकी फसल का रोग या कीट कौन सा है?**"
                     else:
-                        bot_ans = "**Can you please tell what is your crop disease or pest?**"
+                        bot_ans = "❓ **Can you please tell what is your crop disease or pest?**"
                 else:
                     if lang_name == "Marathi":
-                        bot_ans = f"""कृषी सल्ला (प्रश्न: {active_query})
+                        bot_ans = f"""🔴 कृषी सल्ला (प्रश्न: {active_query})
 
-रसायनिक उपचार (Chemical Treatment):
+💊 रसायनिक उपचार (Chemical Treatment):
 • कीड/रोगासाठी योग्य कीटकनाशकाची (उदा. क्लोरपायरीफॉस २ मिली/लिटर किंवा इमॅमेक्टिन ०.५ ग्रॅम/लिटर) फवारणी करा.
 • संध्याकाळी फवारणी करणे अधिक प्रभावी ठरते.
 
-सेंद्रिय व जैविक उपचार (Organic Treatment):
+🌿 सेंद्रिय व जैविक उपचार (Organic Treatment):
 • ५% कडुनिंब तेल (Neem Oil) किंवा दशपर्णी अर्क (५ मिली/लिटर) चा वापर करा.
 • शेतात पिवळे व निळे चिकट सापळे (Sticky Traps) लावा.
 
-बचाव व सुरक्षा:
+🛡️ बचाव व सुरक्षा:
 • मास्क आणि हातमोजे वापरूनच फवारणी करा.
-अधिक मदतीसाठी हेल्पलाइन: 1800-180-1551"""
+☎️ अधिक मदतीसाठी हेल्पलाइन: 1800-180-1551"""
                     elif lang_name == "Hindi":
-                        bot_ans = f"""कृषि सलाह (प्रश्न: {active_query})
+                        bot_ans = f"""🔴 कृषि सलाह (प्रश्न: {active_query})
 
-रासायनिक उपचार (Chemical Treatment):
+💊 रासायनिक उपचार (Chemical Treatment):
 • उपयुक्त कीटनाशक (जैसे इमामेक्टिन 0.5 ग्राम/लीटर) का छिड़काव करें।
 
-जैविक उपचार (Organic Treatment):
+🌿 जैविक उपचार (Organic Treatment):
 • 5% नीम तेल या दशपर्णी अर्क (5 मिली/लीटर) का स्प्रे करें।
 
-बचाव:
+🛡️ बचाव:
 • सुरक्षा मास्क पहनकर छिड़काव करें।
-हेल्पलाइन: 1800-180-1551"""
+☎️ हेल्पलाइन: 1800-180-1551"""
                     else:
-                        bot_ans = f"""Agronomic Advisory (Query: {active_query})
+                        bot_ans = f"""🔴 Agronomic Advisory (Query: {active_query})
 
-Chemical Treatment:
+💊 Chemical Treatment:
 • Spray recommended pesticide with protective mask.
 
-Organic Treatment:
+🌿 Organic Treatment:
 • Spray 5% Neem Oil or Dashparni Ark (5 ml / Liter).
 
-Kisan Helpline: 1800-180-1551"""
+☎️ Kisan Helpline: 1800-180-1551"""
         except Exception:
             bot_ans = "कृपया कृषी हेल्पलाइन 1800-180-1551 वर संपर्क साधा."
 
@@ -1661,40 +1807,40 @@ Kisan Helpline: 1800-180-1551"""
 # ─────────────────────────────────────────────────────────────
 with tab_contacts:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### Verified Agricultural Specialist Directory & Emergency Helplines")
+    st.markdown("### 📞 Verified Agricultural Specialist Directory & Emergency Helplines")
     st.markdown("Connect directly with Maharashtra Krishi Vigyan Kendras (KVK), ICAR Scientists, and Govt Officers.")
 
     # Emergency Call Bar
     st.markdown("""
     <div style='background:#FFEBEE;border:2px solid #FFCDD2;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
         <div>
-            <h4 style='color:#C62828;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
+            <h4 style='color:#C62828;margin:0'>🚨 Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
             <p style='color:#B71C1C;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
         </div>
-        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
+        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>📞 1800-180-1551</a>
     </div>""", unsafe_allow_html=True)
 
-    r1, r2, r3, r4 = st.tabs(["State & National", "Western MH & Pune", "Marathwada & Nashik", "Vidarbha & Cotton"])
+    r1, r2, r3, r4 = st.tabs(["🏛️ State & National", "🌾 Western MH & Pune", "🎋 Marathwada & Nashik", "🌿 Vidarbha & Cotton"])
 
     with r1:
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>Kisan Call Center (KCC)</h4>
+                <h4>🇮🇳 Kisan Call Center (KCC)</h4>
                 <p><b>Number:</b> 1800-180-1551 (Toll-Free)<br>
                 <b>Languages:</b> Marathi, Hindi, English<br>
                 <b>Timings:</b> 6:00 AM - 10:00 PM (Daily)</p>
-                <a href='tel:18001801551'>Call KCC Now</a>
+                <a href='tel:18001801551'>📞 Call KCC Now</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>Maharashtra Agriculture Dept (कृषी आयुक्तालय)</h4>
+                <h4>🌾 Maharashtra Agriculture Dept (कृषी आयुक्तालय)</h4>
                 <p><b>Helpline:</b> 1800-233-4000 / 14447<br>
                 <b>Location:</b> Shivajinagar, Pune<br>
                 <b>Services:</b> Crop advice, Subsidies, Disease alerts</p>
-                <a href='tel:18002334000'>Call State Agri Helpline</a>
+                <a href='tel:18002334000'>📞 Call State Agri Helpline</a>
             </div>""", unsafe_allow_html=True)
 
     with r2:
@@ -1702,19 +1848,19 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>KVK Baramati (Pune District)</h4>
+                <h4>📍 KVK Baramati (Pune District)</h4>
                 <p><b>Phone:</b> 02112-255227 / 255327<br>
                 <b>Speciality:</b> Sugarcane, Fruits, Pest Control<br>
-                <b>WhatsApp Support:</b> <a href='https://wa.me/919422000000' target='_blank'>Chat on WhatsApp</a></p>
-                <a href='tel:02112255227'>Call KVK Baramati</a>
+                <b>WhatsApp Support:</b> <a href='https://wa.me/919422000000' target='_blank'>💬 Chat on WhatsApp</a></p>
+                <a href='tel:02112255227'>📞 Call KVK Baramati</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>Vasantdada Sugar Institute (VSI Pune)</h4>
+                <h4>🏛️ Vasantdada Sugar Institute (VSI Pune)</h4>
                 <p><b>Phone:</b> 020-26902100 / 26902200<br>
                 <b>Speciality:</b> Sugarcane Red Rot, Pokkah Boeng, Pest Advisory</p>
-                <a href='tel:02026902100'>Call VSI Experts</a>
+                <a href='tel:02026902100'>📞 Call VSI Experts</a>
             </div>""", unsafe_allow_html=True)
 
     with r3:
@@ -1722,18 +1868,18 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>KVK Yashwantrao Chavan (Nashik)</h4>
+                <h4>📍 KVK Yashwantrao Chavan (Nashik)</h4>
                 <p><b>Phone:</b> 0253-2415121 / 2415321<br>
                 <b>Speciality:</b> Grapes, Onion, Vegetables, Leaf Blight Advisory</p>
-                <a href='tel:02532415121'>Call KVK Nashik</a>
+                <a href='tel:02532415121'>📞 Call KVK Nashik</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>MPKV Rahuri Agri University</h4>
+                <h4>🌾 MPKV Rahuri Agri University</h4>
                 <p><b>Phone:</b> 02426-243208 / 243311<br>
                 <b>Speciality:</b> Pulses, Rice Blast, Crop Pathology Research</p>
-                <a href='tel:02426243208'>Call MPKV Rahuri</a>
+                <a href='tel:02426243208'>📞 Call MPKV Rahuri</a>
             </div>""", unsafe_allow_html=True)
 
     with r4:
@@ -1741,23 +1887,23 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>ICAR - CICR Cotton Experts (Nagpur)</h4>
+                <h4>🔬 ICAR - CICR Cotton Experts (Nagpur)</h4>
                 <p><b>Phone:</b> 07103-275536 / 275538<br>
                 <b>Speciality:</b> Pink Bollworm, Cotton Leaf Curl, Whitefly Control</p>
-                <a href='tel:07103275536'>Call CICR Cotton Helpline</a>
+                <a href='tel:07103275536'>📞 Call CICR Cotton Helpline</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>Dr. PDKV Agri University (Akola)</h4>
+                <h4>📍 Dr. PDKV Agri University (Akola)</h4>
                 <p><b>Phone:</b> 0724-2258419<br>
                 <b>Speciality:</b> Soybean, Cotton, Grain Crop Protection</p>
-                <a href='tel:07242258419'>Call PDKV Akola</a>
+                <a href='tel:07242258419'>📞 Call PDKV Akola</a>
             </div>""", unsafe_allow_html=True)
 
     # Specialist Form
     st.markdown("---")
-    st.markdown("#### Request Direct Specialist Callback / तज्ज्ञ कॉल विनंती")
+    st.markdown("#### 📝 Request Direct Specialist Callback / तज्ज्ञ कॉल विनंती")
     with st.form("specialist_form"):
         fc1, fc2, fc3 = st.columns(3)
         farmer_name = fc1.text_input("शेतकऱ्याचे नाव / Farmer Name",
@@ -1771,10 +1917,10 @@ with tab_contacts:
                   if st.session_state.get("farmer_district", "Pune") in ALL_DISTRICTS else 0
         )
         crop_query = st.text_area("पिकाची समस्या सांगा / Describe Crop Problem")
-        submit_form = st.form_submit_button("Submit Request / विनंती पाठवा", type="primary")
+        submit_form = st.form_submit_button("📩 Submit Request / विनंती पाठवा", type="primary")
 
         if submit_form:
-            st.success(f"धन्यवाद {farmer_name}! तुमची विनंती नोंदवली गेली आहे. कृषी तज्ज्ञ २४ तासांत {farmer_phone} वर संपर्क साधतील.")
+            st.success(f"✅ धन्यवाद {farmer_name}! तुमची विनंती नोंदवली गेली आहे. कृषी तज्ज्ञ २४ तासांत {farmer_phone} वर संपर्क साधतील.")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -1784,7 +1930,7 @@ with tab_contacts:
 # ─────────────────────────────────────────────────────────────
 with tab_map:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### Nearby Farmer Disease & Pest Outbreak Alert Map")
+    st.markdown("### 🗺️ Nearby Farmer Disease & Pest Outbreak Alert Map")
     st.markdown("Real-time outbreak mapping across Maharashtra. Color-coded severity pins notify nearby farmers within **10 km - 50 km** radius.")
 
     # Show real alert history from Excel if available
@@ -1792,7 +1938,7 @@ with tab_map:
         try:
             alerts_df = pd.read_excel(EXCEL_ALERTS_FILE, dtype=str)
             if not alerts_df.empty:
-                st.markdown("#### Recent AI-Detected Alerts (from Registered Farmers):")
+                st.markdown("#### 📋 Recent AI-Detected Alerts (from Registered Farmers):")
                 st.dataframe(
                     alerts_df[["Timestamp", "Reporter_Name", "District", "Crop_Disease", "Confidence_Pct"]]
                     .tail(10)
@@ -1811,12 +1957,12 @@ with tab_map:
 
     # Outbreak Data Points in Maharashtra
     outbreaks = [
-        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "Emergency Outbreak", "radius": 15000, "color": [211, 47, 47, 180]},
-        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "Warning", "radius": 20000, "color": [245, 124, 0, 180]},
-        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "Emergency Outbreak", "radius": 12000, "color": [211, 47, 47, 180]},
-        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "Emergency Outbreak", "radius": 25000, "color": [211, 47, 47, 180]},
-        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "Advisory Watch", "radius": 18000, "color": [251, 192, 45, 180]},
-        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "Warning", "radius": 10000, "color": [245, 124, 0, 180]}
+        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "🔴 Emergency Outbreak", "radius": 15000, "color": [211, 47, 47, 180]},
+        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "🟠 Warning", "radius": 20000, "color": [245, 124, 0, 180]},
+        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "🔴 Emergency Outbreak", "radius": 12000, "color": [211, 47, 47, 180]},
+        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "🔴 Emergency Outbreak", "radius": 25000, "color": [211, 47, 47, 180]},
+        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "🟡 Advisory Watch", "radius": 18000, "color": [251, 192, 45, 180]},
+        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "🟠 Warning", "radius": 10000, "color": [245, 124, 0, 180]}
     ]
 
     # PyDeck Map
@@ -1850,7 +1996,7 @@ with tab_map:
     st.pydeck_chart(r)
 
     # Active Alert List
-    st.markdown("#### Active Regional Outbreak Alerts:")
+    st.markdown("#### 🚨 Active Regional Outbreak Alerts:")
     m1, m2 = st.columns(2)
     for idx, ob in enumerate(outbreaks):
         target_col = m1 if idx % 2 == 0 else m2
@@ -1862,7 +2008,7 @@ with tab_map:
             st.markdown(f"""
             <div class='contact-card'>
                 <span class='{badge_type}'>{ob['severity']}</span>
-                <h4 style='margin:8px 0 2px;color:#1B5E20'>{ob['district']} — {ob['issue']}</h4>
+                <h4 style='margin:8px 0 2px;color:#1B5E20'>📍 {ob['district']} — {ob['issue']}</h4>
                 <p style='margin:0;font-size:0.88rem;color:#558B2F'>
                 <b>Affected Crop:</b> {ob['crop']} | <b>Impact Radius:</b> {ob['radius']//1000} km{reg_info}
                 </p>
@@ -1870,14 +2016,14 @@ with tab_map:
 
     # Broadcast Alert Form
     st.markdown("---")
-    st.markdown("#### Broadcast New Disease/Pest Alert to Nearby Farmers")
+    st.markdown("#### 📢 Broadcast New Disease/Pest Alert to Nearby Farmers")
     with st.form("alert_broadcast"):
         ac1, ac2, ac3 = st.columns(3)
         b_dist  = ac1.selectbox("जिल्हा / District", ALL_DISTRICTS)
         b_crop  = ac2.text_input("पीक / Crop Name", "Sugarcane / कापूस / धान")
         b_issue = ac3.selectbox("रोग / कीड / Issue Type", ["Pink Bollworm", "Fall Armyworm", "Red Rot", "Rice Blast", "Aphids", "Whitefly"])
         b_desc  = st.text_area("अलर्ट माहिती / Detailed Outbreak Description")
-        broadcast_btn = st.form_submit_button("Broadcast SMS & Map Alert | अलर्ट जारी करा", type="primary")
+        broadcast_btn = st.form_submit_button("🚨 Broadcast SMS & Map Alert | अलर्ट जारी करा", type="primary")
 
         if broadcast_btn:
             reg_in_dist = get_registered_farmers_count(b_dist)
@@ -1892,7 +2038,7 @@ with tab_map:
                 confidence=100.0
             )
             st.success(
-                f"अलर्ट यशस्वीपणे पाठवला! "
+                f"🚨 अलर्ट यशस्वीपणे पाठवला! "
                 f"**{b_dist}** परिसरातील **{reach}** नोंदणीकृत शेतकऱ्यांना "
                 f"**{b_issue}** बद्दल अलर्ट पाठवण्यात आला आहे."
             )
@@ -1905,7 +2051,7 @@ with tab_map:
 # ─────────────────────────────────────────────────────────────
 with tab_schemes:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### Official Government Agricultural Schemes & Subsidies Portal")
+    st.markdown("### 🏛️ Official Government Agricultural Schemes & Subsidies Portal")
     st.markdown("Direct access to Central & Maharashtra Govt schemes, eligibility criteria, subsidy rates, and official portals.")
 
     schemes = [
@@ -1983,11 +2129,11 @@ with tab_schemes:
             <div class='scheme-card' style='margin-bottom:16px'>
                 <span class='figma-badge' style='background:#1B5E20;color:white'>{sc['cat']}</span>
                 <h4 style='margin-top:10px'>{sc['name']}</h4>
-                <p><b>Benefit:</b> {sc['benefit']}<br>
-                <b>Eligibility:</b> {sc['eligibility']}<br>
-                <b>Required Docs:</b> {sc['docs']}</p>
+                <p><b>🎁 Benefit:</b> {sc['benefit']}<br>
+                <b>👥 Eligibility:</b> {sc['eligibility']}<br>
+                <b>📄 Required Docs:</b> {sc['docs']}</p>
             </div>""", unsafe_allow_html=True)
-            st.link_button(f"Apply Now / अधिकृत संकेतस्थळ ({sc['name'].split()[0]})", sc['link'], use_container_width=True)
+            st.link_button(f"🔗 Apply Now / अधिकृत संकेतस्थळ ({sc['name'].split()[0]})", sc['link'], use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -1998,7 +2144,7 @@ with tab_schemes:
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
 <div style='text-align:center;padding:20px;color:#558B2F;font-size:0.85rem;border-top:1px solid #DCEDC8;margin-top:40px'>
-<b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
+🌾 <b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
