@@ -379,7 +379,7 @@ def show_login_page():
            if "sel_lang_display" not in st.session_state:
                st.session_state["sel_lang_display"] = "🌾 मराठी (Marathi)"
 
-                def on_lang_change():
+           def on_lang_change():
                     chosen = st.session_state["lang_selector"]
                     st.session_state["app_lang"] = LANGUAGE_MAP[chosen]
                     st.session_state["lang_name"] = LANGUAGE_NAMES[LANGUAGE_MAP[chosen]]
@@ -389,31 +389,31 @@ def show_login_page():
                 current_index = lang_options.index(st.session_state["sel_lang_display"]) \
                     if st.session_state["sel_lang_display"] in lang_options else 0
                 
-                st.selectbox(
+            st.selectbox(
                     _t('sel_lang'),
                     lang_options,
                     index=current_index,
                     key="lang_selector",
                     on_change=on_lang_change
                 )
-                if "app_lang" not in st.session_state:
+            if "app_lang" not in st.session_state:
                     st.session_state["app_lang"] = "mr"
-                if "lang_name" not in st.session_state:
+            if "lang_name" not in st.session_state:
                     st.session_state["lang_name"] = "Marathi"
-                if "sel_lang_display" not in st.session_state:
+            if "sel_lang_display" not in st.session_state:
                     st.session_state["sel_lang_display"] = "🌾 मराठी (Marathi)"
                 
-                def on_lang_change():
+            def on_lang_change():
                     chosen = st.session_state["lang_selector"]
                     st.session_state["app_lang"] = LANGUAGE_MAP[chosen]
                     st.session_state["lang_name"] = LANGUAGE_NAMES[LANGUAGE_MAP[chosen]]
                     st.session_state["sel_lang_display"] = chosen
                 
-                lang_options = list(LANGUAGE_MAP.keys())
-                current_index = lang_options.index(st.session_state["sel_lang_display"]) \
-                    if st.session_state["sel_lang_display"] in lang_options else 0
+            lang_options = list(LANGUAGE_MAP.keys())
+            current_index = lang_options.index(st.session_state["sel_lang_display"]) \
+            if st.session_state["sel_lang_display"] in lang_options else 0
                 
-                st.selectbox(
+            st.selectbox(
                     _t('sel_lang'),
                     lang_options,
                     index=current_index,
