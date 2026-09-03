@@ -180,12 +180,16 @@ st.markdown("""
 LANGUAGE_MAP   = {
     "🌾 मराठी (Marathi)": "mr",
     "🇮🇳 हिंदी (Hindi)": "hi",
-    "🌍 English": "en"
+    "🌍 English": "en",
+    "🌻 ગુજરાતી (Gujarati)": "gu",
+    "🌟 ਪੰਜਾਬੀ (Punjabi)": "pa"
 }
 LANGUAGE_NAMES = {
     "mr": "Marathi",
     "hi": "Hindi",
-    "en": "English"
+    "en": "English",
+    "gu": "Gujarati",
+    "pa": "Punjabi"
 }
 
 UI_TEXT = {
@@ -225,7 +229,7 @@ UI_TEXT = {
         "tab_schemes": "🏛️ शासकीय योजना",
         "signout": "🚪 लॉग आउट"
     },
-    "hi": {
+     "hi": {
         "title": "महाकृषि AI",
         "subtitle": "स्मार्ट फसल रोग और कीट पहचान",
         "signin_tab": "🔑 साइन इन",
@@ -242,6 +246,42 @@ UI_TEXT = {
         "tab_map": "🗺️ रोग अलर्ट मैप",
         "tab_schemes": "🏛️ सरकारी योजनाएं",
         "signout": "🚪 लॉग आउट"
+    },
+    "gu": {
+        "title": "મહાકૃષિ AI",
+        "subtitle": "સ્માર્ટ પાક રોગ અને જીવાત શોધ",
+        "signin_tab": "🔑 સાઇન ઇન",
+        "register_tab": "📝 નોંધણી",
+        "mobile": "📱 મોબાઇલ નંબર",
+        "name": "👤 પૂરું નામ",
+        "district": "📍 જિલ્લો",
+        "signin_btn": "✅ સાઇન ઇન કરો",
+        "register_btn": "📝 નોંધણી કરો",
+        "sel_lang": "🌐 ભાષા પસંદ કરો",
+        "tab_detect": "🔍 AI રોગ શોધ",
+        "tab_chat": "🤖 કૃષિ ચેટબોટ",
+        "tab_contacts": "📞 નિષ્ણાત સંપર્ક",
+        "tab_map": "🗺️ રોગ એલર્ટ નકશો",
+        "tab_schemes": "🏛️ સરકારી યોજનાઓ",
+        "signout": "🚪 લૉગ આઉટ"
+    },
+    "pa": {
+        "title": "ਮਹਾਕ੍ਰਿਸ਼ੀ AI",
+        "subtitle": "ਸਮਾਰਟ ਫਸਲ ਰੋਗ ਅਤੇ ਕੀਟ ਪਛਾਣ",
+        "signin_tab": "🔑 ਸਾਈਨ ਇਨ",
+        "register_tab": "📝 ਰਜਿਸਟ੍ਰੇਸ਼ਨ",
+        "mobile": "📱 ਮੋਬਾਈਲ ਨੰਬਰ",
+        "name": "👤 ਪੂਰਾ ਨਾਮ",
+        "district": "📍 ਜ਼ਿਲ੍ਹਾ",
+        "signin_btn": "✅ ਸਾਈਨ ਇਨ ਕਰੋ",
+        "register_btn": "📝 ਰਜਿਸਟਰ ਕਰੋ",
+        "sel_lang": "🌐 ਭਾਸ਼ਾ ਚੁਣੋ",
+        "tab_detect": "🔍 AI ਰੋਗ ਪਛਾਣ",
+        "tab_chat": "🤖 ਖੇਤੀ ਚੈਟਬੋਟ",
+        "tab_contacts": "📞 ਮਾਹਰ ਸੰਪਰਕ",
+        "tab_map": "🗺️ ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
+        "tab_schemes": "🏛️ ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
+        "signout": "🚪 ਲੌਗ ਆਉਟ"
     }
 }
 
@@ -761,12 +801,16 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
 
     # Elaborative Fallback Response
     if is_healthy:
-        if lang_name == "Marathi":
-            return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आणि सुदृढ दिसत आहे! तुमची शेतीतील मेहनत वाखाणण्याजोगी आहे.\n\n💧 **कृषी मित्राचा सविस्तर सल्ला:**\n१. जमिनीच्या गरजेनुसार वेळेवर पाणी व सेंद्रिय खते द्या.\n२. शेताची दररोज सकाळी पाहणी करा.\n३. पानांवर बारीक पिवळे डाग दिसतात का यावर लक्ष ठेवा.\n४. जिवामृताचा वापर करून पिकाची प्रतिकारशक्ती वाढवा."
+             if lang_name == "Marathi":
+            return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आहे!..."
         elif lang_name == "Hindi":
-            return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ और हरी-भरी दिख रही है! आपकी मेहनत रंग लाई है।\n\n💧 **कृषि मित्र की सविस्तार सलाह:**\n1. आवश्यकतानुसार सिंचाई और जैविक खाद दें।\n2. रोजाना सुबह फसल का निरीक्षण करें।\n3. जीवामृत का प्रयोग कर मिट्टी की उर्वरा शक्ति बढ़ाएं।"
+            return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ है!..."
+        elif lang_name == "Gujarati":
+            return "🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾\n\n✅ તમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n💧 **કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
+        elif lang_name == "Punjabi":
+            return "🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾\n\n✅ ਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n💧 **ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
         else:
-            return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Detailed Advice:**\n1. Maintain timely irrigation and organic fertilizers.\n2. Regularly inspect your fields in the morning.\n3. Apply Jeevamrut to enhance soil microbial activity."
+            return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
     else:
         if lang_name == "Marathi":
             return f"""🙏 **रामराम शेतकरी दादा!** 🌾
@@ -830,6 +874,48 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
 • प्रभावित पत्तियों को खेत से बाहर नष्ट करें।
 
 ☎️ **हेल्पलाइन:** 1800-180-1551"""
+              elif lang_name == "Gujarati":        # ← ADD FROM HERE
+            return f"""🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾
+
+🔴 **શોધાયેલ રોગ / જીવાત:** **{issue_name}**
+
+🦠 **પાક પર અસર:**
+- આ રોગ અથવા જીવાત પાંદડાનો રસ ચૂસે છે, જેથી પ્રકાશ-સંશ્લેષણ અટકે છે અને ઉત્પાદન ૩૦-૫૦% ઘટે છે.
+
+🌧️ **ઉત્પત્તિનાં કારણો:**
+- ભેજ, વાદળછાયું હવામાન અને વધુ પડતા નાઇટ્રોજનનો ઉપયોગ.
+
+💊 **રાસાયણિક સ્પ્રે:**
+- પ્રોફેનોફોસ ૫૦% EC (૨ ml/લિટર) અથવા ઇમામેક્ટિન (૦.૫ ગ્રામ/લિટર).
+- સાંજે માસ્ક પહેરીને છંટકાવ કરો.
+
+🌿 **જૈવિક ઉપાય:**
+- લીમડાનું તેલ ૫ ml/લિટર અથવા દશપર્ણી અર્ક ૫ ml/લિટર.
+- ચીકણા પીળા-વાદળી ટ્રેપ એકર દીઠ ૧૦-૧૨ લગાવો.
+
+☎️ **હેલ્પલાઇન:** 1800-180-1551"""
+
+        elif lang_name == "Punjabi":
+            return f"""🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾
+
+🔴 **ਪਛਾਣਿਆ ਗਿਆ ਰੋਗ / ਕੀਟ:** **{issue_name}**
+
+🦠 **ਫਸਲ ਉੱਤੇ ਅਸਰ:**
+- ਇਹ ਰੋਗ ਪੱਤਿਆਂ ਦਾ ਰਸ ਚੂਸਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਝਾੜ ੩੦-੫੦% ਘੱਟਦਾ ਹੈ.
+
+🌧️ **ਕਾਰਨ:**
+- ਵੱਧ ਨਮੀ, ਬੱਦਲਵਾਈ ਮੌਸਮ ਅਤੇ ਜ਼ਿਆਦਾ ਯੂਰੀਆ ਦੀ ਵਰਤੋਂ.
+
+💊 **ਰਸਾਇਣਕ ਸਪ੍ਰੇ:**
+- ਪ੍ਰੋਫੇਨੋਫੋਸ ੫੦% EC (੨ ml/ਲਿਟਰ) ਜਾਂ ਇਮਾਮੇਕਟਿਨ (੦.੫ ਗ੍ਰਾਮ/ਲਿਟਰ).
+- ਸ਼ਾਮ ਨੂੰ ਮਾਸਕ ਪਾ ਕੇ ਸਪ੍ਰੇ ਕਰੋ.
+
+🌿 **ਜੈਵਿਕ ਉਪਾਅ:**
+- ਨਿੰਮ ਤੇਲ ੫ ml/ਲਿਟਰ ਜਾਂ ਦਸ਼ਪਰਣੀ ਅਰਕ ੫ ml/ਲਿਟਰ.
+- ਪੀਲੇ-ਨੀਲੇ ਸਟਿੱਕੀ ਟਰੈਪ ਏਕੜ ਪਿੱਛੇ ੧੦-੧੨ ਲਗਾਓ.
+
+☎️ **ਹੈਲਪਲਾਈਨ:** 1800-180-1551"""
+            
         else:
             return f"""🙏 **Hello Dear Farmer!** 🌾
 
