@@ -226,44 +226,243 @@ st.markdown("""
     footer {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
+# ─────────────────────────────────────────────────────────────
+
+
+# ─────────────────────────────────────────────────────────────
+# MOBILE RESPONSIVE OVERRIDES
+# ─────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins...');
-
-html, body, [class*="css"] { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; }
-
-.figma-header { ... }
-.figma-header-title { ... }
-... (all your existing rules, unchanged) ...
-
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-
-/* ───────────── MOBILE RESPONSIVENESS ───────────── */
-@media (max-width: 768px) {
-  .figma-header { padding: 14px 16px; border-radius: 14px; flex-direction: column; align-items: flex-start; }
-  .figma-header-title { font-size: 1.4rem; line-height: 1.2; }
-  .figma-header-sub { font-size: 0.85rem; }
-  .figma-badge { font-size: 0.72rem; padding: 6px 12px; }
-  .figma-card { padding: 14px; border-radius: 12px; margin-bottom: 14px; }
-  .login-card { padding: 22px 18px; max-width: 100%; border-radius: 16px; }
-  .remedy-chemical, .remedy-organic, .chat-box, .alert-box, .audio-section, .scheme-card, .contact-card {
-    padding: 12px; font-size: 0.92rem;
-  }
-  h1 { font-size: 1.5rem !important; }
-  h2 { font-size: 1.25rem !important; }
-  h3 { font-size: 1.1rem !important; }
-  .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; }
-  .stTabs [data-baseweb="tab-list"] { overflow-x: auto; flex-wrap: nowrap; }
+html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+    overflow-x: hidden !important;
 }
 
-@media (max-width: 380px) {
-  .figma-header-title { font-size: 1.2rem; }
-  img { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+    .block-container {
+        padding: 0.75rem 0.75rem 2rem !important;
+        max-width: 100% !important;
+    }
+
+    .figma-header {
+        padding: 14px 16px !important;
+        border-radius: 14px !important;
+        margin-bottom: 14px !important;
+        gap: 8px !important;
+    }
+
+    .figma-header-title {
+        font-size: 1.35rem !important;
+        line-height: 1.25 !important;
+    }
+
+    .figma-header-sub {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .figma-badge {
+        font-size: 0.68rem !important;
+        padding: 5px 9px !important;
+    }
+
+    .figma-card {
+        padding: 14px !important;
+        margin-bottom: 12px !important;
+        border-radius: 12px !important;
+    }
+
+    .profile-hero {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 22px 14px !important;
+        margin-bottom: 14px !important;
+        border-radius: 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 9px !important;
+    }
+
+    .profile-avatar {
+        width: 78px !important;
+        height: 78px !important;
+    }
+
+    .profile-avatar img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .profile-hero h2 {
+        font-size: 1.25rem !important;
+        line-height: 1.3 !important;
+        margin: 0 !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    .profile-hero p {
+        font-size: 0.78rem !important;
+        line-height: 1.45 !important;
+        margin: 2px 0 !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    /* Profile stats: 2 × 2 */
+    div[data-testid="stHorizontalBlock"]:has(.profile-stat-card) {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 9px !important;
+        width: 100% !important;
+    }
+
+    div[data-testid="stHorizontalBlock"]:has(.profile-stat-card) > div {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+    }
+
+    .profile-stat-card {
+        min-height: 86px !important;
+        padding: 12px 6px !important;
+        border-radius: 11px !important;
+        box-sizing: border-box !important;
+    }
+
+    .profile-stat-num {
+        font-size: 1.25rem !important;
+        line-height: 1.2 !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    .profile-stat-label {
+        font-size: 0.66rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Profile information */
+    .figma-card table {
+        width: 100% !important;
+        table-layout: fixed !important;
+        font-size: 0.78rem !important;
+    }
+
+    .figma-card table td {
+        padding: 8px 3px !important;
+        vertical-align: top !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    .figma-card table td:first-child {
+        width: 42% !important;
+    }
+
+    .figma-card table td:last-child {
+        width: 58% !important;
+        text-align: right !important;
+    }
+
+    /* Detection history */
+    .history-row {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px !important;
+        margin-bottom: 8px !important;
+        gap: 8px !important;
+        flex-wrap: wrap !important;
+        align-items: flex-start !important;
+        border-radius: 10px !important;
+    }
+
+    .history-icon {
+        font-size: 1.2rem !important;
+    }
+
+    .history-badge {
+        font-size: 0.66rem !important;
+        padding: 3px 7px !important;
+        white-space: normal !important;
+        text-align: center !important;
+    }
+
+    div[data-testid="column"] {
+        min-width: 0 !important;
+    }
+
+    .stButton > button {
+        min-height: 42px !important;
+        border-radius: 10px !important;
+    }
+
+    .stTextInput input,
+    .stSelectbox div[data-baseweb="select"] {
+        min-height: 42px !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        scrollbar-width: none !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    img, canvas, svg {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .block-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .figma-header-title {
+        font-size: 1.2rem !important;
+    }
+
+    .profile-hero {
+        padding: 18px 10px !important;
+    }
+
+    .profile-avatar {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .profile-hero h2 {
+        font-size: 1.12rem !important;
+    }
+
+    .profile-stat-card {
+        min-height: 78px !important;
+        padding: 9px 4px !important;
+    }
+
+    .profile-stat-num {
+        font-size: 1.1rem !important;
+    }
+
+    .profile-stat-label {
+        font-size: 0.61rem !important;
+    }
+
+    .history-row {
+        padding: 8px !important;
+    }
+
+    .history-badge {
+        width: 100% !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
-# ─────────────────────────────────────────────────────────────
 
 # ─────────────────────────────────────────────────────────────
 # TRANSLATIONS & CONFIG
@@ -683,7 +882,7 @@ def show_profile_page():
     healthy_count = sum(1 for h in history if h.get("healthy"))
     total_scans   = len(history)
 
-    s1, s2, s3, s4 = st.columns(4)
+    s1, s2 = st.columns(2)
     with s1:
         st.markdown(f"""
         <div class='profile-stat-card'>
