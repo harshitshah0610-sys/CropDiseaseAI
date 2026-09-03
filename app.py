@@ -171,7 +171,43 @@ st.markdown("""
     footer {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins...');
 
+html, body, [class*="css"] { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; }
+
+.figma-header { ... }
+.figma-header-title { ... }
+... (all your existing rules, unchanged) ...
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* ───────────── MOBILE RESPONSIVENESS ───────────── */
+@media (max-width: 768px) {
+  .figma-header { padding: 14px 16px; border-radius: 14px; flex-direction: column; align-items: flex-start; }
+  .figma-header-title { font-size: 1.4rem; line-height: 1.2; }
+  .figma-header-sub { font-size: 0.85rem; }
+  .figma-badge { font-size: 0.72rem; padding: 6px 12px; }
+  .figma-card { padding: 14px; border-radius: 12px; margin-bottom: 14px; }
+  .login-card { padding: 22px 18px; max-width: 100%; border-radius: 16px; }
+  .remedy-chemical, .remedy-organic, .chat-box, .alert-box, .audio-section, .scheme-card, .contact-card {
+    padding: 12px; font-size: 0.92rem;
+  }
+  h1 { font-size: 1.5rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  h3 { font-size: 1.1rem !important; }
+  .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; }
+  .stTabs [data-baseweb="tab-list"] { overflow-x: auto; flex-wrap: nowrap; }
+}
+
+@media (max-width: 380px) {
+  .figma-header-title { font-size: 1.2rem; }
+  img { max-width: 100%; height: auto; }
+}
+</style>
+""", unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────
 
 # ─────────────────────────────────────────────────────────────
