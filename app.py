@@ -874,7 +874,7 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
 • प्रभावित पत्तियों को खेत से बाहर नष्ट करें।
 
 ☎️ **हेल्पलाइन:** 1800-180-1551"""
-              elif lang_name == "Gujarati":        # ← ADD FROM HERE
+        elif lang_name == "Gujarati":        # ← ADD FROM HERE
             return f"""🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾
 
 🔴 **શોધાયેલ રોગ / જીવાત:** **{issue_name}**
