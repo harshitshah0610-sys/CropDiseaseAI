@@ -802,15 +802,15 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
     # Elaborative Fallback Response
     if is_healthy:
              if lang_name == "Marathi":
-            return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आहे!..."
-        elif lang_name == "Hindi":
-            return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ है!..."
-        elif lang_name == "Gujarati":
-            return "🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾\n\n✅ તમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n💧 **કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
-        elif lang_name == "Punjabi":
-            return "🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾\n\n✅ ਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n💧 **ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
-        else:
-            return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
+                 return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आहे!..."
+             elif lang_name == "Hindi":
+                  return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ है!..."
+             elif lang_name == "Gujarati":
+                  return "🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾\n\n✅ તમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n💧 **કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
+             elif lang_name == "Punjabi":
+                  return "🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾\n\n✅ ਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n💧 **ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
+             elif:
+                  return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
     else:
         if lang_name == "Marathi":
             return f"""🙏 **रामराम शेतकरी दादा!** 🌾
