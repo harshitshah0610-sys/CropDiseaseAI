@@ -891,13 +891,13 @@ with st.sidebar:
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
 <div class='figma-header'>
-    <div>
+    <div style='flex: 1; min-width: 0;'>
         <h1 class='figma-header-title'>🌾 MahaKrishi AI | महाकृषि</h1>
         <p class='figma-header-sub'>
             AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
         </p>
     </div>
-    <div>
+    <div style='flex-shrink: 0;'>
         <span class='figma-badge'>🟢 System Active | महाराष्ट्र शासन</span>
     </div>
 </div>
