@@ -101,6 +101,51 @@ st.markdown("""
     .badge-success   { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; }
     .badge-low-conf  { background: #FFF9C4; color: #F57F17; border: 1px solid #FFF176; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; }
 
+    /* Profile Icon Button */
+    .profile-icon-btn {
+        background: rgba(255,255,255,0.2);
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 50%;
+        width: 46px; height: 46px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.4rem; cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none; color: white;
+        flex-shrink: 0;
+    }
+    .profile-icon-btn:hover { background: rgba(255,255,255,0.35); }
+
+    /* Profile Page */
+    .profile-hero {
+        background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #388E3C 100%);
+        border-radius: 20px; padding: 32px; margin-bottom: 24px;
+        color: white; display: flex; align-items: center; gap: 24px;
+        box-shadow: 0 8px 30px rgba(27,94,32,0.3);
+    }
+    .profile-avatar {
+        width: 90px; height: 90px; background: rgba(255,255,255,0.2);
+        border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-size: 2.8rem;
+        border: 3px solid rgba(255,255,255,0.5); flex-shrink: 0;
+    }
+    .profile-stat-card {
+        background: #FFFFFF; border: 1px solid #E0E0E0;
+        border-radius: 16px; padding: 20px; text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.2s;
+    }
+    .profile-stat-card:hover { transform: translateY(-3px); }
+    .profile-stat-num { font-size: 2.2rem; font-weight: 700; color: #1B5E20; margin: 0; }
+    .profile-stat-label { color: #558B2F; font-size: 0.85rem; font-weight: 500; margin: 4px 0 0; }
+    .history-row {
+        background: #F9FBE7; border: 1px solid #DCEDC8;
+        border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
+        display: flex; align-items: center; gap: 14px;
+    }
+    .history-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .history-badge { font-size: 0.78rem; font-weight: 600; padding: 3px 10px;
+        border-radius: 20px; white-space: nowrap; }
+
     /* Remedy Container */
     .remedy-chemical {
         background: #FFF8E1;
@@ -526,6 +571,231 @@ if "logged_in" not in st.session_state:
 if not st.session_state["logged_in"]:
     show_login_page()
     st.stop()   # Stop here — rest of app not shown until logged in
+
+# ── PROFILE PAGE SESSION STATE ──
+if "show_profile" not in st.session_state:
+    st.session_state["show_profile"] = False
+if "detection_history" not in st.session_state:
+    st.session_state["detection_history"] = []
+
+
+# ─────────────────────────────────────────────────────────────
+# PROFILE PAGE FUNCTION
+# ─────────────────────────────────────────────────────────────
+def show_profile_page():
+    farmer_name    = st.session_state.get("farmer_name", "Farmer")
+    farmer_phone   = st.session_state.get("farmer_phone", "—")
+    farmer_district= st.session_state.get("farmer_district", "—")
+    reg_number     = f"MK-{abs(hash(farmer_phone)) % 900000 + 100000}"
+    history        = st.session_state.get("detection_history", [])
+
+    # Back button
+    if st.button("← Back to Dashboard", key="back_from_profile"):
+        st.session_state["show_profile"] = False
+        st.rerun()
+
+    # ── HERO CARD ──
+    st.markdown(f"""
+    <div class='profile-hero'>
+        <div class='profile-avatar'>👨‍🌾</div>
+        <div style='flex:1'>
+            <h2 style='margin:0 0 4px;font-size:1.8rem'>{farmer_name}</h2>
+            <p style='margin:0;opacity:0.85;font-size:1rem'>📱 {farmer_phone}</p>
+            <p style='margin:4px 0 0;opacity:0.8;font-size:0.9rem'>📍 {farmer_district} District, Maharashtra</p>
+            <p style='margin:6px 0 0;'>
+                <span style='background:rgba(255,255,255,0.25);border-radius:20px;
+                             padding:4px 14px;font-size:0.82rem;font-weight:600'>
+                    🪪 Reg. No: {reg_number}
+                </span>
+            </p>
+        </div>
+        <div style='text-align:right;opacity:0.8'>
+            <p style='margin:0;font-size:0.8rem'>Member Since</p>
+            <p style='margin:0;font-weight:700;font-size:1.1rem'>{datetime.now().strftime("%b %Y")}</p>
+            <span style='background:#4CAF50;color:white;border-radius:20px;
+                         padding:3px 12px;font-size:0.78rem;font-weight:600'>✅ Verified Farmer</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ── STATS ROW ──
+    disease_count = sum(1 for h in history if h.get("type") == "disease")
+    pest_count    = sum(1 for h in history if h.get("type") == "pest")
+    healthy_count = sum(1 for h in history if h.get("healthy"))
+    total_scans   = len(history)
+
+    s1, s2, s3, s4 = st.columns(4)
+    with s1:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🔍 {total_scans}</p>
+            <p class='profile-stat-label'>Total AI Scans</p>
+        </div>""", unsafe_allow_html=True)
+    with s2:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🦠 {disease_count}</p>
+            <p class='profile-stat-label'>Diseases Detected</p>
+        </div>""", unsafe_allow_html=True)
+    with s3:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🐛 {pest_count}</p>
+            <p class='profile-stat-label'>Pests Identified</p>
+        </div>""", unsafe_allow_html=True)
+    with s4:
+        st.markdown(f"""
+        <div class='profile-stat-card'>
+            <p class='profile-stat-num'>🌱 {healthy_count}</p>
+            <p class='profile-stat-label'>Healthy Crops</p>
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── TWO COLUMN LAYOUT ──
+    col_left, col_right = st.columns([1.1, 1], gap="large")
+
+    with col_left:
+        # Farmer Info Card
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 👤 Farmer Information")
+        st.markdown(f"""
+        <table style='width:100%;border-collapse:collapse;font-size:0.92rem'>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Full Name</td>
+                <td style='padding:10px 0;color:#1B5E20;font-weight:700'>{farmer_name}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Mobile Number</td>
+                <td style='padding:10px 0;color:#1B5E20'>{farmer_phone}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>District</td>
+                <td style='padding:10px 0;color:#1B5E20'>{farmer_district}</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>State</td>
+                <td style='padding:10px 0;color:#1B5E20'>Maharashtra</td>
+            </tr>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Registration No.</td>
+                <td style='padding:10px 0'>
+                    <span style='background:#E8F5E9;color:#1B5E20;font-weight:700;
+                                 padding:3px 10px;border-radius:10px'>{reg_number}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Account Status</td>
+                <td style='padding:10px 0'>
+                    <span style='background:#C8E6C9;color:#1B5E20;font-weight:700;
+                                 padding:3px 10px;border-radius:10px'>✅ Active</span>
+                </td>
+            </tr>
+        </table>
+        """, unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Quick Stats Mini Dashboard
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 📊 Activity Dashboard")
+        if total_scans > 0:
+            # Simple bar chart data
+            import pandas as pd
+            chart_data = {
+                "Category": ["🦠 Disease", "🐛 Pest", "🌱 Healthy"],
+                "Count": [disease_count, pest_count, healthy_count]
+            }
+            df_chart = pd.DataFrame(chart_data)
+            st.bar_chart(df_chart.set_index("Category"), color="#2E7D32", use_container_width=True)
+        else:
+            st.markdown("""
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+                <div style='font-size:2.5rem'>📊</div>
+                <p style='color:#558B2F;margin:8px 0 0'>No scan data yet.<br>
+                   <small>Start detecting crop diseases to see your activity chart here.</small></p>
+            </div>""", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with col_right:
+        # Detection History
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 🕐 Detection History")
+
+        if not history:
+            st.markdown("""
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+                <div style='font-size:2.5rem'>🌾</div>
+                <p style='color:#558B2F;margin:8px 0 0'>No detections yet.<br>
+                   <small>Upload a crop photo on the AI Detection tab to get started.</small></p>
+            </div>""", unsafe_allow_html=True)
+        else:
+            for h in reversed(history[-10:]):  # Show last 10
+                icon  = "🦠" if h.get("type") == "disease" else ("🐛" if h.get("type") == "pest" else "🌱")
+                badge_color = "#FFEBEE" if h.get("type") == "disease" else (
+                              "#FFF3E0" if h.get("type") == "pest" else "#E8F5E9")
+                badge_text_color = "#C62828" if h.get("type") == "disease" else (
+                                   "#EF6C00" if h.get("type") == "pest" else "#2E7D32")
+                label = "Disease" if h.get("type") == "disease" else (
+                        "Pest" if h.get("type") == "pest" else "Healthy")
+                st.markdown(f"""
+                <div class='history-row'>
+                    <div class='history-icon'>{icon}</div>
+                    <div style='flex:1;min-width:0'>
+                        <p style='margin:0;font-weight:600;color:#1B5E20;
+                                  white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
+                            {h.get("name","Unknown")}
+                        </p>
+                        <p style='margin:2px 0 0;font-size:0.78rem;color:#558B2F'>
+                            🕐 {h.get("time","—")} &nbsp;|&nbsp; 🎯 {h.get("conf",0):.1f}% confidence
+                        </p>
+                    </div>
+                    <span class='history-badge'
+                          style='background:{badge_color};color:{badge_text_color}'>{label}</span>
+                </div>""", unsafe_allow_html=True)
+
+            if st.button("🗑️ Clear History", key="clear_hist"):
+                st.session_state["detection_history"] = []
+                st.rerun()
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # AI Model Info Card
+        st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
+        st.markdown("### 🤖 AI Models Used")
+        st.markdown("""
+        <div style='display:flex;flex-direction:column;gap:10px'>
+            <div style='background:#E8F5E9;border-radius:10px;padding:12px'>
+                <b style='color:#1B5E20'>🌾 Crop Disease Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#33691E'>
+                    EfficientNet-B0 · 39 Classes · TTA ×4<br>
+                    Rice, Sugarcane, Cotton, Wheat, Tomato, Potato
+                </p>
+            </div>
+            <div style='background:#FFF3E0;border-radius:10px;padding:12px'>
+                <b style='color:#E65100'>🐛 Pest Detection Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#BF360C'>
+                    EfficientNet-B0 · 14 Classes · TTA ×4<br>
+                    Bollworm, Aphids, Stem Borer, Whitefly, Armyworm
+                </p>
+            </div>
+            <div style='background:#E3F2FD;border-radius:10px;padding:12px'>
+                <b style='color:#1565C0'>🧠 AI Advisory Engine</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#0D47A1'>
+                    Google Gemini 1.5 Flash + gTTS Voice<br>
+                    Supports: Marathi, Hindi, English, Gujarati, Punjabi
+                </p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # ── SIGN OUT ──
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("🚪 Sign Out", type="secondary", use_container_width=False, key="profile_signout"):
+        for key in ["logged_in", "farmer_name", "farmer_phone", "farmer_district",
+                    "show_profile", "detection_history"]:
+            st.session_state.pop(key, None)
+        st.rerun()
 
 
 # ─────────────────────────────────────────────────────────────
@@ -1035,21 +1305,41 @@ with st.sidebar:
 
 
 # ─────────────────────────────────────────────────────────────
-# FIGMA DYNAMIC HEADER
+# PROFILE PAGE ROUTING
 # ─────────────────────────────────────────────────────────────
-st.markdown("""
-<div class='figma-header'>
-    <div style='flex: 1; min-width: 0;'>
-        <h1 class='figma-header-title'>🌾 MahaKrishi AI | महाकृषि</h1>
-        <p class='figma-header-sub'>
-            AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
-        </p>
+if st.session_state.get("show_profile", False):
+    show_profile_page()
+    st.stop()
+
+# ─────────────────────────────────────────────────────────────
+# FIGMA DYNAMIC HEADER (with Profile Icon)
+# ─────────────────────────────────────────────────────────────
+farmer_name_header = st.session_state.get("farmer_name", "Farmer")
+
+header_col, profile_col = st.columns([10, 1])
+with header_col:
+    st.markdown("""
+    <div class='figma-header'>
+        <div style='flex: 1; min-width: 0;'>
+            <h1 class='figma-header-title'>🌾 MahaKrishi AI | महाकृषि</h1>
+            <p class='figma-header-sub'>
+                AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
+            </p>
+        </div>
+        <div style='flex-shrink: 0;'>
+            <span class='figma-badge'>🟢 System Active | महाराष्ट्र शासन</span>
+        </div>
     </div>
-    <div style='flex-shrink: 0;'>
-        <span class='figma-badge'>🟢 System Active | महाराष्ट्र शासन</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+with profile_col:
+    st.markdown("<div style='padding-top:8px'>", unsafe_allow_html=True)
+    if st.button("👨‍🌾", key="open_profile",
+                 help=f"View Profile — {farmer_name_header}",
+                 use_container_width=True):
+        st.session_state["show_profile"] = True
+        st.rerun()
+    st.markdown(f"<p style='text-align:center;font-size:0.65rem;color:#2E7D32;margin:0'>{farmer_name_header.split()[0]}</p>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
@@ -1208,6 +1498,22 @@ with tab_detect:
                                     f"in **{farmer_district}** district! "
                                     f"Disease alert for **{name}** recorded in system."
                                 )
+
+                        # ── SAVE TO DETECTION HISTORY ──
+                        history_entry = {
+                            "name":    name,
+                            "type":    "pest" if is_pest_mode else "disease",
+                            "healthy": healthy,
+                            "conf":    conf,
+                            "time":    datetime.now().strftime("%d %b %Y, %I:%M %p"),
+                            "district": st.session_state.get("farmer_district", "")
+                        }
+                        if "detection_history" not in st.session_state:
+                            st.session_state["detection_history"] = []
+                        # Avoid duplicate consecutive entries
+                        if not st.session_state["detection_history"] or \
+                           st.session_state["detection_history"][-1]["name"] != name:
+                            st.session_state["detection_history"].append(history_entry)
 
                         # Generate AI Advisory
                         with st.spinner(f"💬 Generating {lang_name} advisory & remedies..."):
