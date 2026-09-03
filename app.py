@@ -39,30 +39,35 @@ st.markdown("""
 
     /* Main Header Figma Banner */
     .figma-header {
-        background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
-        padding: 24px 32px;
-        border-radius: 20px;
-        margin-bottom: 24px;
-        color: white;
-        box-shadow: 0 10px 30px rgba(27, 94, 32, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+    background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+    padding: 20px 28px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(27, 94, 32, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
     .figma-header-title { font-size: 2.2rem; font-weight: 700; margin: 0; color: #FFFFFF; }
     .figma-header-sub { font-size: 1rem; color: #C8E6C9; margin-top: 6px; }
     
-    .figma-badge {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        padding: 8px 16px;
-        border-radius: 30px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #E8F5E9;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+  .figma-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #E8F5E9;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
 
     /* Cards */
     .figma-card {
