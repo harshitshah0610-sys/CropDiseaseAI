@@ -370,9 +370,31 @@ def show_login_page():
 
     _, mid, _ = st.columns([1, 2, 1])
     with mid:
-        sel_lang_key = st.selectbox(_t('sel_lang'), list(LANGUAGE_MAP.keys()), index=0)
-        st.session_state["app_lang"] = LANGUAGE_MAP[sel_lang_key]
-        st.session_state["lang_name"] = LANGUAGE_NAMES[LANGUAGE_MAP[sel_lang_key]]
+        # Initialize language in session state only ONCE
+if "app_lang" not in st.session_state:
+    st.session_state["app_lang"] = "mr"
+if "lang_name" not in st.session_state:
+    st.session_state["lang_name"] = "Marathi"
+if "sel_lang_display" not in st.session_state:
+    st.session_state["sel_lang_display"] = "🌾 मराठी (Marathi)"
+
+def on_lang_change():
+    chosen = st.session_state["lang_selector"]
+    st.session_state["app_lang"] = LANGUAGE_MAP[chosen]
+    st.session_state["lang_name"] = LANGUAGE_NAMES[LANGUAGE_MAP[chosen]]
+    st.session_state["sel_lang_display"] = chosen
+
+lang_options = list(LANGUAGE_MAP.keys())
+current_index = lang_options.index(st.session_state["sel_lang_display"]) \
+    if st.session_state["sel_lang_display"] in lang_options else 0
+
+st.selectbox(
+    _t('sel_lang'),
+    lang_options,
+    index=current_index,
+    key="lang_selector",
+    on_change=on_lang_change
+)
         
         tab_signin, tab_register = st.tabs([_t('signin_tab'), _t('register_tab')])
 
