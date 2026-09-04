@@ -1484,7 +1484,7 @@ with profile_col:
     avatar_uri_header = get_avatar_data_uri(st.session_state.get("farmer_phone", ""))
     st.markdown(f"""
     <style>
-    div[data-testid="column"]:nth-of-type(2) button {{
+    .profile-icon-marker + div button {{
         background-image: url('{avatar_uri_header}') !important;
         background-size: cover !important;
         background-position: center !important;
@@ -1500,6 +1500,7 @@ with profile_col:
         overflow: hidden !important;
     }}
     </style>
+    <div class="profile-icon-marker"></div>
     <div style='padding-top:8px'>
     """, unsafe_allow_html=True)
     if st.button("", key="open_profile",
