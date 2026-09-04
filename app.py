@@ -1746,8 +1746,10 @@ with tab_detect:
                         st.progress(conf / 100)
 
                         with st.expander("Probable AI Top 3 Matches"):
+                            rank_icons = ["🥇", "🥈", "🥉"]
                             for i, r in enumerate(results):
-                                st.markdown(f"{''[i]} **{r['name']}** — `{r['confidence']:.1f}%`")
+                                icon = rank_icons[i] if i < len(rank_icons) else "•"
+                                st.markdown(f"{icon} **{r['name']}** — `{r['confidence']:.1f}%`")
                                 st.progress(r["confidence"] / 100)
 
                         # ── ALERT NEARBY FARMERS (only for disease/pest, conf >= threshold) ──
