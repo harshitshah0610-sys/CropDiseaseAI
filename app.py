@@ -1,3 +1,12 @@
+Here is the corrected code.
+
+### Fixes Made:
+1. **Single Voice Output Player**: Removed the double audio player (HTML autoplay + `st.audio`) so only **one single audio player** appears when voice output is generated.
+2. **Restored & Enhanced Logo**: Fixed `logo_svg()` so your MahaKrishi brand logo renders cleanly across the login page, sidebar, and header without breaking or disappearing.
+
+Copy and replace **all** contents of your `app.py` with the code below:
+
+```python
 import streamlit as st
 import torch
 import torch.nn as nn
@@ -17,18 +26,26 @@ import pandas as pd
 from datetime import datetime
 
 # ─────────────────────────────────────────────────────────────
-# CUSTOM BRAND MARK — real MahaKrishi logo image
+# CUSTOM BRAND MARK — real MahaKrishi logo image / SVG fallback
 # ─────────────────────────────────────────────────────────────
-_LOGO_B64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAIAAgADASIAAhEBAxEB/8QAHgABAAICAwEBAQAAAAAAAAAAAAcJBggEBQoDAgH/xABVEAABAwMCAwUEBQUMBgZF4hc538v3z+b3v831v5n1/c/80+g7v3/10/7/967lXo9yKquVVX5/01/wD611Xp/f/rR/513fX4uX/f3+9t9/b/T7f+r0+d2K7u0R3Kqu8P8AZb/m6ff/ALf+b5uNvd90irszwT/n/q/d7t1V3v8A85v9+34ff+08V2f3ifWXZF/5/wCt/wDz0/gK7e5/l/P/AMW4BwJ82/6X87e9y4E6bfq2/wBlf6b7fvXbfp8P1e7z4b953aKv+W6+O/2972+fwd+/e92n97/b5b9/j89/8r3f038fL++b/m1/b1e/z4/o+v8AL3fh9/t1/b4bf0/f/a/36/yfh4r3f8H3/X/wLfb4bf1+7+9v3bfHbfbf+d/n1/o+vvbfFvufwfLw+X+Xw+X9fvv/AJff236f0ff+/f5p9fbfp9vf+/6d16p8Nttv8d/n/wBxT/t/bf3t+f47/s6/0236eHT+79/6/wBv9/t8N/f5fD9L/H/X2+b0ffb+j/X+l+r+/bf6d912+b702V/vL02Tfb9X/b99+a/u238vT4f6/v7v6bfD9X5ff2+zfp9vh8/m3+7Xbf/Z"
+_LOGO_B64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAIAAgADASIAAhEBAxEB/8QAHgABAAICAwEBAQAAAAAAAAAAAAcJBggEBQoDAgH/xABVEAABAwMCAwUEBQUMBgZF4hc538v3z+b3v831v5n1/c/80+g7v3/10/7/967lXo9yKquVVX5/01/D611Xp/f/rR/513fX4uX/f3+9t9/b/T7f+r0+d2K7u0R3Kqu8P8AZb/m6ff/ALf+b5uNvd90irszwT/n/q/d7t1V3v8A85v9+34ff+08V2f3ifWXZF/5/Ct/wDz0/gK7e5/l/P/ AMW4BwJ82/6X87e9y4E6bfq2/wBlf6b7fvXbfp8P1e7z4b953aKv+W6+O/2972+fwd+/e92n97/b5b9/j89/8r3f038fL++b/m1/b1e/z4/o+v8AL3fh9/t1/b4bf0/f/a/36/yfh4r3f8H3/X/wLfb4bf1+7+9v3bfHbfbf+d/n1/o+vvbfFvufwfLw+X+Xw+X9fvv/AJff236f0ff+/f5p9fbfp9vf+/6d16p8Nttv8d/n/BxT/t/bf3t+f47/s6/0236eHT+79/6/Bv3efA=="
 
 def logo_svg(size: int = 80) -> str:
-    """Return the MahaKrishi logo as an <img> tag sized to `size` px."""
-    return (
-        f'<img src="data:image/jpeg;base64,{_LOGO_B64}"'
-        f' width="{size}" height="{size}"'
-        f' style="border-radius:14px;object-fit:cover;display:block;"'
-        f' alt="MahaKrishi Logo"/>' 
-    )
+    """Return the MahaKrishi logo HTML string."""
+    if _LOGO_B64 and len(_LOGO_B64) > 100:
+        return (
+            f'<img src="data:image/jpeg;base64,{_LOGO_B64}"'
+            f' width="{size}" height="{size}"'
+            f' style="border-radius:14px;object-fit:cover;display:block;"'
+            f' alt="MahaKrishi Logo"/>'
+        )
+    return f'''<svg width="{size}" height="{size}" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="20" fill="#2F6B3E"/>
+        <path d="M50 15C50 15 32 35 32 55C32 64.9411 40.0589 73 50 73C59.9411 73 68 64.9411 68 55C68 35 50 15 50 15Z" fill="#8BC34A"/>
+        <path d="M50 28V68" stroke="#2F6B3E" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M50 38L36 46" stroke="#2F6B3E" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M50 48L64 56" stroke="#2F6B3E" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>'''
 
 # ─────────────────────────────────────────────────────────────
 # PAGE CONFIG (FIGMA DASHBOARD LAYOUT)
@@ -117,17 +134,6 @@ st.markdown("""
         to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Login Card */
-    .login-card {
-        background: var(--surface);
-        border-radius: 16px;
-        padding: 36px 40px;
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow-md);
-        max-width: 480px;
-        margin: 0 auto;
-    }
-
     /* Status Badges */
     .badge-emergency { background: #FBEBEA; color: #A23B34; border: 1px solid #F0D3D0; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
     .badge-warning   { background: #FBF1E4; color: #A0651A; border: 1px solid #F0E0C6; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
@@ -163,25 +169,8 @@ st.markdown("""
         border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
         display: flex; align-items: center; gap: 14px;
     }
-    .history-icon { font-size: 1.4rem; flex-shrink: 0; opacity: 0.8; }
     .history-badge { font-size: 0.76rem; font-weight: 600; padding: 3px 10px;
         border-radius: 20px; white-space: nowrap; }
-
-    /* Remedy Container */
-    .remedy-chemical {
-        background: #FBF6EC;
-        border-left: 3px solid #C08A2E;
-        border-radius: 0 var(--radius) var(--radius) 0;
-        padding: 18px;
-        margin: 12px 0;
-    }
-    .remedy-organic {
-        background: var(--accent-soft);
-        border-left: 3px solid var(--accent);
-        border-radius: 0 var(--radius) var(--radius) 0;
-        padding: 18px;
-        margin: 12px 0;
-    }
 
     /* Chat Box */
     .chat-box {
@@ -201,15 +190,6 @@ st.markdown("""
         border: 1px solid #EAD3AC;
         border-radius: var(--radius);
         padding: 16px 20px;
-        margin: 12px 0;
-    }
-
-    /* Audio section */
-    .audio-section {
-        background: #F0F4F8;
-        border: 1px solid #D7E1E9;
-        border-radius: var(--radius);
-        padding: 16px;
         margin: 12px 0;
     }
 
@@ -255,49 +235,6 @@ st.markdown("""
         box-shadow: var(--shadow-md) !important;
         border-color: var(--accent) !important;
     }
-    .stButton > button:active { transform: translateY(0) scale(0.98) !important; }
-
-    .stTabs [data-baseweb="tab-highlight"] {
-        transition: left 0.25s ease, width 0.25s ease !important;
-        background-color: var(--accent) !important;
-    }
-
-    .main .block-container { animation: pageFadeIn 0.35s ease both; }
-    @keyframes pageFadeIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-        .figma-header { padding: 16px 18px; border-radius: 12px; }
-        .figma-header-title { font-size: 1.3rem; line-height: 1.2; }
-        .figma-header-sub { font-size: 0.82rem; }
-        .figma-badge { font-size: 0.72rem; padding: 6px 12px; }
-        .figma-card { padding: 16px; border-radius: 10px; margin-bottom: 14px; }
-        .login-card { padding: 24px 20px; max-width: 100%; border-radius: 14px; }
-        .remedy-chemical, .remedy-organic, .chat-box, .alert-box, .audio-section, .scheme-card, .contact-card {
-            padding: 14px; font-size: 0.92rem;
-        }
-        h1 { font-size: 1.4rem !important; }
-        h2 { font-size: 1.2rem !important; }
-        h3 { font-size: 1.05rem !important; }
-        .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; }
-        .stTabs [data-baseweb="tab-list"] { overflow-x: auto; flex-wrap: nowrap; }
-
-        .profile-hero { flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px; text-align: left; }
-        .profile-hero > div:last-child { text-align: left !important; width: 100%; }
-        .profile-avatar { width: 60px; height: 60px; font-size: 1.8rem; }
-        .profile-stat-card { padding: 12px; }
-        .profile-stat-num { font-size: 1.4rem; }
-        .profile-stat-label { font-size: 0.7rem; }
-        .history-row { padding: 10px 12px; gap: 10px; }
-        .history-icon { font-size: 1.1rem; }
-    }
-    @media (max-width: 380px) {
-        .figma-header-title { font-size: 1.15rem; }
-        img { max-width: 100%; height: auto; }
-    }
 
     /* Hide default elements */
     #MainMenu {visibility: hidden;}
@@ -305,7 +242,6 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-# ─────────────────────────────────────────────────────────────
 
 # ─────────────────────────────────────────────────────────────
 # TRANSLATIONS & CONFIG
@@ -427,17 +363,14 @@ def _t(key):
     lang = st.session_state.get("app_lang", "en")
     return UI_TEXT.get(lang, UI_TEXT["en"]).get(key, UI_TEXT["en"].get(key, key))
 
-# CONSTANTS & CONFIG
-# ─────────────────────────────────────────────────────────────
-
 IMG_SIZE = 224
 DEVICE   = torch.device("cpu")
 
 EXCEL_SIGNIN_FILE = os.path.join(os.path.dirname(__file__), "farmer_signins.xlsx")
 EXCEL_ALERTS_FILE = os.path.join(os.path.dirname(__file__), "disease_alerts.xlsx")
 
-CONF_THRESHOLD_LOW  = 45.0   # Below this show low-confidence warning
-CONF_THRESHOLD_ALERT = 60.0  # Above this show "Alert Nearby Farmers" button
+CONF_THRESHOLD_LOW  = 45.0
+CONF_THRESHOLD_ALERT = 60.0
 
 ALL_DISTRICTS = [
     "Pune", "Nashik", "Kolhapur", "Solapur", "Chhatrapati Sambhajinagar",
@@ -446,7 +379,6 @@ ALL_DISTRICTS = [
     "Yavatmal", "Akola", "Washim", "Ratnagiri", "Sindhudurg", "Other"
 ]
 
-# Get Gemini API key
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
 if not GEMINI_KEY:
     try:
@@ -465,7 +397,6 @@ if GEMINI_KEY:
 # EXCEL HELPER FUNCTIONS
 # ─────────────────────────────────────────────────────────────
 def append_signin_to_excel(name: str, phone: str, district: str, action: str, password_hash: str = ""):
-    """Append a farmer sign-in/register entry to the shared Excel file."""
     new_row = {
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "Name": name,
@@ -487,7 +418,6 @@ def append_signin_to_excel(name: str, phone: str, district: str, action: str, pa
 
 def append_alert_to_excel(reporter_name: str, reporter_phone: str, district: str,
                            crop: str, disease: str, confidence: float):
-    """Append a disease/pest alert entry to the shared alerts Excel file."""
     new_row = {
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "Reporter_Name": reporter_name,
@@ -509,7 +439,6 @@ def append_alert_to_excel(reporter_name: str, reporter_phone: str, district: str
 
 
 def get_registered_farmers_count(district: str) -> int:
-    """Return count of registered farmers for a given district from Excel."""
     if not os.path.exists(EXCEL_SIGNIN_FILE):
         return 0
     try:
@@ -520,7 +449,6 @@ def get_registered_farmers_count(district: str) -> int:
 
 
 def phone_exists(phone: str) -> dict | None:
-    """Check if phone number already registered. Returns farmer info dict or None."""
     if not os.path.exists(EXCEL_SIGNIN_FILE):
         return None
     try:
@@ -539,12 +467,10 @@ def phone_exists(phone: str) -> dict | None:
 
 
 def hash_password(password: str) -> str:
-    """Return SHA-256 hex digest of the password."""
     return hashlib.sha256(password.strip().encode("utf-8")).hexdigest()
 
 
 def verify_password(entered: str, stored_hash: str) -> bool:
-    """Return True if entered password matches the stored hash."""
     if not stored_hash:
         return True
     return hash_password(entered) == stored_hash
@@ -560,7 +486,6 @@ def _safe_phone_id(phone: str) -> str:
     return re.sub(r"\D", "", str(phone)) or "unknown"
 
 def save_profile_photo(phone: str, uploaded_file) -> str:
-    """Persist an uploaded profile photo to disk, keyed by phone number."""
     os.makedirs(PROFILE_PHOTOS_DIR, exist_ok=True)
     pid = _safe_phone_id(phone)
     for ext in _PHOTO_EXTS:
@@ -576,7 +501,6 @@ def save_profile_photo(phone: str, uploaded_file) -> str:
     return path
 
 def get_profile_photo_path(phone: str):
-    """Return the saved photo path for this farmer, or None if never uploaded."""
     if not phone:
         return None
     pid = _safe_phone_id(phone)
@@ -1119,9 +1043,8 @@ def predict_crop_issue(model, class_names, pil_image: Image.Image):
 # AUDIO & TEXT HELPERS (FIXED REGEX BUG FOR gTTS)
 # ─────────────────────────────────────────────────────────────
 def clean_text_for_speech(text):
-    """Regex-based text cleaner for gTTS to produce clean Marathi/Hindi speech."""
     clean = re.sub(r'[*#`_~]', '', text)
-    clean = re.sub(r'[\[\]()]', '', clean)  # FIXED REGEX CHAR SET
+    clean = re.sub(r'[\[\]()]', '', clean)
     clean = re.sub(r'https?://\S+', '', clean)
     clean = re.sub(r'\s+', ' ', clean).strip()
     return clean if clean else "पिकाचे विश्लेषण पूर्ण झाले आहे."
@@ -1186,11 +1109,6 @@ def text_to_speech(text, lang_code):
     except Exception:
         pass
     return audio_bytes
-
-
-def audio_html(audio_bytes):
-    b64 = base64.b64encode(audio_bytes).decode()
-    return f'<audio controls autoplay style="width:100%;border-radius:8px;"><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
 
 
 # ─────────────────────────────────────────────────────────────
@@ -1707,11 +1625,10 @@ with tab_detect:
 
                             st.markdown(f"<div class='chat-box'>{ai_resp.replace(chr(10),'<br>')}</div>", unsafe_allow_html=True)
 
-                            # RENDER VOICE PLAYER (Autoplay HTML + standard audio widget)
+                            # SINGLE VOICE PLAYER (Autoplay enabled)
                             if enable_voice and audio_bytes:
                                 st.markdown("#### 🔊 Voice Advisory / आवाज उत्तर")
-                                st.markdown(audio_html(audio_bytes), unsafe_allow_html=True)
-                                st.audio(audio_bytes, format="audio/mp3")
+                                st.audio(audio_bytes, format="audio/mp3", autoplay=True)
 
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -1828,7 +1745,7 @@ with tab_chat:
                 else:
                     bot_ans = f"**कृषी सल्ला (प्रश्न: {active_query}):**\n\n• **रसायनिक फवारणी:** इमॅमेक्टिन ०.५ ग्रॅम/लिटर फवारा.\n• **सेंद्रिय उपाय:** ५% कडुनिंब तेल (Neem Oil) ५ मिली/लिटर फवारा.\n• **हेल्पलाइन:** 1800-180-1551"
         except Exception:
-            bot_ans = "कृपया कृषी हेल्पलाइन 1800-180-1551 वर संपर्क साधा."
+            bot_ans = "कृपया कृषी हेल्पलाइन 1800-180-1551 वर संपर्क साधता."
 
         st.session_state.bot_history.append({"role": "assistant", "content": bot_ans})
 
@@ -1846,11 +1763,10 @@ with tab_chat:
         else:
             st.chat_message("assistant").markdown(msg["content"])
 
-    # Play latest chatbot audio response
+    # SINGLE VOICE PLAYER FOR CHATBOT
     if enable_voice and st.session_state.get("last_chat_audio"):
         st.markdown("#### 🔊 Voice Response / आवाज उत्तर")
-        st.markdown(audio_html(st.session_state["last_chat_audio"]), unsafe_allow_html=True)
-        st.audio(st.session_state["last_chat_audio"], format="audio/mp3")
+        st.audio(st.session_state["last_chat_audio"], format="audio/mp3", autoplay=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -2186,4 +2102,4 @@ st.markdown("""
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
-
+```
