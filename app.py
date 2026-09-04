@@ -305,6 +305,8 @@ st.markdown("""
     /* Hide default elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+
+
 </style>
 """, unsafe_allow_html=True)
 # ─────────────────────────────────────────────────────────────
@@ -1409,20 +1411,48 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
 with st.sidebar:
     farmer_name_display = st.session_state.get("farmer_name", "Farmer")
     farmer_dist_display = st.session_state.get("farmer_district", "")
+    _sidebar_avatar_uri  = get_avatar_data_uri(st.session_state.get("farmer_phone", ""))
 
+    # ── Sidebar top: logo + circular profile photo + name ──
     st.markdown(f"""
-    <div style='text-align:center;padding:16px;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);
+    <div style='text-align:center;padding:16px 16px 14px;
+                background:linear-gradient(135deg,#E8F5E9,#C8E6C9);
                 border-radius:14px;margin-bottom:15px;border:1px solid #A5D6A7'>
-        <div style="display:flex;justify-content:center;margin-bottom:5px">""" + logo_svg(64) + f"""</div><h2 style='color:#1F4E2B;margin:0;font-weight:700'>महाकृषि</h2>
-        <p style='color:#2F6B39;font-size:0.88rem;margin:3px 0 0;font-weight:600'>MahaKrishi AI</p>
-        <span class='figma-badge' style='background:#1F4E2B;color:white;margin-top:6px;display:inline-block'>
+        <div style="display:flex;justify-content:center;margin-bottom:8px">
+            {logo_svg(52)}
+        </div>
+        <h2 style='color:#1F4E2B;margin:0 0 2px;font-weight:700;font-size:1.2rem'>महाकृषि</h2>
+        <p style='color:#2F6B39;font-size:0.82rem;margin:0 0 10px;font-weight:600'>MahaKrishi AI</p>
+
+        <!-- Circular profile photo -->
+        <div style='display:flex;justify-content:center;margin-bottom:10px'>
+            <img src='{_sidebar_avatar_uri}'
+                 style='width:72px;height:72px;border-radius:50%;object-fit:cover;
+                        border:3px solid #FFFFFF;
+                        box-shadow:0 2px 10px rgba(31,78,43,0.25);
+                        background:#EEF3EC;'/>
+        </div>
+
+        <!-- Farmer name & district -->
+        <p style='color:#1F4E2B;font-weight:700;font-size:0.95rem;margin:0 0 2px;
+                  white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
+            {farmer_name_display}
+        </p>
+        <p style='color:#558B2F;font-size:0.78rem;margin:0 0 8px'>
+            {farmer_dist_display}
+        </p>
+
+        <span class='figma-badge'
+              style='background:#1F4E2B;color:white;margin-top:2px;display:inline-block;font-size:0.72rem'>
             Govt. Agri-Tech Initiative
         </span>
     </div>
-    <div style='background:#F1F8E9;border-radius:10px;padding:10px 14px;margin-bottom:12px;border:1px solid #C8E6C9'>
-        <small><b>{farmer_name_display}</b><br>{farmer_dist_display}</small>
-    </div>
     """, unsafe_allow_html=True)
+
+    # Profile button inside sidebar
+    if st.button("👤 View My Profile", use_container_width=True, key="sidebar_profile_btn"):
+        st.session_state["show_profile"] = True
+        st.rerun()
 
     lang_code = st.session_state.get("app_lang", "mr")
     lang_name = st.session_state.get("lang_name", "Marathi")
@@ -1461,73 +1491,110 @@ if st.session_state.get("show_profile", False):
     st.stop()
 
 # ─────────────────────────────────────────────────────────────
-# FIGMA DYNAMIC HEADER (with Profile Icon)
+# FIGMA DYNAMIC HEADER (with Profile Icon embedded in header)
 # ─────────────────────────────────────────────────────────────
 farmer_name_header = st.session_state.get("farmer_name", "Farmer")
+avatar_uri_header  = get_avatar_data_uri(st.session_state.get("farmer_phone", ""))
 
-header_col, profile_col = st.columns([10, 1])
+# Two columns: header bar | profile button column
+header_col, profile_col = st.columns([11, 1])
+
 with header_col:
-    st.markdown("""
-    <div class='figma-header'>
-        <div style='flex: 1; min-width: 0;'>
+    st.markdown(f"""
+    <div class='figma-header' style='margin-bottom:0'>
+        <div style='flex:1;min-width:0'>
             <h1 class='figma-header-title'>MahaKrishi AI | महाकृषि</h1>
             <p class='figma-header-sub'>
-                AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
+                AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies |
+                Specialist Helplines &amp; Govt Schemes
             </p>
         </div>
-        <div style='flex-shrink: 0;'>
-            <span class='figma-badge'><span class='status-dot'></span>System Active | महाराष्ट्र शासन</span>
+        <div style='flex-shrink:0'>
+            <span class='figma-badge'>
+                <span class='status-dot'></span>System Active | महाराष्ट्र शासन
+            </span>
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 with profile_col:
-    # Always refresh avatar URI from disk on every render (including after back-navigation)
-    avatar_uri_header = get_avatar_data_uri(st.session_state.get("farmer_phone", ""))
-    # Use data-testid="stBaseButton-secondary" scoped to a unique wrapper id so the
-    # selector never drifts when Streamlit re-renders after st.rerun().
+    # Render the avatar as a plain <img> circle — no CSS selector games.
+    # Below it, a real st.button (text hidden via CSS scoped to this column's
+    # unique wrapper id) handles the Streamlit navigation.
     st.markdown(f"""
     <style>
-    #mk-profile-btn-wrap {{
+    /* Scope all overrides strictly to this column wrapper */
+    #mk-profile-col {{
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 8px;
+        justify-content: center;
+        padding-top: 6px;
     }}
-    #mk-profile-btn-wrap [data-testid="stBaseButton-secondary"] {{
-        background-image: url('{avatar_uri_header}') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        border-radius: 50% !important;
-        width: 46px !important;
-        height: 46px !important;
-        min-height: 46px !important;
-        max-width: 46px !important;
+    #mk-profile-col img.mk-avatar {{
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #A5D6A7;
+        box-shadow: 0 2px 10px rgba(31,78,43,0.22);
+        background: #EEF3EC;
+        display: block;
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
+        margin-bottom: 3px;
+    }}
+    #mk-profile-col img.mk-avatar:hover {{
+        border-color: #2F6B3E;
+        box-shadow: 0 4px 16px rgba(47,107,62,0.35);
+        transform: scale(1.07);
+    }}
+    #mk-profile-col .mk-name-label {{
+        font-size: 0.6rem;
+        color: #2F6B39;
+        font-weight: 600;
+        text-align: center;
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 2px;
+    }}
+    /* Make the st.button below invisible — clicking the img does the same job */
+    #mk-profile-col button {{
+        opacity: 0 !important;
+        height: 1px !important;
+        min-height: 0 !important;
         padding: 0 !important;
-        border: 2.5px solid #A5D6A7 !important;
-        color: transparent !important;
-        font-size: 0 !important;
-        overflow: hidden !important;
-        box-shadow: 0 2px 8px rgba(47,107,62,0.18) !important;
-        transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
-    }}
-    #mk-profile-btn-wrap [data-testid="stBaseButton-secondary"]:hover {{
-        border-color: #2F6B3E !important;
-        box-shadow: 0 3px 12px rgba(47,107,62,0.32) !important;
+        margin: 0 !important;
+        border: none !important;
+        pointer-events: none !important;
+        position: absolute !important;
     }}
     </style>
-    <div id="mk-profile-btn-wrap">
+    <div id="mk-profile-col">
+        <img class="mk-avatar"
+             src="{avatar_uri_header}"
+             alt="Profile"
+             title="View Profile — {farmer_name_header}"
+             onclick="
+                 // Find the nearest Streamlit button and programmatically click it
+                 var btns = document.querySelectorAll('#mk-profile-col button');
+                 if(btns.length) {{ btns[0].style.pointerEvents='auto'; btns[0].click(); }}
+             "/>
+        <div class="mk-name-label">{farmer_name_header.split()[0]}</div>
+    </div>
     """, unsafe_allow_html=True)
-    if st.button("P", key="open_profile",
+
+    # Real Streamlit button — invisible, activated by the img onclick above
+    if st.button("↗", key="open_profile",
                  help=f"View Profile — {farmer_name_header}",
-                 use_container_width=False):
+                 use_container_width=True):
         st.session_state["show_profile"] = True
         st.rerun()
-    st.markdown(
-        f"<p style='text-align:center;font-size:0.65rem;color:#2F6B39;margin:2px 0 0'>"
-        f"{farmer_name_header.split()[0]}</p></div>",
-        unsafe_allow_html=True
-    )
+
+# Spacer so header and tabs don't collapse together
+st.markdown("<div style='margin-bottom:18px'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
