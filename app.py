@@ -1481,10 +1481,19 @@ with header_col:
     </div>
     """, unsafe_allow_html=True)
 with profile_col:
+    # Always refresh avatar URI from disk on every render (including after back-navigation)
     avatar_uri_header = get_avatar_data_uri(st.session_state.get("farmer_phone", ""))
+    # Use data-testid="stBaseButton-secondary" scoped to a unique wrapper id so the
+    # selector never drifts when Streamlit re-renders after st.rerun().
     st.markdown(f"""
     <style>
-    .profile-icon-marker + div button {{
+    #mk-profile-btn-wrap {{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 8px;
+    }}
+    #mk-profile-btn-wrap [data-testid="stBaseButton-secondary"] {{
         background-image: url('{avatar_uri_header}') !important;
         background-size: cover !important;
         background-position: center !important;
@@ -1493,23 +1502,32 @@ with profile_col:
         width: 46px !important;
         height: 46px !important;
         min-height: 46px !important;
+        max-width: 46px !important;
         padding: 0 !important;
-        border: 2px solid #DCE8DD !important;
+        border: 2.5px solid #A5D6A7 !important;
         color: transparent !important;
         font-size: 0 !important;
         overflow: hidden !important;
+        box-shadow: 0 2px 8px rgba(47,107,62,0.18) !important;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+    }}
+    #mk-profile-btn-wrap [data-testid="stBaseButton-secondary"]:hover {{
+        border-color: #2F6B3E !important;
+        box-shadow: 0 3px 12px rgba(47,107,62,0.32) !important;
     }}
     </style>
-    <div class="profile-icon-marker"></div>
-    <div style='padding-top:8px'>
+    <div id="mk-profile-btn-wrap">
     """, unsafe_allow_html=True)
-    if st.button("", key="open_profile",
+    if st.button("P", key="open_profile",
                  help=f"View Profile — {farmer_name_header}",
-                 use_container_width=True):
+                 use_container_width=False):
         st.session_state["show_profile"] = True
         st.rerun()
-    st.markdown(f"<p style='text-align:center;font-size:0.65rem;color:#2F6B39;margin:0'>{farmer_name_header.split()[0]}</p>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<p style='text-align:center;font-size:0.65rem;color:#2F6B39;margin:2px 0 0'>"
+        f"{farmer_name_header.split()[0]}</p></div>",
+        unsafe_allow_html=True
+    )
 
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
