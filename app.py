@@ -11,6 +11,7 @@ import json
 import os
 import base64
 import re
+import hashlib
 import pydeck as pdk
 import pandas as pd
 from datetime import datetime
@@ -342,6 +343,7 @@ UI_TEXT = {
         "tab_contacts": "Specialist Contacts",
         "tab_map": "Outbreak Map & Alerts",
         "tab_schemes": "Govt Schemes",
+        "password": "Password",
         "signout": "Sign Out"
     },
     "mr": {
@@ -360,6 +362,8 @@ UI_TEXT = {
         "tab_contacts": "विशेषज्ञ संपर्क",
         "tab_map": "रोग अलर्ट नकाशा",
         "tab_schemes": "शासकीय योजना",
+        "password": "पासवर्ड",
+        "password": "पासवर्ड",
         "signout": "लॉग आउट"
     },
      "hi": {
@@ -396,6 +400,7 @@ UI_TEXT = {
         "tab_contacts": "નિષ્ણાત સંપર્ક",
         "tab_map": "રોગ એલર્ટ નકશો",
         "tab_schemes": "સરકારી યોજનાઓ",
+        "password": "પાસવર્ડ",
         "signout": "લૉગ આઉટ"
     },
     "pa": {
@@ -414,6 +419,7 @@ UI_TEXT = {
         "tab_contacts": "ਮਾਹਰ ਸੰਪਰਕ",
         "tab_map": "ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
         "tab_schemes": "ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
+        "password": "ਪਾਸਵਰਡ",
         "signout": "ਲੌਗ ਆਉਟ"
     }
 }
@@ -459,14 +465,15 @@ if GEMINI_KEY:
 # ─────────────────────────────────────────────────────────────
 # EXCEL HELPER FUNCTIONS
 # ─────────────────────────────────────────────────────────────
-def append_signin_to_excel(name: str, phone: str, district: str, action: str):
+def append_signin_to_excel(name: str, phone: str, district: str, action: str, password_hash: str = ""):
     """Append a farmer sign-in/register entry to the shared Excel file."""
     new_row = {
         "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "Name": name,
         "Phone": phone,
         "District": district,
-        "Action": action
+        "Action": action,
+        "Password_Hash": password_hash
     }
     if os.path.exists(EXCEL_SIGNIN_FILE):
         try:
@@ -522,10 +529,27 @@ def phone_exists(phone: str) -> dict | None:
         match = df[df["Phone"] == phone.strip()]
         if not match.empty:
             row = match.iloc[0]
-            return {"name": row.get("Name", ""), "district": row.get("District", "")}
+            return {
+                "name":          row.get("Name", ""),
+                "district":      row.get("District", ""),
+                "password_hash": row.get("Password_Hash", "")
+            }
     except Exception:
         pass
     return None
+
+
+def hash_password(password: str) -> str:
+    """Return SHA-256 hex digest of the password."""
+    return hashlib.sha256(password.strip().encode("utf-8")).hexdigest()
+
+
+def verify_password(entered: str, stored_hash: str) -> bool:
+    """Return True if entered password matches the stored hash."""
+    if not stored_hash:
+        # Legacy accounts registered before password was added — let them in
+        return True
+    return hash_password(entered) == stored_hash
 
 
 # ─────────────────────────────────────────────────────────────
@@ -653,37 +677,57 @@ def show_login_page():
         tab_signin, tab_register = st.tabs([_t('signin_tab'), _t('register_tab')])
 
         with tab_signin:
-            si_phone = st.text_input(_t('mobile'), key="si_phone")
+            si_phone    = st.text_input(_t('mobile'), key="si_phone")
+            si_password = st.text_input(_t('password'), type="password", key="si_password")
             if st.button(_t('signin_btn'), type="primary", use_container_width=True, key="btn_signin"):
                 phone_clean = si_phone.strip()
+                lang        = st.session_state["app_lang"]
                 if not phone_clean or len(phone_clean) < 10:
-                    st.error("Invalid number" if st.session_state["app_lang"]=="en" else "अवैध नंबर")
+                    st.error("Invalid number" if lang == "en" else "अवैध नंबर")
+                elif not si_password.strip():
+                    st.error("Please enter your password." if lang == "en" else "कृपया पासवर्ड टाका.")
                 else:
                     farmer_info = phone_exists(phone_clean)
                     if farmer_info:
-                        append_signin_to_excel(farmer_info["name"], phone_clean, farmer_info["district"], "Sign-In")
-                        st.session_state["logged_in"] = True
-                        st.session_state["farmer_name"] = farmer_info["name"]
-                        st.session_state["farmer_phone"] = phone_clean
-                        st.session_state["farmer_district"] = farmer_info["district"]
-                        st.rerun()
+                        if verify_password(si_password, farmer_info.get("password_hash", "")):
+                            append_signin_to_excel(farmer_info["name"], phone_clean, farmer_info["district"], "Sign-In")
+                            st.session_state["logged_in"] = True
+                            st.session_state["farmer_name"] = farmer_info["name"]
+                            st.session_state["farmer_phone"] = phone_clean
+                            st.session_state["farmer_district"] = farmer_info["district"]
+                            st.rerun()
+                        else:
+                            st.error("❌ Incorrect password. Please try again." if lang == "en" else "❌ चुकीचा पासवर्ड. पुन्हा प्रयत्न करा.")
                     else:
-                        st.error("Not found. Please register." if st.session_state["app_lang"]=="en" else "नंबर आढळला नाही. कृपया नोंदणी करा.")
+                        st.error("Not found. Please register." if lang == "en" else "नंबर आढळला नाही. कृपया नोंदणी करा.")
 
         with tab_register:
-            rg_name = st.text_input(_t('name'), key="rg_name")
-            rg_phone = st.text_input(_t('mobile') + " ", key="rg_phone")
+            rg_name     = st.text_input(_t('name'), key="rg_name")
+            rg_phone    = st.text_input(_t('mobile') + " ", key="rg_phone")
             rg_district = st.selectbox(_t('district'), ALL_DISTRICTS, key="rg_district")
+            rg_password  = st.text_input(_t('password'), type="password", key="rg_password",
+                                         help="Min 6 characters" if st.session_state.get("app_lang","mr")=="en" else "किमान 6 अक्षरे")
+            rg_confirm   = st.text_input(
+                ("Confirm Password" if st.session_state.get("app_lang","mr")=="en" else "पासवर्ड पुन्हा टाका"),
+                type="password", key="rg_confirm"
+            )
 
             if st.button(_t('register_btn'), type="primary", use_container_width=True, key="btn_register"):
                 name_clean, phone_clean = rg_name.strip(), rg_phone.strip()
+                pwd_clean = rg_password.strip()
+                lang = st.session_state.get("app_lang", "mr")
                 if not name_clean or not phone_clean or len(phone_clean) < 10:
-                    st.error("Invalid details")
+                    st.error("Invalid details" if lang=="en" else "अवैध माहिती")
+                elif len(pwd_clean) < 6:
+                    st.error("Password must be at least 6 characters." if lang=="en" else "पासवर्ड किमान 6 अक्षरांचा असावा.")
+                elif pwd_clean != rg_confirm.strip():
+                    st.error("Passwords do not match." if lang=="en" else "पासवर्ड जुळत नाही.")
                 else:
                     if phone_exists(phone_clean):
-                        st.warning("Already registered")
+                        st.warning("Already registered" if lang=="en" else "हा नंबर आधीच नोंदणीकृत आहे.")
                     else:
-                        append_signin_to_excel(name_clean, phone_clean, rg_district, "Register")
+                        append_signin_to_excel(name_clean, phone_clean, rg_district, "Register",
+                                               password_hash=hash_password(pwd_clean))
                         st.session_state["logged_in"] = True
                         st.session_state["farmer_name"] = name_clean
                         st.session_state["farmer_phone"] = phone_clean
