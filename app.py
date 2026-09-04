@@ -20,7 +20,7 @@ from datetime import datetime
 # ─────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="MahaKrishi AI | महाकृषि",
-    page_icon="🌾",
+    page_icon="M",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -152,7 +152,7 @@ st.markdown("""
         border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
         display: flex; align-items: center; gap: 14px;
     }
-    .history-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .history-icon { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
     .history-badge { font-size: 0.78rem; font-weight: 600; padding: 3px 10px;
         border-radius: 20px; white-space: nowrap; }
 
@@ -269,11 +269,11 @@ footer {visibility: hidden;}
 # TRANSLATIONS & CONFIG
 # ─────────────────────────────────────────────────────────────
 LANGUAGE_MAP   = {
-    "🌾 मराठी (Marathi)": "mr",
-    "🇮🇳 हिंदी (Hindi)": "hi",
-    "🌍 English": "en",
-    "🌻 ગુજરાતી (Gujarati)": "gu",
-    "🌟 ਪੰਜਾਬੀ (Punjabi)": "pa"
+    "मराठी (Marathi)": "mr",
+    "हिंदी (Hindi)": "hi",
+    "English": "en",
+    "ગુજરાતી (Gujarati)": "gu",
+    "ਪੰਜਾਬੀ (Punjabi)": "pa"
 }
 LANGUAGE_NAMES = {
     "mr": "Marathi",
@@ -287,92 +287,92 @@ UI_TEXT = {
     "en": {
         "title": "MahaKrishi AI",
         "subtitle": "Smart Crop Disease & Pest Detection",
-        "signin_tab": "🔑 Sign In",
-        "register_tab": "📝 Register",
-        "mobile": "📱 Mobile Number",
-        "name": "👤 Full Name",
-        "district": "📍 District",
-        "signin_btn": "✅ Sign In",
-        "register_btn": "📝 Register & Sign In",
-        "sel_lang": "🌐 Select Language",
-        "tab_detect": "🔍 AI Detection",
-        "tab_chat": "🤖 Treatment Chatbot",
-        "tab_contacts": "📞 Specialist Contacts",
-        "tab_map": "🗺️ Outbreak Map & Alerts",
-        "tab_schemes": "🏛️ Govt Schemes",
-        "signout": "🚪 Sign Out"
+        "signin_tab": "Sign In",
+        "register_tab": "Register",
+        "mobile": "Mobile Number",
+        "name": "Full Name",
+        "district": "District",
+        "signin_btn": "Sign In",
+        "register_btn": "Register & Sign In",
+        "sel_lang": "Select Language",
+        "tab_detect": "AI Detection",
+        "tab_chat": "Treatment Chatbot",
+        "tab_contacts": "Specialist Contacts",
+        "tab_map": "Outbreak Map & Alerts",
+        "tab_schemes": "Govt Schemes",
+        "signout": "Sign Out"
     },
     "mr": {
         "title": "महाकृषि AI",
         "subtitle": "स्मार्ट पीक रोग आणि कीड ओळख",
-        "signin_tab": "🔑 लॉग इन",
-        "register_tab": "📝 नोंदणी",
-        "mobile": "📱 मोबाईल नंबर",
-        "name": "👤 पूर्ण नाव",
-        "district": "📍 जिल्हा",
-        "signin_btn": "✅ लॉग इन करा",
-        "register_btn": "📝 नोंदणी करा",
-        "sel_lang": "🌐 भाषा निवडा",
-        "tab_detect": "🔍 AI रोग निदान",
-        "tab_chat": "🤖 कृषी चॅटबॉट",
-        "tab_contacts": "📞 विशेषज्ञ संपर्क",
-        "tab_map": "🗺️ रोग अलर्ट नकाशा",
-        "tab_schemes": "🏛️ शासकीय योजना",
-        "signout": "🚪 लॉग आउट"
+        "signin_tab": "लॉग इन",
+        "register_tab": "नोंदणी",
+        "mobile": "मोबाईल नंबर",
+        "name": "पूर्ण नाव",
+        "district": "जिल्हा",
+        "signin_btn": "लॉग इन करा",
+        "register_btn": "नोंदणी करा",
+        "sel_lang": "भाषा निवडा",
+        "tab_detect": "AI रोग निदान",
+        "tab_chat": "कृषी चॅटबॉट",
+        "tab_contacts": "विशेषज्ञ संपर्क",
+        "tab_map": "रोग अलर्ट नकाशा",
+        "tab_schemes": "शासकीय योजना",
+        "signout": "लॉग आउट"
     },
      "hi": {
         "title": "महाकृषि AI",
         "subtitle": "स्मार्ट फसल रोग और कीट पहचान",
-        "signin_tab": "🔑 साइन इन",
-        "register_tab": "📝 पंजीकरण",
-        "mobile": "📱 मोबाइल नंबर",
-        "name": "👤 पूरा नाम",
-        "district": "📍 जिला",
-        "signin_btn": "✅ साइन इन करें",
-        "register_btn": "📝 रजिस्टर करें",
-        "sel_lang": "🌐 भाषा चुनें",
-        "tab_detect": "🔍 AI रोग पहचान",
-        "tab_chat": "🤖 कृषि चैटबॉट",
-        "tab_contacts": "📞 विशेषज्ञ संपर्क",
-        "tab_map": "🗺️ रोग अलर्ट मैप",
-        "tab_schemes": "🏛️ सरकारी योजनाएं",
-        "signout": "🚪 लॉग आउट"
+        "signin_tab": "साइन इन",
+        "register_tab": "पंजीकरण",
+        "mobile": "मोबाइल नंबर",
+        "name": "पूरा नाम",
+        "district": "जिला",
+        "signin_btn": "साइन इन करें",
+        "register_btn": "रजिस्टर करें",
+        "sel_lang": "भाषा चुनें",
+        "tab_detect": "AI रोग पहचान",
+        "tab_chat": "कृषि चैटबॉट",
+        "tab_contacts": "विशेषज्ञ संपर्क",
+        "tab_map": "रोग अलर्ट मैप",
+        "tab_schemes": "सरकारी योजनाएं",
+        "signout": "लॉग आउट"
     },
     "gu": {
         "title": "મહાકૃષિ AI",
         "subtitle": "સ્માર્ટ પાક રોગ અને જીવાત શોધ",
-        "signin_tab": "🔑 સાઇન ઇન",
-        "register_tab": "📝 નોંધણી",
-        "mobile": "📱 મોબાઇલ નંબર",
-        "name": "👤 પૂરું નામ",
-        "district": "📍 જિલ્લો",
-        "signin_btn": "✅ સાઇન ઇન કરો",
-        "register_btn": "📝 નોંધણી કરો",
-        "sel_lang": "🌐 ભાષા પસંદ કરો",
-        "tab_detect": "🔍 AI રોગ શોધ",
-        "tab_chat": "🤖 કૃષિ ચેટબોટ",
-        "tab_contacts": "📞 નિષ્ણાત સંપર્ક",
-        "tab_map": "🗺️ રોગ એલર્ટ નકશો",
-        "tab_schemes": "🏛️ સરકારી યોજનાઓ",
-        "signout": "🚪 લૉગ આઉટ"
+        "signin_tab": "સાઇન ઇન",
+        "register_tab": "નોંધણી",
+        "mobile": "મોબાઇલ નંબર",
+        "name": "પૂરું નામ",
+        "district": "જિલ્લો",
+        "signin_btn": "સાઇન ઇન કરો",
+        "register_btn": "નોંધણી કરો",
+        "sel_lang": "ભાષા પસંદ કરો",
+        "tab_detect": "AI રોગ શોધ",
+        "tab_chat": "કૃષિ ચેટબોટ",
+        "tab_contacts": "નિષ્ણાત સંપર્ક",
+        "tab_map": "રોગ એલર્ટ નકશો",
+        "tab_schemes": "સરકારી યોજનાઓ",
+        "signout": "લૉગ આઉટ"
     },
     "pa": {
         "title": "ਮਹਾਕ੍ਰਿਸ਼ੀ AI",
         "subtitle": "ਸਮਾਰਟ ਫਸਲ ਰੋਗ ਅਤੇ ਕੀਟ ਪਛਾਣ",
-        "signin_tab": "🔑 ਸਾਈਨ ਇਨ",
-        "register_tab": "📝 ਰਜਿਸਟ੍ਰੇਸ਼ਨ",
-        "mobile": "📱 ਮੋਬਾਈਲ ਨੰਬਰ",
-        "name": "👤 ਪੂਰਾ ਨਾਮ",
-        "district": "📍 ਜ਼ਿਲ੍ਹਾ",
-        "signin_btn": "✅ ਸਾਈਨ ਇਨ ਕਰੋ",
-        "register_btn": "📝 ਰਜਿਸਟਰ ਕਰੋ",
-        "sel_lang": "🌐 ਭਾਸ਼ਾ ਚੁਣੋ",
-        "tab_detect": "🔍 AI ਰੋਗ ਪਛਾਣ",
-        "tab_chat": "🤖 ਖੇਤੀ ਚੈਟਬੋਟ",
-        "tab_contacts": "📞 ਮਾਹਰ ਸੰਪਰਕ",
-        "tab_map": "🗺️ ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
-        "tab_schemes": "🏛️ ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
-        "signout": "🚪 ਲੌਗ ਆਉਟ"
+        "signin_tab": "ਸਾਈਨ ਇਨ",
+        "register_tab": "ਰਜਿਸਟ੍ਰੇਸ਼ਨ",
+        "mobile": "ਮੋਬਾਈਲ ਨੰਬਰ",
+        "name": "ਪੂਰਾ ਨਾਮ",
+        "district": "ਜ਼ਿਲ੍ਹਾ",
+        "signin_btn": "ਸਾਈਨ ਇਨ ਕਰੋ",
+        "register_btn": "ਰਜਿਸਟਰ ਕਰੋ",
+        "sel_lang": "ਭਾਸ਼ਾ ਚੁਣੋ",
+        "tab_detect": "AI ਰੋਗ ਪਛਾਣ",
+        "tab_chat": "ਖੇਤੀ ਚੈਟਬੋਟ",
+        "tab_contacts": "ਮਾਹਰ ਸੰਪਰਕ",
+        "tab_map": "ਰੋਗ ਅਲਰਟ ਨਕਸ਼ਾ",
+        "tab_schemes": "ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ",
+        "signout": "ਲੌਗ ਆਉਟ"
     }
 }
 
@@ -389,8 +389,8 @@ DEVICE   = torch.device("cpu")
 EXCEL_SIGNIN_FILE = os.path.join(os.path.dirname(__file__), "farmer_signins.xlsx")
 EXCEL_ALERTS_FILE = os.path.join(os.path.dirname(__file__), "disease_alerts.xlsx")
 
-CONF_THRESHOLD_LOW  = 45.0   # Below this → show low-confidence warning
-CONF_THRESHOLD_ALERT = 60.0  # Above this → show "Alert Nearby Farmers" button
+CONF_THRESHOLD_LOW  = 45.0   # Below this show low-confidence warning
+CONF_THRESHOLD_ALERT = 60.0  # Above this show "Alert Nearby Farmers" button
 
 ALL_DISTRICTS = [
     "Pune", "Nashik", "Kolhapur", "Solapur", "Chhatrapati Sambhajinagar",
@@ -533,7 +533,7 @@ def show_login_page():
         if "lang_name" not in st.session_state:
             st.session_state["lang_name"] = "Marathi"
         if "sel_lang_display" not in st.session_state:
-            st.session_state["sel_lang_display"] = "🌾 मराठी (Marathi)"
+            st.session_state["sel_lang_display"] = "मराठी (Marathi)"
         
         def on_lang_change():
             chosen = st.session_state["lang_selector"]
@@ -594,7 +594,7 @@ def show_login_page():
 
     st.markdown("""
     <div style='text-align:center;padding:30px;color:#558B2F;font-size:0.82rem;margin-top:20px'>
-        🌾 <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
+        <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
         Maharashtra Government Agri-Tech Initiative
     </div>
     """, unsafe_allow_html=True)
@@ -628,7 +628,7 @@ def show_profile_page():
     history        = st.session_state.get("detection_history", [])
 
     # Back button
-    if st.button("← Back to Dashboard", key="back_from_profile"):
+    if st.button("Back to Dashboard", key="back_from_profile"):
         st.session_state["show_profile"] = False
         st.rerun()
 
@@ -638,12 +638,12 @@ def show_profile_page():
         <div class='profile-avatar'>{get_avatar_html(90, icon_scale=0.5)}</div>
         <div style='flex:1'>
             <h2 style='margin:0 0 4px;font-size:1.8rem'>{farmer_name}</h2>
-            <p style='margin:0;opacity:0.85;font-size:1rem'>📱 {farmer_phone}</p>
-            <p style='margin:4px 0 0;opacity:0.8;font-size:0.9rem'>📍 {farmer_district} District, Maharashtra</p>
+            <p style='margin:0;opacity:0.85;font-size:1rem'>{farmer_phone}</p>
+            <p style='margin:4px 0 0;opacity:0.8;font-size:0.9rem'>{farmer_district} District, Maharashtra</p>
             <p style='margin:6px 0 0;'>
                 <span style='background:rgba(255,255,255,0.25);border-radius:20px;
                              padding:4px 14px;font-size:0.82rem;font-weight:600'>
-                    🪪 Reg. No: {reg_number}
+                    Reg. No: {reg_number}
                 </span>
             </p>
         </div>
@@ -651,13 +651,13 @@ def show_profile_page():
             <p style='margin:0;font-size:0.8rem'>Member Since</p>
             <p style='margin:0;font-weight:700;font-size:1.1rem'>{datetime.now().strftime("%b %Y")}</p>
             <span style='background:#4CAF50;color:white;border-radius:20px;
-                         padding:3px 12px;font-size:0.78rem;font-weight:600'>✅ Verified Farmer</span>
+                         padding:3px 12px;font-size:0.78rem;font-weight:600'>Verified Farmer</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
     # ── PROFILE PHOTO UPLOAD ──
-    with st.expander("📷 Change Profile Photo / प्रोफाइल फोटो बदला"):
+    with st.expander("Change Profile Photo / प्रोफाइल फोटो बदला"):
         pu1, pu2 = st.columns([1, 3])
         with pu1:
             st.markdown(
@@ -673,7 +673,7 @@ def show_profile_page():
                 st.session_state["farmer_photo_b64"] = base64.b64encode(new_photo.read()).decode("utf-8")
                 st.rerun()
             if st.session_state.get("farmer_photo_b64"):
-                if st.button("🗑️ Remove Photo", key="remove_profile_photo"):
+                if st.button("Remove Photo", key="remove_profile_photo"):
                     st.session_state["farmer_photo_b64"] = None
                     st.rerun()
 
@@ -687,25 +687,25 @@ def show_profile_page():
     with s1:
         st.markdown(f"""
         <div class='profile-stat-card'>
-            <p class='profile-stat-num'>🔍 {total_scans}</p>
+            <p class='profile-stat-num'>{total_scans}</p>
             <p class='profile-stat-label'>Total AI Scans</p>
         </div>""", unsafe_allow_html=True)
     with s2:
         st.markdown(f"""
         <div class='profile-stat-card'>
-            <p class='profile-stat-num'>🦠 {disease_count}</p>
+            <p class='profile-stat-num'>{disease_count}</p>
             <p class='profile-stat-label'>Diseases Detected</p>
         </div>""", unsafe_allow_html=True)
     with s3:
         st.markdown(f"""
         <div class='profile-stat-card'>
-            <p class='profile-stat-num'>🐛 {pest_count}</p>
+            <p class='profile-stat-num'>{pest_count}</p>
             <p class='profile-stat-label'>Pests Identified</p>
         </div>""", unsafe_allow_html=True)
     with s4:
         st.markdown(f"""
         <div class='profile-stat-card'>
-            <p class='profile-stat-num'>🌱 {healthy_count}</p>
+            <p class='profile-stat-num'>{healthy_count}</p>
             <p class='profile-stat-label'>Healthy Crops</p>
         </div>""", unsafe_allow_html=True)
 
@@ -717,7 +717,7 @@ def show_profile_page():
     with col_left:
         # Farmer Info Card
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 👤 Farmer Information")
+        st.markdown("### Farmer Information")
         st.markdown(f"""
         <table style='width:100%;border-collapse:collapse;font-size:0.92rem'>
             <tr style='border-bottom:1px solid #E8F5E9'>
@@ -747,7 +747,7 @@ def show_profile_page():
                 <td style='padding:10px 0;color:#558B2F;font-weight:600'>Account Status</td>
                 <td style='padding:10px 0'>
                     <span style='background:#C8E6C9;color:#1B5E20;font-weight:700;
-                                 padding:3px 10px;border-radius:10px'>✅ Active</span>
+                                 padding:3px 10px;border-radius:10px'>Active</span>
                 </td>
             </tr>
         </table>
@@ -756,12 +756,12 @@ def show_profile_page():
 
         # Quick Stats Mini Dashboard
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 📊 Activity Dashboard")
+        st.markdown("### Activity Dashboard")
         if total_scans > 0:
             # Simple bar chart data
             import pandas as pd
             chart_data = {
-                "Category": ["🦠 Disease", "🐛 Pest", "🌱 Healthy"],
+                "Category": ["Disease", "Pest", "Healthy"],
                 "Count": [disease_count, pest_count, healthy_count]
             }
             df_chart = pd.DataFrame(chart_data)
@@ -769,7 +769,7 @@ def show_profile_page():
         else:
             st.markdown("""
             <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
-                <div style='font-size:2.5rem'>📊</div>
+                <div style='font-size:2.5rem'></div>
                 <p style='color:#558B2F;margin:8px 0 0'>No scan data yet.<br>
                    <small>Start detecting crop diseases to see your activity chart here.</small></p>
             </div>""", unsafe_allow_html=True)
@@ -778,18 +778,19 @@ def show_profile_page():
     with col_right:
         # Detection History
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 🕐 Detection History")
+        st.markdown("### Detection History")
 
         if not history:
             st.markdown("""
             <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
-                <div style='font-size:2.5rem'>🌾</div>
+                <div style='font-size:2.5rem'></div>
                 <p style='color:#558B2F;margin:8px 0 0'>No detections yet.<br>
                    <small>Upload a crop photo on the AI Detection tab to get started.</small></p>
             </div>""", unsafe_allow_html=True)
         else:
             for h in reversed(history[-10:]):  # Show last 10
-                icon  = "🦠" if h.get("type") == "disease" else ("🐛" if h.get("type") == "pest" else "🌱")
+                dot_color = "#C62828" if h.get("type") == "disease" else (
+                            "#EF6C00" if h.get("type") == "pest" else "#2E7D32")
                 badge_color = "#FFEBEE" if h.get("type") == "disease" else (
                               "#FFF3E0" if h.get("type") == "pest" else "#E8F5E9")
                 badge_text_color = "#C62828" if h.get("type") == "disease" else (
@@ -798,21 +799,21 @@ def show_profile_page():
                         "Pest" if h.get("type") == "pest" else "Healthy")
                 st.markdown(f"""
                 <div class='history-row'>
-                    <div class='history-icon'>{icon}</div>
+                    <div class='history-icon' style='background:{dot_color}'></div>
                     <div style='flex:1;min-width:0'>
                         <p style='margin:0;font-weight:600;color:#1B5E20;
                                   white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
                             {h.get("name","Unknown")}
                         </p>
                         <p style='margin:2px 0 0;font-size:0.78rem;color:#558B2F'>
-                            🕐 {h.get("time","—")} &nbsp;|&nbsp; 🎯 {h.get("conf",0):.1f}% confidence
+                            {h.get("time","—")} &nbsp;|&nbsp; {h.get("conf",0):.1f}% confidence
                         </p>
                     </div>
                     <span class='history-badge'
                           style='background:{badge_color};color:{badge_text_color}'>{label}</span>
                 </div>""", unsafe_allow_html=True)
 
-            if st.button("🗑️ Clear History", key="clear_hist"):
+            if st.button("Clear History", key="clear_hist"):
                 st.session_state["detection_history"] = []
                 st.rerun()
 
@@ -820,25 +821,25 @@ def show_profile_page():
 
         # AI Model Info Card
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 🤖 AI Models Used")
+        st.markdown("### AI Models Used")
         st.markdown("""
         <div style='display:flex;flex-direction:column;gap:10px'>
             <div style='background:#E8F5E9;border-radius:10px;padding:12px'>
-                <b style='color:#1B5E20'>🌾 Crop Disease Model</b>
+                <b style='color:#1B5E20'>Crop Disease Model</b>
                 <p style='margin:4px 0 0;font-size:0.82rem;color:#33691E'>
                     EfficientNet-B0 · 39 Classes · TTA ×4<br>
                     Rice, Sugarcane, Cotton, Wheat, Tomato, Potato
                 </p>
             </div>
             <div style='background:#FFF3E0;border-radius:10px;padding:12px'>
-                <b style='color:#E65100'>🐛 Pest Detection Model</b>
+                <b style='color:#E65100'>Pest Detection Model</b>
                 <p style='margin:4px 0 0;font-size:0.82rem;color:#BF360C'>
                     EfficientNet-B0 · 14 Classes · TTA ×4<br>
                     Bollworm, Aphids, Stem Borer, Whitefly, Armyworm
                 </p>
             </div>
             <div style='background:#E3F2FD;border-radius:10px;padding:12px'>
-                <b style='color:#1565C0'>🧠 AI Advisory Engine</b>
+                <b style='color:#1565C0'>AI Advisory Engine</b>
                 <p style='margin:4px 0 0;font-size:0.82rem;color:#0D47A1'>
                     Google Gemini 1.5 Flash + gTTS Voice<br>
                     Supports: Marathi, Hindi, English, Gujarati, Punjabi
@@ -850,7 +851,7 @@ def show_profile_page():
 
     # ── SIGN OUT ──
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🚪 Sign Out", type="secondary", use_container_width=False, key="profile_signout"):
+    if st.button("Sign Out", type="secondary", use_container_width=False, key="profile_signout"):
         for key in ["logged_in", "farmer_name", "farmer_phone", "farmer_district",
                     "show_profile", "detection_history"]:
             st.session_state.pop(key, None)
@@ -864,7 +865,7 @@ def show_profile_page():
 def load_disease_model():
     model_path = os.path.join(os.path.dirname(__file__), "crop_disease_model.pth")
     if not os.path.exists(model_path):
-        return None, None, "❌ Model file 'crop_disease_model.pth' not found."
+        return None, None, "Model file 'crop_disease_model.pth' not found."
     try:
         checkpoint  = torch.load(model_path, map_location=DEVICE)
         class_names = checkpoint["class_names"]
@@ -883,7 +884,7 @@ def load_disease_model():
         base.eval().to(DEVICE)
         return base, class_names, None
     except Exception as e:
-        return None, None, f"❌ Error loading disease model: {e}"
+        return None, None, f"Error loading disease model: {e}"
 
 
 @st.cache_resource(show_spinner=False)
@@ -909,7 +910,7 @@ def load_pest_model():
         base.eval().to(DEVICE)
         return base, class_names, None
     except Exception as e:
-        return None, None, f"❌ Error loading pest model: {e}"
+        return None, None, f"Error loading pest model: {e}"
 
 
 # ─────────────────────────────────────────────────────────────
@@ -971,7 +972,7 @@ def check_image_quality(pil_image: Image.Image) -> tuple[bool, str]:
     brightness = img_array.mean()
     if brightness < 40:
         return False, (
-            "⚠️ **Image too dark for accurate detection!**\n\n"
+            "**Image too dark for accurate detection!**\n\n"
             "Please retake the photo in bright daylight or good lighting. "
             "Dark images cause the AI to give wrong predictions."
         )
@@ -980,7 +981,7 @@ def check_image_quality(pil_image: Image.Image) -> tuple[bool, str]:
     laplacian_var = np.var(np.gradient(img_array.astype(float)))
     if laplacian_var < 50:
         return False, (
-            "⚠️ **Image appears blurry or out of focus!**\n\n"
+            "**Image appears blurry or out of focus!**\n\n"
             "Please hold the camera steady and retake the photo closer to the leaf/plant. "
             "Blurry images significantly reduce detection accuracy."
         )
@@ -1124,35 +1125,35 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
         CRITICAL REQUIREMENT — COMPREHENSIVE, ELABORATIVE & STEP-BY-STEP ADVISORY:
         Provide a detailed, thorough, highly elaborative advisory covering all of the following sections:
 
-        1. 🙏 **नमस्कार व कृषी मित्राचे मनोगत (GREETING & EMPATHETIC INTRODUCTION)**
+        1. **नमस्कार व कृषी मित्राचे मनोगत (GREETING & EMPATHETIC INTRODUCTION)**
            - Respectful warm greeting to the farmer.
 
-        2. 🦠 **पिकावर होणारा विघातक परिणाम (HOW THE DISEASE/PEST AFFECTS THE PLANT)**
+        2. **पिकावर होणारा विघातक परिणाम (HOW THE DISEASE/PEST AFFECTS THE PLANT)**
            - Detail plant physiological damage: leaf chlorosis, sap-sucking damage, photosynthesis blockage, stem vascular clogging, fruit/boll boring, root rot, or severe yield reduction.
 
-        3. 🌧️ **कीड / रोग येण्याची मुख्य कारणे (WHY THE PEST/DISEASE OCCURS)**
+        3. **कीड / रोग येण्याची मुख्य कारणे (WHY THE PEST/DISEASE OCCURS)**
            - Explain triggers: high atmospheric humidity (>80%), cloudy monsoon weather, excessive nitrogen/urea fertilizer use, stubble residue, temperature fluctuations, and lack of natural beneficial insects.
 
-        4. 📊 **रोगाचे / कीडीचे ३ मुख्य टप्पे (STAGES OF DISEASE / PEST INFESTATION)**
-           - Describe Early Stage (🌱 प्राथमिक टप्पा - 1-5% infestation, mild leaf spotting, easily controlled by Neem Oil).
-           - Describe Moderate Stage (🌿 मध्यम टप्पा - 10-30% infestation, active lesions & caterpillars, target chemical spray needed within 48 hours).
-           - Describe Critical/Severe Stage (🥀 गंभीर / तीव्र टप्पा - 50%+ foliage damage, wilt/rot/boring, emergency systemic spray & burning infected plants required).
+        4. **रोगाचे / कीडीचे ३ मुख्य टप्पे (STAGES OF DISEASE / PEST INFESTATION)**
+           - Describe Early Stage (प्राथमिक टप्पा - 1-5% infestation, mild leaf spotting, easily controlled by Neem Oil).
+           - Describe Moderate Stage (मध्यम टप्पा - 10-30% infestation, active lesions & caterpillars, target chemical spray needed within 48 hours).
+           - Describe Critical/Severe Stage (गंभीर / तीव्र टप्पा - 50%+ foliage damage, wilt/rot/boring, emergency systemic spray & burning infected plants required).
 
-        5. 💊 **टप्पा १: प्रभावी रसायनिक फवारणी (STEP 1: CHEMICAL SPRAY SOLUTION WITH DOSAGES)**
+        5. **टप्पा १: प्रभावी रसायनिक फवारणी (STEP 1: CHEMICAL SPRAY SOLUTION WITH DOSAGES)**
            - Recommend specific chemical pesticides/fungicides (e.g., Profenofos 50% EC, Emamectin Benzoate 5% SG, Hexaconazole 5% EC, Chlorantraniliprole 18.5% SC).
            - Provide EXACT dosage per Liter of water AND per Acre (e.g., 2 ml/Liter or 400 ml/Acre in 200 Liters water).
            - Specify best spraying time (evening/early morning) and safety gear (mask, gloves).
 
-        6. 🌿 **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (STEP 2: ORGANIC & BIOLOGICAL SOLUTIONS)**
+        6. **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (STEP 2: ORGANIC & BIOLOGICAL SOLUTIONS)**
            - Detailed recipe for 5% Neem Oil (कडुनिंब तेल - 5 ml/L), Jeevamrut (जीवामृत), or Dashparni Ark (दशपर्णी अर्क - 5 ml/L).
            - Bio-control agents (Trichoderma viride @ 5g/L for soil diseases or Beauveria bassiana for insect pests).
            - Mechanical traps: Yellow and blue sticky traps (10-15 traps/Acre) or Pheromone traps (5 traps/Acre for bollworm/borer).
 
-        7. 🛡️ **टप्पा ३: दीर्घकालीन शेत स्वच्छता व सुपीकता (STEP 3: LONG-TERM PREVENTION & FIELD HYGIENE)**
+        7. **टप्पा ३: दीर्घकालीन शेत स्वच्छता व सुपीकता (STEP 3: LONG-TERM PREVENTION & FIELD HYGIENE)**
            - Cultural practices: Removing & burning infected plant parts.
            - Soil health management, crop rotation, and subsoil drainage.
 
-        8. ☎️ **मोफत कृषी हेल्पलाइन (HELPLINE SUPPORT)**
+        8. **मोफत कृषी हेल्पलाइन (HELPLINE SUPPORT)**
            - Toll-Free Kisan Call Center: 1800-180-1551.
         """
     try:
@@ -1167,150 +1168,150 @@ def get_ai_advisory(issue_name, is_pest, lang_name, confidence):
     # Elaborative Fallback Response
     if is_healthy:
              if lang_name == "Marathi":
-                 return "🙏 **रामराम शेतकरी दादा!** 🌾\n\n✅ तुमचे पीक पूर्णपणे निरोगी आहे!..."
+                 return "**रामराम शेतकरी दादा!**\n\nतुमचे पीक पूर्णपणे निरोगी आहे!..."
              elif lang_name == "Hindi":
-                  return "🙏 **नमस्कार किसान भाई!** 🌾\n\n✅ आपकी फसल पूरी तरह स्वस्थ है!..."
+                  return "**नमस्कार किसान भाई!**\n\nआपकी फसल पूरी तरह स्वस्थ है!..."
              elif lang_name == "Gujarati":
-                  return "🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾\n\n✅ તમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n💧 **કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
+                  return "**નમસ્કાર ખેડૂત ભાઈ/બહેન!**\n\nતમારો પાક સંપૂર્ણ સ્વસ્થ અને લીલોછમ છે!\n\n**કૃષિ મિત્રની સલાહ:**\n૧. જમીનની જરૂરિયાત મુજબ સિંચાઈ કરો.\n૨. દરરોજ સવારે પાકનું નિરીક્ષણ કરો.\n૩. જીવામૃતનો ઉપયોગ કરી જમીન સુધારો."
              elif lang_name == "Punjabi":
-                  return "🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾\n\n✅ ਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n💧 **ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
+                  return "**ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!**\n\nਤੁਹਾਡੀ ਫਸਲ ਬਿਲਕੁਲ ਸਿਹਤਮੰਦ ਅਤੇ ਹਰੀਭਰੀ ਹੈ!\n\n**ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ ਦੀ ਸਲਾਹ:**\n੧. ਜ਼ਮੀਨ ਦੀ ਲੋੜ ਅਨੁਸਾਰ ਸਿੰਚਾਈ ਕਰੋ.\n੨. ਹਰ ਰੋਜ਼ ਸਵੇਰੇ ਫਸਲ ਦੀ ਜਾਂਚ ਕਰੋ.\n੩. ਜੀਵਾਮ੍ਰਿਤ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਮਿੱਟੀ ਸੁਧਾਰੋ."
              else:
-                  return "🙏 **Greetings Dear Farmer!** 🌾\n\n✅ Your crop is completely healthy and growing strong!\n\n💧 **Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
+                  return "**Greetings Dear Farmer!**\n\nYour crop is completely healthy and growing strong!\n\n**Krishi Mitra Advice:**\n1. Maintain timely irrigation.\n2. Inspect fields every morning.\n3. Apply Jeevamrut to boost soil health."
     else:
         if lang_name == "Marathi":
-            return f"""🙏 **रामराम शेतकरी दादा!** 🌾
+            return f"""**रामराम शेतकरी दादा!**
 
-🔴 **आढळलेला विकार / कीड:** **{issue_name}**
+**आढळलेला विकार / कीड:** **{issue_name}**
 
-🦠 **पिकावर होणारा विघातक परिणाम (How it Affects Plant):**
+**पिकावर होणारा विघातक परिणाम (How it Affects Plant):**
 • हा विकार किंवा कीड पानांमधील रस शोषून घेते, ज्यामुळे पानातील हरितद्रव्य (Photosynthesis) नष्ट होते.
 • झाडाची वाढ खुंटते, पाने पिवळी पडून वाळतात आणि उत्पादनात ३०% ते ५०% पर्यंत घट येऊ शकते.
 
-🌧️ **प्रादुर्भावाची मुख्य कारणे (Why it Attacks):**
+**प्रादुर्भावाची मुख्य कारणे (Why it Attacks):**
 • हवेतील वाढलेला दमटपणा, सततचे ढगाळ हवामान आणि युरियाचा (नत्र) अतिवापर यांमुळे कीड व रोगाचा प्रसार वेगाने होतो.
 
-📊 **रोगाचे / कीडीचे ३ मुख्य टप्पे (Stages of Disease / Infestation):**
-• **🌱 १. प्राथमिक टप्पा (Early Stage):** पानांवर बारीक डाग (१-५% प्रादुर्भाव). ५% कडुनिंब तेल व चिकट सापळ्यांनी सहज नियंत्रण शक्य.
-• **🌿 २. मध्यम टप्पा (Moderate Stage):** १०-३०% पानांवर डाग किंवा कीड. ४८ तासांत रसायनिक फवारणी (प्रोफेनोफॉस/इमॅमेक्टिन/हेक्झाकोनॅझोल) आवश्यक.
-• **🥀 ३. गंभीर / तीव्र टप्पा (Critical Stage):** ५०% पेक्षा जास्त पीक बाधित, पाने वाळणे, खोड सडणे. तातडीची सिस्टेमिक औषध फवारणी व बाधित भाग जाळणे आवश्यक.
+**रोगाचे / कीडीचे ३ मुख्य टप्पे (Stages of Disease / Infestation):**
+• **१. प्राथमिक टप्पा (Early Stage):** पानांवर बारीक डाग (१-५% प्रादुर्भाव). ५% कडुनिंब तेल व चिकट सापळ्यांनी सहज नियंत्रण शक्य.
+• **२. मध्यम टप्पा (Moderate Stage):** १०-३०% पानांवर डाग किंवा कीड. ४८ तासांत रसायनिक फवारणी (प्रोफेनोफॉस/इमॅमेक्टिन/हेक्झाकोनॅझोल) आवश्यक.
+• **३. गंभीर / तीव्र टप्पा (Critical Stage):** ५०% पेक्षा जास्त पीक बाधित, पाने वाळणे, खोड सडणे. तातडीची सिस्टेमिक औषध फवारणी व बाधित भाग जाळणे आवश्यक.
 
-💊 **टप्पा १: रसायनिक फवारणी उपाय (Chemical Treatment):**
+**टप्पा १: रसायनिक फवारणी उपाय (Chemical Treatment):**
 • **औषध:** प्रोफेनोफॉस ५०% EC (२ मिली प्रति लिटर पाणी) किंवा इमॅमेक्टिन बेन्झोएट ५% SG (०.५ ग्रॅम प्रति लिटर पाणी).
 • **प्रमाण:** एका एकरासाठी २०० लिटर पाण्यात ४०० मिली औषध मिसळून फवारणी करा.
 • **सुरक्षा:** फवारणी नेहमी संध्याकाळी व तोंडाला मास्क लावूनच करा.
 
-🌿 **टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (Organic Treatment):**
+**टप्पा २: सेंद्रिय व जैविक घरगुती उपाय (Organic Treatment):**
 • **कडुनिंब तेल (Neem Oil):** ५ मिली कडुनिंब तेल (1500 PPM) + १ मिली डिटर्जंट लिक्विड प्रति लिटर पाण्यात मिसळून फवारा.
 • **दशपर्णी अर्क:** ५ मिली दशपर्णी अर्क प्रति लिटर पाण्यात मिसळून फवारल्यास कीड पळून जाते.
 • **चिकट सापळे:** कीडींच्या नियंत्रणासाठी शेतात एकरी १०-१२ पिवळे व निळे चिकट सापळे (Sticky Traps) लावा.
 
-🛡️ **टप्पा ३: दीर्घकालीन शेत स्वच्छता व बचाव:**
+**टप्पा ३: दीर्घकालीन शेत स्वच्छता व बचाव:**
 • बाधित पाने व झाडांचे अवशेष तात्काळ गोळा करून नष्ट करा.
 • पिकांची आलटून-पालटून (Crop Rotation) लागवड करा.
 
-☎️ **मोफत कृषी हेल्पलाइन:** 1800-180-1551 (कृषी सल्ला केंद्र)"""
+**मोफत कृषी हेल्पलाइन:** 1800-180-1551 (कृषी सल्ला केंद्र)"""
         elif lang_name == "Hindi":
-            return f"""🙏 **नमस्कार किसान भाई!** 🌾
+            return f"""**नमस्कार किसान भाई!**
 
-🔴 **पहचाना गया रोग / कीट:** **{issue_name}**
+**पहचाना गया रोग / कीट:** **{issue_name}**
 
-🦠 **फसल पर प्रभाव (How it Affects Plant):**
+**फसल पर प्रभाव (How it Affects Plant):**
 • यह कीट या रोग पत्तियों का रस चूसता है, जिससे प्रकाश संश्लेषण (Photosynthesis) बाधित होता है और पत्तियां पीली पड़कर सूख जाती हैं।
 
-🌧️ **प्रकोप का कारण (Why it Attacks):**
+**प्रकोप का कारण (Why it Attacks):**
 • मौसम में अत्यधिक नमी, बादल छाए रहना और नाइट्रोजन (यूरिया) का अत्यधिक उपयोग कीटों के पनपने का मुख्य कारण है।
 
-📊 **बीमारी / कीट प्रकोप के 3 चरण (Stages of Disease / Infestation):**
-• **🌱 1. प्रारंभिक चरण (Early Stage):** पत्तियों पर छोटे धब्बे (1-5% प्रभाव)। 5% नीम तेल एवं स्टिकी ट्रैप से नियंत्रण संभव।
-• **🌿 2. मध्यम चरण (Moderate Stage):** 10-30% प्रभाव। 48 घंटे के भीतर रसायनिक छिड़काव आवश्यक।
-• **🥀 3. गंभीर चरण (Critical Stage):** 50%+ फसल प्रभावित, पत्तियां सूखना व सड़ना। तुरंत आपातकालीन सिस्टमिक स्प्रे व रोगग्रस्त पौधों को जलाना आवश्यक.
+**बीमारी / कीट प्रकोप के 3 चरण (Stages of Disease / Infestation):**
+• **1. प्रारंभिक चरण (Early Stage):** पत्तियों पर छोटे धब्बे (1-5% प्रभाव)। 5% नीम तेल एवं स्टिकी ट्रैप से नियंत्रण संभव।
+• **2. मध्यम चरण (Moderate Stage):** 10-30% प्रभाव। 48 घंटे के भीतर रसायनिक छिड़काव आवश्यक।
+• **3. गंभीर चरण (Critical Stage):** 50%+ फसल प्रभावित, पत्तियां सूखना व सड़ना। तुरंत आपातकालीन सिस्टमिक स्प्रे व रोगग्रस्त पौधों को जलाना आवश्यक.
 
-💊 **चरण 1: रासायनिक छिड़काव (Chemical Treatment):**
+**चरण 1: रासायनिक छिड़काव (Chemical Treatment):**
 • **दवा:** प्रोफेनोफॉस 50% EC (2 मिली प्रति लीटर पानी) या इमामेक्टिन बेंजोएट (0.5 ग्राम/लीटर)।
 • **मात्रा:** 1 एकड़ के लिए 200 लीटर पानी में 400 मिली दवा मिलाकर छिड़काव करें।
 • **सावधानी:** शाम के समय सुरक्षा मास्क पहनकर छिड़काव करें।
 
-🌿 **चरण 2: जैविक एवं देसी उपाय (Organic Treatment):**
+**चरण 2: जैविक एवं देसी उपाय (Organic Treatment):**
 • **नीम तेल (Neem Oil):** 5 मिली नीम तेल प्रति लीटर पानी में मिलाकर स्प्रे करें।
 • **दशपर्णी अर्क:** 5 मिली दशपर्णी अर्क का स्प्रे करें।
 • **स्टिकी ट्रैप:** खेत में प्रति एकड़ 10-12 पीले व नीले स्टिकी ट्रैप लगाएं।
 
-🛡️ **चरण 3: दीर्घकालिक बचाव:**
+**चरण 3: दीर्घकालिक बचाव:**
 • प्रभावित पत्तियों को खेत से बाहर नष्ट करें।
 
-☎️ **हेल्पलाइन:** 1800-180-1551"""
-        elif lang_name == "Gujarati":        # ← ADD FROM HERE
-            return f"""🙏 **નમસ્કાર ખેડૂત ભાઈ/બહેન!** 🌾
+**हेल्पलाइन:** 1800-180-1551"""
+        elif lang_name == "Gujarati":        # ADD FROM HERE
+            return f"""**નમસ્કાર ખેડૂત ભાઈ/બહેન!**
 
-🔴 **શોધાયેલ રોગ / જીવાત:** **{issue_name}**
+**શોધાયેલ રોગ / જીવાત:** **{issue_name}**
 
-🦠 **પાક પર અસર:**
+**પાક પર અસર:**
 - આ રોગ અથવા જીવાત પાંદડાનો રસ ચૂસે છે, જેથી પ્રકાશ-સંશ્લેષણ અટકે છે અને ઉત્પાદન ૩૦-૫૦% ઘટે છે.
 
-🌧️ **ઉત્પત્તિનાં કારણો:**
+**ઉત્પત્તિનાં કારણો:**
 - ભેજ, વાદળછાયું હવામાન અને વધુ પડતા નાઇટ્રોજનનો ઉપયોગ.
 
-💊 **રાસાયણિક સ્પ્રે:**
+**રાસાયણિક સ્પ્રે:**
 - પ્રોફેનોફોસ ૫૦% EC (૨ ml/લિટર) અથવા ઇમામેક્ટિન (૦.૫ ગ્રામ/લિટર).
 - સાંજે માસ્ક પહેરીને છંટકાવ કરો.
 
-🌿 **જૈવિક ઉપાય:**
+**જૈવિક ઉપાય:**
 - લીમડાનું તેલ ૫ ml/લિટર અથવા દશપર્ણી અર્ક ૫ ml/લિટર.
 - ચીકણા પીળા-વાદળી ટ્રેપ એકર દીઠ ૧૦-૧૨ લગાવો.
 
-☎️ **હેલ્પલાઇન:** 1800-180-1551"""
+**હેલ્પલાઇન:** 1800-180-1551"""
 
         elif lang_name == "Punjabi":
-            return f"""🙏 **ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!** 🌾
+            return f"""**ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਕਿਸਾਨ ਭਰਾ/ਭੈਣ!**
 
-🔴 **ਪਛਾਣਿਆ ਗਿਆ ਰੋਗ / ਕੀਟ:** **{issue_name}**
+**ਪਛਾਣਿਆ ਗਿਆ ਰੋਗ / ਕੀਟ:** **{issue_name}**
 
-🦠 **ਫਸਲ ਉੱਤੇ ਅਸਰ:**
+**ਫਸਲ ਉੱਤੇ ਅਸਰ:**
 - ਇਹ ਰੋਗ ਪੱਤਿਆਂ ਦਾ ਰਸ ਚੂਸਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਝਾੜ ੩੦-੫੦% ਘੱਟਦਾ ਹੈ.
 
-🌧️ **ਕਾਰਨ:**
+**ਕਾਰਨ:**
 - ਵੱਧ ਨਮੀ, ਬੱਦਲਵਾਈ ਮੌਸਮ ਅਤੇ ਜ਼ਿਆਦਾ ਯੂਰੀਆ ਦੀ ਵਰਤੋਂ.
 
-💊 **ਰਸਾਇਣਕ ਸਪ੍ਰੇ:**
+**ਰਸਾਇਣਕ ਸਪ੍ਰੇ:**
 - ਪ੍ਰੋਫੇਨੋਫੋਸ ੫੦% EC (੨ ml/ਲਿਟਰ) ਜਾਂ ਇਮਾਮੇਕਟਿਨ (੦.੫ ਗ੍ਰਾਮ/ਲਿਟਰ).
 - ਸ਼ਾਮ ਨੂੰ ਮਾਸਕ ਪਾ ਕੇ ਸਪ੍ਰੇ ਕਰੋ.
 
-🌿 **ਜੈਵਿਕ ਉਪਾਅ:**
+**ਜੈਵਿਕ ਉਪਾਅ:**
 - ਨਿੰਮ ਤੇਲ ੫ ml/ਲਿਟਰ ਜਾਂ ਦਸ਼ਪਰਣੀ ਅਰਕ ੫ ml/ਲਿਟਰ.
 - ਪੀਲੇ-ਨੀਲੇ ਸਟਿੱਕੀ ਟਰੈਪ ਏਕੜ ਪਿੱਛੇ ੧੦-੧੨ ਲਗਾਓ.
 
-☎️ **ਹੈਲਪਲਾਈਨ:** 1800-180-1551"""
+**ਹੈਲਪਲਾਈਨ:** 1800-180-1551"""
             
         else:
-            return f"""🙏 **Hello Dear Farmer!** 🌾
+            return f"""**Hello Dear Farmer!**
 
-🔴 **Detected Issue:** **{issue_name}**
+**Detected Issue:** **{issue_name}**
 
-🦠 **How it Affects the Crop:**
+**How it Affects the Crop:**
 • This pest/disease disrupts photosynthesis, causes chlorosis, saps leaf nutrients, and clogs stem vascular tissues, leading to potential 30-50% yield loss.
 
-🌧️ **Why it Occurs (Triggers):**
+**Why it Occurs (Triggers):**
 • High relative atmospheric humidity (>80%), prolonged cloudy weather, and excessive nitrogenous fertilizer application create favorable conditions for pest outbreaks.
 
-📊 **3 Stages of Disease / Infestation:**
-• **🌱 1. Early Stage (1-5% Damage):** Mild leaf spotting or initial egg clusters. Easily controlled with 5% Neem Oil spray & sticky traps.
-• **🌿 2. Moderate Stage (10-30% Damage):** Active lesions & caterpillar feeding. Requires targeted chemical spray (Profenofos / Emamectin) within 48 hours.
-• **🥀 3. Critical Stage (50%+ Damage):** Severe defoliation, stem rot, or boll boring. Requires emergency systemic sprays and destruction of infected plant debris.
+**3 Stages of Disease / Infestation:**
+• **1. Early Stage (1-5% Damage):** Mild leaf spotting or initial egg clusters. Easily controlled with 5% Neem Oil spray & sticky traps.
+• **2. Moderate Stage (10-30% Damage):** Active lesions & caterpillar feeding. Requires targeted chemical spray (Profenofos / Emamectin) within 48 hours.
+• **3. Critical Stage (50%+ Damage):** Severe defoliation, stem rot, or boll boring. Requires emergency systemic sprays and destruction of infected plant debris.
 
-💊 **Step 1: Chemical Spray Treatment:**
+**Step 1: Chemical Spray Treatment:**
 • **Recommended Pesticide:** Spray Profenofos 50% EC (2 ml / Liter of water) or Emamectin Benzoate 5% SG (0.5g / Liter).
 • **Dosage:** 400 ml in 200 Liters of water per Acre.
 • **Safety:** Always spray in the late afternoon wearing protective gloves and face mask.
 
-🌿 **Step 2: Organic & Biological Control:**
+**Step 2: Organic & Biological Control:**
 • **Neem Oil Spray:** Mix 5 ml Neem Oil (1500 PPM) + 1 ml liquid soap per Liter of water and spray thoroughly.
 • **Dashparni Ark:** Spray 5 ml Dashparni Ark per Liter of water.
 • **Traps:** Install 10-12 Yellow and Blue Sticky Traps per Acre.
 
-🛡️ **Step 3: Field Management & Prevention:**
+**Step 3: Field Management & Prevention:**
 • Collect and burn infected crop residues to eliminate spore inoculum.
 
-☎️ **Toll-Free Kisan Helpline:** 1800-180-1551"""
+**Toll-Free Kisan Helpline:** 1800-180-1551"""
 
 
 # ─────────────────────────────────────────────────────────────
@@ -1330,30 +1331,30 @@ with st.sidebar:
         </span>
     </div>
     <div style='background:#F1F8E9;border-radius:10px;padding:10px 14px;margin-bottom:12px;border:1px solid #C8E6C9'>
-        <small>👤 <b>{farmer_name_display}</b><br>📍 {farmer_dist_display}</small>
+        <small><b>{farmer_name_display}</b><br>{farmer_dist_display}</small>
     </div>
     """, unsafe_allow_html=True)
 
     lang_code = st.session_state.get("app_lang", "mr")
     lang_name = st.session_state.get("lang_name", "Marathi")
 
-    enable_voice = st.toggle("🔊 Voice Output / आवाज उत्तर", value=True)
+    enable_voice = st.toggle("Voice Output / आवाज उत्तर", value=True)
 
     st.markdown("---")
-    st.markdown("### 📊 AI Model Directory")
+    st.markdown("### AI Model Directory")
     st.markdown("""
     <div class='contact-card'><small>
-    🌾 <b>Crop Diseases:</b> 39 Classes (Rice, Sugarcane, Cotton, Wheat, Tomato, Potato)<br>
-    🐛 <b>Crop Pests:</b> 14 Classes (Bollworm, Stem Borer, Aphids, Whitefly, Armyworm, etc.)<br>
-    🤖 <b>AI Advisory:</b> Gemini AI + gTTS Voice Output<br>
-    🎯 <b>Accuracy:</b> Test-Time Augmentation (TTA ×4)
+    <b>Crop Diseases:</b> 39 Classes (Rice, Sugarcane, Cotton, Wheat, Tomato, Potato)<br>
+    <b>Crop Pests:</b> 14 Classes (Bollworm, Stem Borer, Aphids, Whitefly, Armyworm, etc.)<br>
+    <b>AI Advisory:</b> Gemini AI + gTTS Voice Output<br>
+    <b>Accuracy:</b> Test-Time Augmentation (TTA ×4)
     </small></div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <div style='background:#FFF3E0;border-left:4px solid #FF9800;padding:10px;border-radius:6px'>
-    <small><b>🚨 Emergency Agri Helpline:</b><br>
-    📞 Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
+    <small><b>Emergency Agri Helpline:</b><br>
+    Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
     </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -1380,13 +1381,13 @@ with header_col:
     st.markdown("""
     <div class='figma-header'>
         <div style='flex: 1; min-width: 0;'>
-            <h1 class='figma-header-title'>🌾 MahaKrishi AI | महाकृषि</h1>
+            <h1 class='figma-header-title'>MahaKrishi AI | महाकृषि</h1>
             <p class='figma-header-sub'>
                 AI Crop Disease &amp; Pest Detection | Chemical &amp; Organic Remedies | Specialist Helplines &amp; Govt Schemes
             </p>
         </div>
         <div style='flex-shrink: 0;'>
-            <span class='figma-badge'>🟢 System Active | महाराष्ट्र शासन</span>
+            <span class='figma-badge'>System Active | महाराष्ट्र शासन</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1410,7 +1411,8 @@ with profile_col:
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
 # ─────────────────────────────────────────────────────────────
-tab_detect, tab_chat, tab_contacts, tab_map, tab_schemes = st.tabs([
+tab_home, tab_detect, tab_chat, tab_contacts, tab_map, tab_schemes = st.tabs([
+    "Dashboard",
     _t("tab_detect"),
     _t("tab_chat"),
     _t("tab_contacts"),
@@ -1419,14 +1421,94 @@ tab_detect, tab_chat, tab_contacts, tab_map, tab_schemes = st.tabs([
 ])
 
 # ─────────────────────────────────────────────────────────────
+# TAB 0: HOME / 3D DASHBOARD
+# ─────────────────────────────────────────────────────────────
+with tab_home:
+    st.markdown("""
+    <style>
+    .dashboard-hero {
+        background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+        border-radius: 8px; padding: 48px 32px; margin-bottom: 32px;
+        color: white; text-align: center;
+    }
+    .dashboard-hero h2 { font-size: 2rem; margin: 0 0 12px; }
+    .dashboard-hero p { font-size: 1.05rem; margin: 0; line-height: 1.6; max-width: 600px; }
+    .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .stat-card { background: rgba(255,255,255,0.08); border-radius: 6px; padding: 24px; border: 1px solid rgba(255,255,255,0.12); }
+    .stat-num { font-size: 2rem; font-weight: 600; color: #E7C878; }
+    .stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.72); margin-top: 8px; line-height: 1.4; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
+    .feature-card { background: white; border-radius: 8px; padding: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .feature-card h3 { color: #1B5E20; margin: 0 0 12px; font-size: 1.25rem; }
+    .feature-card p { color: #558B2F; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    @media (max-width:900px){ .stat-row { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+    <div class="dashboard-hero">
+        <h2>Welcome to MahaKrishi AI</h2>
+        <p>Point a camera at a crop leaf. Get a diagnosis in seconds. Learn the fix in your language — Marathi, Hindi, Gujarati, Punjabi or English.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric(label="Disease Classes", value="39", delta=None)
+    with col2:
+        st.metric(label="Pest Classes", value="14", delta=None)
+    with col3:
+        st.metric(label="Languages", value="5", delta=None)
+    with col4:
+        st.metric(label="Districts", value="21", delta=None)
+    
+    st.markdown("---")
+    st.markdown("#### Quick Links", unsafe_allow_html=True)
+    
+    col_feat1, col_feat2, col_feat3 = st.columns(3)
+    with col_feat1:
+        st.markdown("""
+        <div class="feature-card">
+            <h3>Diagnosis</h3>
+            <p>Upload a leaf photo and our EfficientNet model identifies diseases, pests or healthy status with confidence scores.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Go to Detection", key="home_detect"):
+            st.session_state["home_go_detect"] = True
+            st.rerun()
+    
+    with col_feat2:
+        st.markdown("""
+        <div class="feature-card">
+            <h3>Treatment</h3>
+            <p>Get personalized remedies in chemical or organic paths, with voice-guided explanations and expert advice.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Open Chatbot", key="home_chat"):
+            st.session_state["home_go_chat"] = True
+            st.rerun()
+    
+    with col_feat3:
+        st.markdown("""
+        <div class="feature-card">
+            <h3>Alerts</h3>
+            <p>Watch live outbreak maps and get SMS alerts when disease or pest pressure emerges in your district.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("View Map", key="home_map"):
+            st.session_state["home_go_map"] = True
+            st.rerun()
+    
+    st.markdown("---")
+    st.markdown("#### System Status", unsafe_allow_html=True)
+    st.info("System Active | महाराष्ट्र शासन | EfficientNet-B0 Model with TTA | 5 Languages | Live District Alerts")
+
+# ─────────────────────────────────────────────────────────────
 # TAB 1: AI DISEASE & PEST DETECTION
 # ─────────────────────────────────────────────────────────────
 with tab_detect:
     col_mode, _ = st.columns([2, 1])
     with col_mode:
         model_mode = st.radio(
-            "🎯 Select AI Target Mode / काय ओळखायचे आहे?",
-            ["🌾 Crop Disease Detection (पिकांचे रोग)", "🐛 Pest Identification (कीड ओळख)"],
+            "Select AI Target Mode / काय ओळखायचे आहे?",
+            ["Crop Disease Detection (पिकांचे रोग)", "Pest Identification (कीड ओळख)"],
             horizontal=True
         )
 
@@ -1434,19 +1516,19 @@ with tab_detect:
 
     with col_img:
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 📷 Upload Crop / Pest Photo")
+        st.markdown("### Upload Crop / Pest Photo")
         uploaded = st.file_uploader("Choose leaf or pest photo...", type=["jpg","jpeg","png","bmp","webp"],
                                     label_visibility="collapsed")
 
         if uploaded:
             pil_image = Image.open(uploaded).convert("RGB")
-            st.image(pil_image, caption="📸 Uploaded Image", use_container_width=True)
-            analyze_btn = st.button("🔍 Analyze with AI | निदान करा", type="primary", use_container_width=True)
+            st.image(pil_image, caption="Uploaded Image", use_container_width=True)
+            analyze_btn = st.button("Analyze with AI | निदान करा", type="primary", use_container_width=True)
         else:
             st.markdown("""
             <div style='background:#F9FBE7;border:2px dashed #8BC34A;border-radius:14px;
                         padding:40px;text-align:center'>
-                <div style='font-size:3rem'>📸</div>
+                <div style='font-size:3rem'></div>
                 <p style='color:#33691E;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
                 <small style='color:#558B2F'>Supports JPG, PNG, WEBP</small>
             </div>""", unsafe_allow_html=True)
@@ -1455,12 +1537,12 @@ with tab_detect:
 
     with col_res:
         st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-        st.markdown("### 🧠 AI Diagnosis & Advisory")
+        st.markdown("### AI Diagnosis & Advisory")
 
         if not uploaded:
             st.markdown("""
             <div style='background:#E8F5E9;border-radius:12px;padding:30px;text-align:center'>
-                <div style='font-size:2.5rem'>🌱</div>
+                <div style='font-size:2.5rem'></div>
                 <h4 style='color:#1B5E20;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
                 <p style='color:#2E7D32;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
             </div>""", unsafe_allow_html=True)
@@ -1469,12 +1551,12 @@ with tab_detect:
             is_pest_mode = "Pest" in model_mode
 
             # ── IMAGE QUALITY CHECK FIRST ──
-            with st.spinner("🔎 Checking image quality..."):
+            with st.spinner("Checking image quality..."):
                 quality_ok, quality_msg = check_image_quality(pil_image)
 
             if not quality_ok:
                 st.warning(quality_msg)
-                st.info("💡 **Tip:** Take photo in bright natural light, hold camera steady, and ensure the leaf fills most of the frame.")
+                st.info("**Tip:** Take photo in bright natural light, hold camera steady, and ensure the leaf fills most of the frame.")
             else:
                 with st.spinner("⏳ Loading AI model & analyzing features (TTA ×4)..."):
                     if is_pest_mode:
@@ -1495,17 +1577,17 @@ with tab_detect:
                     if conf < CONF_THRESHOLD_LOW:
                         st.markdown(f"""
                         <div class='alert-box'>
-                            <span class='badge-low-conf'>⚠️ Low Confidence Detection</span>
+                            <span class='badge-low-conf'>Low Confidence Detection</span>
                             <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
                             <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                             <p style='margin:6px 0 0;font-size:0.88rem;color:#6D4C41'>
-                            📌 <b>Suggestions:</b> Retake the photo in bright natural light, ensure leaf fills the frame, 
+                            <b>Suggestions:</b> Retake the photo in bright natural light, ensure leaf fills the frame, 
                             avoid shadows, and make sure the image is sharp/in-focus.
                             </p>
                         </div>""", unsafe_allow_html=True)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
-                        status_txt = "Healthy Crop! 🎉" if healthy else ("Pest Detected! 🐛" if is_pest_mode else "Disease Detected! 🔴")
+                        status_txt = "Healthy Crop!" if healthy else ("Pest Detected!" if is_pest_mode else "Disease Detected!")
 
                         st.markdown(f"""
                         <div style='background:#FAFAFA;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #E0E0E0'>
@@ -1515,9 +1597,10 @@ with tab_detect:
                         </div>""", unsafe_allow_html=True)
                         st.progress(conf / 100)
 
-                        with st.expander("📊 Probable AI Top 3 Matches"):
+                        with st.expander("Probable AI Top 3 Matches"):
+                            rank_labels = ["1st", "2nd", "3rd"]
                             for i, r in enumerate(results):
-                                st.markdown(f"{'🥇🥈🥉'[i]} **{r['name']}** — `{r['confidence']:.1f}%`")
+                                st.markdown(f"{rank_labels[i]} — **{r['name']}** — `{r['confidence']:.1f}%`")
                                 st.progress(r["confidence"] / 100)
 
                         # ── ALERT NEARBY FARMERS (only for disease/pest, conf >= threshold) ──
@@ -1531,7 +1614,7 @@ with tab_detect:
 
                             st.markdown(f"""
                             <div class='alert-box'>
-                                <b>🚨 {name} detected in {farmer_district} district!</b><br>
+                                <b>{name} detected in {farmer_district} district!</b><br>
                                 <small>There are <b>{nearby_count}</b> registered farmers in your district 
                                 who could be at risk. Alert them instantly.</small>
                             </div>""", unsafe_allow_html=True)
@@ -1542,7 +1625,7 @@ with tab_detect:
 
                             if not st.session_state[alert_key]:
                                 if st.button(
-                                    f"🚨 Alert {nearby_count} Farmers in {farmer_district} | शेतकऱ्यांना अलर्ट पाठवा",
+                                    f"Alert {nearby_count} Farmers in {farmer_district} | शेतकऱ्यांना अलर्ट पाठवा",
                                     type="primary",
                                     use_container_width=True,
                                     key=f"btn_alert_{alert_key}"
@@ -1560,7 +1643,7 @@ with tab_detect:
                                     st.rerun()
                             else:
                                 st.success(
-                                    f"✅ Alert successfully sent to **{nearby_count}** registered farmers "
+                                    f"Alert successfully sent to **{nearby_count}** registered farmers "
                                     f"in **{farmer_district}** district! "
                                     f"Disease alert for **{name}** recorded in system."
                                 )
@@ -1582,7 +1665,7 @@ with tab_detect:
                             st.session_state["detection_history"].append(history_entry)
 
                         # Generate AI Advisory
-                        with st.spinner(f"💬 Generating {lang_name} advisory & remedies..."):
+                        with st.spinner(f"Generating {lang_name} advisory & remedies..."):
                             ai_resp = get_ai_advisory(name, is_pest_mode, lang_name, conf)
 
                             audio_bytes = None
@@ -1595,7 +1678,7 @@ with tab_detect:
                             st.markdown(f"<div class='chat-box'>{ai_resp.replace(chr(10),'<br>')}</div>", unsafe_allow_html=True)
 
                             if enable_voice and audio_bytes:
-                                st.markdown("#### 🔊 Marathi/Hindi Voice Advisory (आवाज उत्तर)")
+                                st.markdown("#### Marathi/Hindi Voice Advisory (आवाज उत्तर)")
                                 st.audio(audio_bytes, format="audio/mp3")
 
         st.markdown("</div>", unsafe_allow_html=True)
@@ -1606,14 +1689,14 @@ with tab_detect:
 # ─────────────────────────────────────────────────────────────
 with tab_chat:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### 🤖 Krishi AI Specialist Chatbot / कृषी उपचार चॅटबॉट")
+    st.markdown("### Krishi AI Specialist Chatbot / कृषी उपचार चॅटबॉट")
     st.markdown(" Ask any crop disease, pest issue, or treatment query. Get **Chemical (रसायनिक)** and **Organic (जैविक)** solutions instantly!")
 
     # Preset quick chips (Dynamic Language)
-    st.markdown("#### 💡 Quick Questions / जलद प्रश्न / शीघ्र प्रश्न:")
+    st.markdown("#### Quick Questions / जलद प्रश्न / शीघ्र प्रश्न:")
     c1, c2, c3, c4 = st.columns(4)
     quick_q = None
-    if c1.button("🌾 Rice Stem Borer Spray?", use_container_width=True):
+    if c1.button("Rice Stem Borer Spray?", use_container_width=True):
         if lang_name == "English":
             quick_q = "What is the chemical and organic treatment for Rice Stem Borer?"
         elif lang_name == "Hindi":
@@ -1621,7 +1704,7 @@ with tab_chat:
         else:
             quick_q = "धान्य / तांदूळ पिकावरील खोड कीडीसाठी रसायनिक आणि सेंद्रिय उपाय सांगा."
 
-    if c2.button("🌿 Organic Control for Aphids?", use_container_width=True):
+    if c2.button("Organic Control for Aphids?", use_container_width=True):
         if lang_name == "English":
             quick_q = "How to prepare organic pesticide and Neem oil for Aphids control?"
         elif lang_name == "Hindi":
@@ -1629,7 +1712,7 @@ with tab_chat:
         else:
             quick_q = "मावा (Aphids) साठी जैविक आणि सेंद्रिय औषध कसे तयार करावे?"
 
-    if c3.button("🎋 Sugarcane Red Rot Remedy?", use_container_width=True):
+    if c3.button("Sugarcane Red Rot Remedy?", use_container_width=True):
         if lang_name == "English":
             quick_q = "What chemical spray and organic remedy is recommended for Sugarcane Red Rot?"
         elif lang_name == "Hindi":
@@ -1637,7 +1720,7 @@ with tab_chat:
         else:
             quick_q = "उसावरील तांबेरा व तांबड्या रोगासाठी कोणते औषध फवारावे?"
 
-    if c4.button("🌸 Cotton Pink Bollworm Spray?", use_container_width=True):
+    if c4.button("Cotton Pink Bollworm Spray?", use_container_width=True):
         if lang_name == "English":
             quick_q = "Tell effective chemical and bio-control remedies for Cotton Pink Bollworm."
         elif lang_name == "Hindi":
@@ -1687,9 +1770,9 @@ with tab_chat:
 
             Greet the farmer warmly with respect (e.g. 'रामराम शेतकरी दादा / ताई!' in Marathi, 'नमस्कार किसान भाई!' in Hindi, 'Greetings dear farmer!' in English).
             Introduce yourself as Krishi Mitra (कृषी मित्र) and state in 3 simple points how you can guide them:
-            1. 🌾 Crop Disease & Pest Diagnosis (पिकांचे रोग व कीड निदान)
-            2. 💊 Chemical Spray & 🌿 Organic Remedies (फवारणी व सेंद्रिय घरगुती उपाय)
-            3. 🏛️ Government Schemes & Helplines (शासकीय योजना व हेल्पलाइन)
+            1. Crop Disease & Pest Diagnosis (पिकांचे रोग व कीड निदान)
+            2. Chemical Spray & Organic Remedies (फवारणी व सेंद्रिय घरगुती उपाय)
+            3. Government Schemes & Helplines (शासकीय योजना व हेल्पलाइन)
 
             Invite them warmly to ask any crop or farming query! Max 100 words.
             """
@@ -1716,10 +1799,10 @@ with tab_chat:
             1. Speak like a caring, experienced human agricultural expert (empathetic, respectful, practical).
             2. TYPO AUTO-CORRECTION: If there are typos in crop or pest names (e.g. 'sugrcan', 'pnik bolworm', 'tomto'), auto-correct them naturally and answer for the intended crop.
             3. CROP ADVISORY: For disease or pest questions, provide structured solutions:
-               🔴 ओळख व कारण / Identified Issue & Cause: [Simple human explanation]
-               💊 रसायनिक फवारणी (Chemical Spray): [Recommended spray name, exact dosage per Liter/Acre, best spraying time & safety mask]
-               🌿 सेंद्रिय व जैविक उपचार (Organic Remedy): [Neem oil / Jeevamrut / Dashparni Ark / Sticky traps recipe & dosage]
-               🛡️ शेतकरी मित्रासाठी विशेष सल्ला (Expert Human Advice): [Field management & encouragement]
+               ओळख व कारण / Identified Issue & Cause: [Simple human explanation]
+               रसायनिक फवारणी (Chemical Spray): [Recommended spray name, exact dosage per Liter/Acre, best spraying time & safety mask]
+               सेंद्रिय व जैविक उपचार (Organic Remedy): [Neem oil / Jeevamrut / Dashparni Ark / Sticky traps recipe & dosage]
+               शेतकरी मित्रासाठी विशेष सल्ला (Expert Human Advice): [Field management & encouragement]
             Keep simple, practical, and compassionate. Max 250 words.
             """
 
@@ -1731,62 +1814,62 @@ with tab_chat:
             else:
                 if is_gibberish:
                     if lang_name == "Marathi":
-                        bot_ans = "🙏 **मला आपला संदेश स्पष्टपणे समजला नाही.**\n\nकृपया आपले पीक, रोग किंवा शेतीविषयीचा प्रश्न औपचारिक व स्पष्टपणे सांगावा ही नम्र विनंती. उदा. *'उसावरील तांबेरा रोगासाठी उपाय काय?'*"
+                        bot_ans = "**मला आपला संदेश स्पष्टपणे समजला नाही.**\n\nकृपया आपले पीक, रोग किंवा शेतीविषयीचा प्रश्न औपचारिक व स्पष्टपणे सांगावा ही नम्र विनंती. उदा. *'उसावरील तांबेरा रोगासाठी उपाय काय?'*"
                     elif lang_name == "Hindi":
-                        bot_ans = "🙏 **मुझे आपका संदेश स्पष्ट रूप से समझ नहीं आया।**\n\nकृपया अपनी फसल, बीमारी या खेती से जुड़ा प्रश्न स्पष्ट रूप से लिखें। जैसे: *'धान के खोड कीट का उपचार क्या है?'*"
+                        bot_ans = "**मुझे आपका संदेश स्पष्ट रूप से समझ नहीं आया।**\n\nकृपया अपनी फसल, बीमारी या खेती से जुड़ा प्रश्न स्पष्ट रूप से लिखें। जैसे: *'धान के खोड कीट का उपचार क्या है?'*"
                     else:
-                        bot_ans = "🙏 **I could not understand your message.**\n\nCould you please state your crop, disease, or farming question more clearly in a formal manner?"
+                        bot_ans = "**I could not understand your message.**\n\nCould you please state your crop, disease, or farming question more clearly in a formal manner?"
                 elif is_greeting:
                     if lang_name == "Marathi":
-                        bot_ans = "🙏 **नमस्कार! मी महाकृषि AI सहाय्यक आहे.** 🌾\n\nमी तुम्हाला शेतीविषयक खालील बाबतीत मदत करू शकतो:\n\n• 🌾 **पिकांचे रोग व कीड ओळख** (Crop Disease & Pest Diagnosis)\n• 💊 **रसायनिक फवारणी व 🌿 सेंद्रिय उपाय** (Chemical & Organic Spray Remedies)\n• 🏛️ **शासकीय कृषी योजना व तज्ज्ञ हेल्पलाइन** (Govt Schemes & Helplines)\n\nतुमच्या पिकाची समस्या किंवा प्रश्न खाली विचारा!"
+                        bot_ans = "**नमस्कार! मी महाकृषि AI सहाय्यक आहे.**\n\nमी तुम्हाला शेतीविषयक खालील बाबतीत मदत करू शकतो:\n\n• **पिकांचे रोग व कीड ओळख** (Crop Disease & Pest Diagnosis)\n• **रसायनिक फवारणी व सेंद्रिय उपाय** (Chemical & Organic Spray Remedies)\n• **शासकीय कृषी योजना व तज्ज्ञ हेल्पलाइन** (Govt Schemes & Helplines)\n\nतुमच्या पिकाची समस्या किंवा प्रश्न खाली विचारा!"
                     elif lang_name == "Hindi":
-                        bot_ans = "🙏 **नमस्ते! मैं महाकृषि AI सहायक हूँ।** 🌾\n\nमैं आपकी खेती में निम्नलिखित सहायता कर सकता हूँ:\n\n• 🌾 **फसलों के रोग एवं कीट पहचान**\n• 💊 **रासायनिक छिड़काव एवं 🌿 जैविक उपचार**\n• 🏛️ **सरकारी कृषि योजनाएं एवं हेल्पलाइन**\n\nकृपया अपनी फसल का प्रश्न नीचे लिखें!"
+                        bot_ans = "**नमस्ते! मैं महाकृषि AI सहायक हूँ।**\n\nमैं आपकी खेती में निम्नलिखित सहायता कर सकता हूँ:\n\n• **फसलों के रोग एवं कीट पहचान**\n• **रासायनिक छिड़काव एवं जैविक उपचार**\n• **सरकारी कृषि योजनाएं एवं हेल्पलाइन**\n\nकृपया अपनी फसल का प्रश्न नीचे लिखें!"
                     else:
-                        bot_ans = "🙏 **Hello! I am MahaKrishi AI Assistant.** 🌾\n\nI can assist you with:\n\n• 🌾 **Crop Disease & Pest Diagnosis**\n• 💊 **Chemical Spray & 🌿 Organic Remedies**\n• 🏛️ **Government Schemes & Helplines**\n\nPlease ask any crop question or problem below!"
+                        bot_ans = "**Hello! I am MahaKrishi AI Assistant.**\n\nI can assist you with:\n\n• **Crop Disease & Pest Diagnosis**\n• **Chemical Spray & Organic Remedies**\n• **Government Schemes & Helplines**\n\nPlease ask any crop question or problem below!"
                 elif not is_agri_related:
                     if lang_name == "Marathi":
-                        bot_ans = "❓ **कृपया तुमचे पीक, रोग किंवा कीड कोणती आहे ते सांगू शकाल का?**"
+                        bot_ans = "**कृपया तुमचे पीक, रोग किंवा कीड कोणती आहे ते सांगू शकाल का?**"
                     elif lang_name == "Hindi":
-                        bot_ans = "❓ **क्या आप कृपया बता सकते हैं कि आपकी फसल का रोग या कीट कौन सा है?**"
+                        bot_ans = "**क्या आप कृपया बता सकते हैं कि आपकी फसल का रोग या कीट कौन सा है?**"
                     else:
-                        bot_ans = "❓ **Can you please tell what is your crop disease or pest?**"
+                        bot_ans = "**Can you please tell what is your crop disease or pest?**"
                 else:
                     if lang_name == "Marathi":
-                        bot_ans = f"""🔴 कृषी सल्ला (प्रश्न: {active_query})
+                        bot_ans = f"""कृषी सल्ला (प्रश्न: {active_query})
 
-💊 रसायनिक उपचार (Chemical Treatment):
+रसायनिक उपचार (Chemical Treatment):
 • कीड/रोगासाठी योग्य कीटकनाशकाची (उदा. क्लोरपायरीफॉस २ मिली/लिटर किंवा इमॅमेक्टिन ०.५ ग्रॅम/लिटर) फवारणी करा.
 • संध्याकाळी फवारणी करणे अधिक प्रभावी ठरते.
 
-🌿 सेंद्रिय व जैविक उपचार (Organic Treatment):
+सेंद्रिय व जैविक उपचार (Organic Treatment):
 • ५% कडुनिंब तेल (Neem Oil) किंवा दशपर्णी अर्क (५ मिली/लिटर) चा वापर करा.
 • शेतात पिवळे व निळे चिकट सापळे (Sticky Traps) लावा.
 
-🛡️ बचाव व सुरक्षा:
+बचाव व सुरक्षा:
 • मास्क आणि हातमोजे वापरूनच फवारणी करा.
-☎️ अधिक मदतीसाठी हेल्पलाइन: 1800-180-1551"""
+अधिक मदतीसाठी हेल्पलाइन: 1800-180-1551"""
                     elif lang_name == "Hindi":
-                        bot_ans = f"""🔴 कृषि सलाह (प्रश्न: {active_query})
+                        bot_ans = f"""कृषि सलाह (प्रश्न: {active_query})
 
-💊 रासायनिक उपचार (Chemical Treatment):
+रासायनिक उपचार (Chemical Treatment):
 • उपयुक्त कीटनाशक (जैसे इमामेक्टिन 0.5 ग्राम/लीटर) का छिड़काव करें।
 
-🌿 जैविक उपचार (Organic Treatment):
+जैविक उपचार (Organic Treatment):
 • 5% नीम तेल या दशपर्णी अर्क (5 मिली/लीटर) का स्प्रे करें।
 
-🛡️ बचाव:
+बचाव:
 • सुरक्षा मास्क पहनकर छिड़काव करें।
-☎️ हेल्पलाइन: 1800-180-1551"""
+हेल्पलाइन: 1800-180-1551"""
                     else:
-                        bot_ans = f"""🔴 Agronomic Advisory (Query: {active_query})
+                        bot_ans = f"""Agronomic Advisory (Query: {active_query})
 
-💊 Chemical Treatment:
+Chemical Treatment:
 • Spray recommended pesticide with protective mask.
 
-🌿 Organic Treatment:
+Organic Treatment:
 • Spray 5% Neem Oil or Dashparni Ark (5 ml / Liter).
 
-☎️ Kisan Helpline: 1800-180-1551"""
+Kisan Helpline: 1800-180-1551"""
         except Exception:
             bot_ans = "कृपया कृषी हेल्पलाइन 1800-180-1551 वर संपर्क साधा."
 
@@ -1807,40 +1890,40 @@ with tab_chat:
 # ─────────────────────────────────────────────────────────────
 with tab_contacts:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### 📞 Verified Agricultural Specialist Directory & Emergency Helplines")
+    st.markdown("### Verified Agricultural Specialist Directory & Emergency Helplines")
     st.markdown("Connect directly with Maharashtra Krishi Vigyan Kendras (KVK), ICAR Scientists, and Govt Officers.")
 
     # Emergency Call Bar
     st.markdown("""
     <div style='background:#FFEBEE;border:2px solid #FFCDD2;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
         <div>
-            <h4 style='color:#C62828;margin:0'>🚨 Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
+            <h4 style='color:#C62828;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
             <p style='color:#B71C1C;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
         </div>
-        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>📞 1800-180-1551</a>
+        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
     </div>""", unsafe_allow_html=True)
 
-    r1, r2, r3, r4 = st.tabs(["🏛️ State & National", "🌾 Western MH & Pune", "🎋 Marathwada & Nashik", "🌿 Vidarbha & Cotton"])
+    r1, r2, r3, r4 = st.tabs(["State & National", "Western MH & Pune", "Marathwada & Nashik", "Vidarbha & Cotton"])
 
     with r1:
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>🇮🇳 Kisan Call Center (KCC)</h4>
+                <h4>Kisan Call Center (KCC)</h4>
                 <p><b>Number:</b> 1800-180-1551 (Toll-Free)<br>
                 <b>Languages:</b> Marathi, Hindi, English<br>
                 <b>Timings:</b> 6:00 AM - 10:00 PM (Daily)</p>
-                <a href='tel:18001801551'>📞 Call KCC Now</a>
+                <a href='tel:18001801551'>Call KCC Now</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>🌾 Maharashtra Agriculture Dept (कृषी आयुक्तालय)</h4>
+                <h4>Maharashtra Agriculture Dept (कृषी आयुक्तालय)</h4>
                 <p><b>Helpline:</b> 1800-233-4000 / 14447<br>
                 <b>Location:</b> Shivajinagar, Pune<br>
                 <b>Services:</b> Crop advice, Subsidies, Disease alerts</p>
-                <a href='tel:18002334000'>📞 Call State Agri Helpline</a>
+                <a href='tel:18002334000'>Call State Agri Helpline</a>
             </div>""", unsafe_allow_html=True)
 
     with r2:
@@ -1848,19 +1931,19 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>📍 KVK Baramati (Pune District)</h4>
+                <h4>KVK Baramati (Pune District)</h4>
                 <p><b>Phone:</b> 02112-255227 / 255327<br>
                 <b>Speciality:</b> Sugarcane, Fruits, Pest Control<br>
-                <b>WhatsApp Support:</b> <a href='https://wa.me/919422000000' target='_blank'>💬 Chat on WhatsApp</a></p>
-                <a href='tel:02112255227'>📞 Call KVK Baramati</a>
+                <b>WhatsApp Support:</b> <a href='https://wa.me/919422000000' target='_blank'>Chat on WhatsApp</a></p>
+                <a href='tel:02112255227'>Call KVK Baramati</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>🏛️ Vasantdada Sugar Institute (VSI Pune)</h4>
+                <h4>Vasantdada Sugar Institute (VSI Pune)</h4>
                 <p><b>Phone:</b> 020-26902100 / 26902200<br>
                 <b>Speciality:</b> Sugarcane Red Rot, Pokkah Boeng, Pest Advisory</p>
-                <a href='tel:02026902100'>📞 Call VSI Experts</a>
+                <a href='tel:02026902100'>Call VSI Experts</a>
             </div>""", unsafe_allow_html=True)
 
     with r3:
@@ -1868,18 +1951,18 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>📍 KVK Yashwantrao Chavan (Nashik)</h4>
+                <h4>KVK Yashwantrao Chavan (Nashik)</h4>
                 <p><b>Phone:</b> 0253-2415121 / 2415321<br>
                 <b>Speciality:</b> Grapes, Onion, Vegetables, Leaf Blight Advisory</p>
-                <a href='tel:02532415121'>📞 Call KVK Nashik</a>
+                <a href='tel:02532415121'>Call KVK Nashik</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>🌾 MPKV Rahuri Agri University</h4>
+                <h4>MPKV Rahuri Agri University</h4>
                 <p><b>Phone:</b> 02426-243208 / 243311<br>
                 <b>Speciality:</b> Pulses, Rice Blast, Crop Pathology Research</p>
-                <a href='tel:02426243208'>📞 Call MPKV Rahuri</a>
+                <a href='tel:02426243208'>Call MPKV Rahuri</a>
             </div>""", unsafe_allow_html=True)
 
     with r4:
@@ -1887,23 +1970,23 @@ with tab_contacts:
         with c1:
             st.markdown("""
             <div class='contact-card'>
-                <h4>🔬 ICAR - CICR Cotton Experts (Nagpur)</h4>
+                <h4>ICAR - CICR Cotton Experts (Nagpur)</h4>
                 <p><b>Phone:</b> 07103-275536 / 275538<br>
                 <b>Speciality:</b> Pink Bollworm, Cotton Leaf Curl, Whitefly Control</p>
-                <a href='tel:07103275536'>📞 Call CICR Cotton Helpline</a>
+                <a href='tel:07103275536'>Call CICR Cotton Helpline</a>
             </div>""", unsafe_allow_html=True)
         with c2:
             st.markdown("""
             <div class='contact-card'>
-                <h4>📍 Dr. PDKV Agri University (Akola)</h4>
+                <h4>Dr. PDKV Agri University (Akola)</h4>
                 <p><b>Phone:</b> 0724-2258419<br>
                 <b>Speciality:</b> Soybean, Cotton, Grain Crop Protection</p>
-                <a href='tel:07242258419'>📞 Call PDKV Akola</a>
+                <a href='tel:07242258419'>Call PDKV Akola</a>
             </div>""", unsafe_allow_html=True)
 
     # Specialist Form
     st.markdown("---")
-    st.markdown("#### 📝 Request Direct Specialist Callback / तज्ज्ञ कॉल विनंती")
+    st.markdown("#### Request Direct Specialist Callback / तज्ज्ञ कॉल विनंती")
     with st.form("specialist_form"):
         fc1, fc2, fc3 = st.columns(3)
         farmer_name = fc1.text_input("शेतकऱ्याचे नाव / Farmer Name",
@@ -1917,10 +2000,10 @@ with tab_contacts:
                   if st.session_state.get("farmer_district", "Pune") in ALL_DISTRICTS else 0
         )
         crop_query = st.text_area("पिकाची समस्या सांगा / Describe Crop Problem")
-        submit_form = st.form_submit_button("📩 Submit Request / विनंती पाठवा", type="primary")
+        submit_form = st.form_submit_button("Submit Request / विनंती पाठवा", type="primary")
 
         if submit_form:
-            st.success(f"✅ धन्यवाद {farmer_name}! तुमची विनंती नोंदवली गेली आहे. कृषी तज्ज्ञ २४ तासांत {farmer_phone} वर संपर्क साधतील.")
+            st.success(f"धन्यवाद {farmer_name}! तुमची विनंती नोंदवली गेली आहे. कृषी तज्ज्ञ २४ तासांत {farmer_phone} वर संपर्क साधतील.")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -1930,7 +2013,7 @@ with tab_contacts:
 # ─────────────────────────────────────────────────────────────
 with tab_map:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### 🗺️ Nearby Farmer Disease & Pest Outbreak Alert Map")
+    st.markdown("### Nearby Farmer Disease & Pest Outbreak Alert Map")
     st.markdown("Real-time outbreak mapping across Maharashtra. Color-coded severity pins notify nearby farmers within **10 km - 50 km** radius.")
 
     # Show real alert history from Excel if available
@@ -1938,7 +2021,7 @@ with tab_map:
         try:
             alerts_df = pd.read_excel(EXCEL_ALERTS_FILE, dtype=str)
             if not alerts_df.empty:
-                st.markdown("#### 📋 Recent AI-Detected Alerts (from Registered Farmers):")
+                st.markdown("#### Recent AI-Detected Alerts (from Registered Farmers):")
                 st.dataframe(
                     alerts_df[["Timestamp", "Reporter_Name", "District", "Crop_Disease", "Confidence_Pct"]]
                     .tail(10)
@@ -1957,12 +2040,12 @@ with tab_map:
 
     # Outbreak Data Points in Maharashtra
     outbreaks = [
-        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "🔴 Emergency Outbreak", "radius": 15000, "color": [211, 47, 47, 180]},
-        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "🟠 Warning", "radius": 20000, "color": [245, 124, 0, 180]},
-        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "🔴 Emergency Outbreak", "radius": 12000, "color": [211, 47, 47, 180]},
-        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "🔴 Emergency Outbreak", "radius": 25000, "color": [211, 47, 47, 180]},
-        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "🟡 Advisory Watch", "radius": 18000, "color": [251, 192, 45, 180]},
-        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "🟠 Warning", "radius": 10000, "color": [245, 124, 0, 180]}
+        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "Emergency Outbreak", "radius": 15000, "color": [211, 47, 47, 180]},
+        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "Warning", "radius": 20000, "color": [245, 124, 0, 180]},
+        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "Emergency Outbreak", "radius": 12000, "color": [211, 47, 47, 180]},
+        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "Emergency Outbreak", "radius": 25000, "color": [211, 47, 47, 180]},
+        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "Advisory Watch", "radius": 18000, "color": [251, 192, 45, 180]},
+        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "Warning", "radius": 10000, "color": [245, 124, 0, 180]}
     ]
 
     # PyDeck Map
@@ -1996,7 +2079,7 @@ with tab_map:
     st.pydeck_chart(r)
 
     # Active Alert List
-    st.markdown("#### 🚨 Active Regional Outbreak Alerts:")
+    st.markdown("#### Active Regional Outbreak Alerts:")
     m1, m2 = st.columns(2)
     for idx, ob in enumerate(outbreaks):
         target_col = m1 if idx % 2 == 0 else m2
@@ -2008,7 +2091,7 @@ with tab_map:
             st.markdown(f"""
             <div class='contact-card'>
                 <span class='{badge_type}'>{ob['severity']}</span>
-                <h4 style='margin:8px 0 2px;color:#1B5E20'>📍 {ob['district']} — {ob['issue']}</h4>
+                <h4 style='margin:8px 0 2px;color:#1B5E20'>{ob['district']} — {ob['issue']}</h4>
                 <p style='margin:0;font-size:0.88rem;color:#558B2F'>
                 <b>Affected Crop:</b> {ob['crop']} | <b>Impact Radius:</b> {ob['radius']//1000} km{reg_info}
                 </p>
@@ -2016,14 +2099,14 @@ with tab_map:
 
     # Broadcast Alert Form
     st.markdown("---")
-    st.markdown("#### 📢 Broadcast New Disease/Pest Alert to Nearby Farmers")
+    st.markdown("#### Broadcast New Disease/Pest Alert to Nearby Farmers")
     with st.form("alert_broadcast"):
         ac1, ac2, ac3 = st.columns(3)
         b_dist  = ac1.selectbox("जिल्हा / District", ALL_DISTRICTS)
         b_crop  = ac2.text_input("पीक / Crop Name", "Sugarcane / कापूस / धान")
         b_issue = ac3.selectbox("रोग / कीड / Issue Type", ["Pink Bollworm", "Fall Armyworm", "Red Rot", "Rice Blast", "Aphids", "Whitefly"])
         b_desc  = st.text_area("अलर्ट माहिती / Detailed Outbreak Description")
-        broadcast_btn = st.form_submit_button("🚨 Broadcast SMS & Map Alert | अलर्ट जारी करा", type="primary")
+        broadcast_btn = st.form_submit_button("Broadcast SMS & Map Alert | अलर्ट जारी करा", type="primary")
 
         if broadcast_btn:
             reg_in_dist = get_registered_farmers_count(b_dist)
@@ -2038,7 +2121,7 @@ with tab_map:
                 confidence=100.0
             )
             st.success(
-                f"🚨 अलर्ट यशस्वीपणे पाठवला! "
+                f"अलर्ट यशस्वीपणे पाठवला! "
                 f"**{b_dist}** परिसरातील **{reach}** नोंदणीकृत शेतकऱ्यांना "
                 f"**{b_issue}** बद्दल अलर्ट पाठवण्यात आला आहे."
             )
@@ -2051,7 +2134,7 @@ with tab_map:
 # ─────────────────────────────────────────────────────────────
 with tab_schemes:
     st.markdown("<div class='figma-card'>", unsafe_allow_html=True)
-    st.markdown("### 🏛️ Official Government Agricultural Schemes & Subsidies Portal")
+    st.markdown("### Official Government Agricultural Schemes & Subsidies Portal")
     st.markdown("Direct access to Central & Maharashtra Govt schemes, eligibility criteria, subsidy rates, and official portals.")
 
     schemes = [
@@ -2129,11 +2212,11 @@ with tab_schemes:
             <div class='scheme-card' style='margin-bottom:16px'>
                 <span class='figma-badge' style='background:#1B5E20;color:white'>{sc['cat']}</span>
                 <h4 style='margin-top:10px'>{sc['name']}</h4>
-                <p><b>🎁 Benefit:</b> {sc['benefit']}<br>
-                <b>👥 Eligibility:</b> {sc['eligibility']}<br>
-                <b>📄 Required Docs:</b> {sc['docs']}</p>
+                <p><b>Benefit:</b> {sc['benefit']}<br>
+                <b>Eligibility:</b> {sc['eligibility']}<br>
+                <b>Required Docs:</b> {sc['docs']}</p>
             </div>""", unsafe_allow_html=True)
-            st.link_button(f"🔗 Apply Now / अधिकृत संकेतस्थळ ({sc['name'].split()[0]})", sc['link'], use_container_width=True)
+            st.link_button(f"Apply Now / अधिकृत संकेतस्थळ ({sc['name'].split()[0]})", sc['link'], use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -2144,7 +2227,7 @@ with tab_schemes:
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
 <div style='text-align:center;padding:20px;color:#558B2F;font-size:0.85rem;border-top:1px solid #DCEDC8;margin-top:40px'>
-🌾 <b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
+<b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
