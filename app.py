@@ -57,13 +57,9 @@ st.markdown("""
         --accent: #2F6B3E;
         --accent-dark: #1F4E2B;
         --accent-soft: #EEF3EC;
-        --radius: 20px;
+        --radius: 12px;
         --shadow-sm: 0 1px 2px rgba(20,20,15,0.05);
         --shadow-md: 0 4px 14px rgba(20,20,15,0.06);
-        /* Lovable-style glow accents (surface/colors untouched) */
-        --glow-ring: 0 0 0 1px rgba(47,107,62,0.08), 0 10px 30px -8px rgba(47,107,62,0.28), 0 2px 8px rgba(20,20,15,0.05);
-        --glow-ring-hover: 0 0 0 1px rgba(47,107,62,0.16), 0 16px 40px -6px rgba(47,107,62,0.4), 0 4px 14px rgba(20,20,15,0.08);
-        --sheen: linear-gradient(155deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 30%);
     }
 
     html, body, [class*="css"] {
@@ -74,20 +70,17 @@ st.markdown("""
 
     /* Header */
     .figma-header {
-        position: relative;
         background: var(--surface);
-        background-image: var(--sheen);
         padding: 22px 28px;
         border-radius: var(--radius);
         margin-bottom: 22px;
         border: 1px solid var(--border);
-        box-shadow: var(--glow-ring);
+        box-shadow: var(--shadow-sm);
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 12px;
-        overflow: hidden;
     }
     .figma-header-title { font-size: 1.7rem; font-weight: 700; margin: 0; color: var(--text); letter-spacing: -0.01em; }
     .figma-header-sub { font-size: 0.92rem; color: var(--text-muted); margin-top: 4px; }
@@ -102,26 +95,22 @@ st.markdown("""
         border: 1px solid #DCE8DD;
         white-space: nowrap;
         flex-shrink: 0;
-        box-shadow: 0 4px 12px -4px rgba(47,107,62,0.3);
     }
 
     /* Cards */
     .figma-card {
-        position: relative;
         background: var(--surface);
-        background-image: var(--sheen);
         border-radius: var(--radius);
         padding: 22px;
         margin-bottom: 18px;
         border: 1px solid var(--border);
-        box-shadow: var(--glow-ring);
+        box-shadow: var(--shadow-sm);
         transition: transform 0.25s ease, box-shadow 0.25s ease;
         animation: cardRiseIn 0.4s ease both;
-        overflow: hidden;
     }
     .figma-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--glow-ring-hover);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
     }
     @keyframes cardRiseIn {
         from { opacity: 0; transform: translateY(10px); }
@@ -130,64 +119,50 @@ st.markdown("""
 
     /* Login Card */
     .login-card {
-        position: relative;
         background: var(--surface);
-        background-image: var(--sheen);
-        border-radius: 26px;
+        border-radius: 16px;
         padding: 36px 40px;
         border: 1px solid var(--border);
-        box-shadow: var(--glow-ring-hover);
+        box-shadow: var(--shadow-md);
         max-width: 480px;
         margin: 0 auto;
-        overflow: hidden;
     }
 
     /* Status Badges */
-    .badge-emergency { background: #FBEBEA; color: #A23B34; border: 1px solid #F0D3D0; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px -4px rgba(162,59,52,0.35); }
-    .badge-warning   { background: #FBF1E4; color: #A0651A; border: 1px solid #F0E0C6; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px -4px rgba(160,101,26,0.35); }
-    .badge-success   { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #DCE8DD; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px -4px rgba(47,107,62,0.35); }
-    .badge-low-conf  { background: #FBF6E0; color: #8A6D14; border: 1px solid #EFE4B8; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px -4px rgba(138,109,20,0.35); }
+    .badge-emergency { background: #FBEBEA; color: #A23B34; border: 1px solid #F0D3D0; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-warning   { background: #FBF1E4; color: #A0651A; border: 1px solid #F0E0C6; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-success   { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #DCE8DD; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-low-conf  { background: #FBF6E0; color: #8A6D14; border: 1px solid #EFE4B8; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
 
     /* Profile Page */
     .profile-hero {
-        position: relative;
         background: var(--surface);
-        background-image: var(--sheen);
-        border-radius: 26px; padding: 30px; margin-bottom: 22px;
-        border: 1px solid var(--border); box-shadow: var(--glow-ring);
+        border-radius: 16px; padding: 30px; margin-bottom: 22px;
+        border: 1px solid var(--border); box-shadow: var(--shadow-sm);
         display: flex; align-items: center; gap: 22px;
-        overflow: hidden;
     }
     .profile-avatar {
         width: 84px; height: 84px; background: var(--accent-soft);
         border-radius: 50%; display: flex; align-items: center;
         justify-content: center; font-size: 2.4rem; overflow: hidden;
         border: 1px solid var(--border); flex-shrink: 0;
-        box-shadow: 0 0 0 4px rgba(47,107,62,0.08), 0 8px 20px -6px rgba(47,107,62,0.35);
     }
     .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .profile-stat-card {
-        position: relative;
-        background: var(--surface);
-        background-image: var(--sheen);
-        border: 1px solid var(--border);
+        background: var(--surface); border: 1px solid var(--border);
         border-radius: var(--radius); padding: 18px; text-align: center;
-        box-shadow: var(--glow-ring);
+        box-shadow: var(--shadow-sm);
         transition: transform 0.25s ease, box-shadow 0.25s ease;
         animation: cardRiseIn 0.4s ease both;
-        overflow: hidden;
     }
-    .profile-stat-card:hover { transform: translateY(-4px); box-shadow: var(--glow-ring-hover); }
+    .profile-stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .profile-stat-num { font-size: 1.9rem; font-weight: 700; color: var(--text); margin: 0; }
     .profile-stat-label { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; margin: 4px 0 0; }
     .history-row {
         background: var(--bg); border: 1px solid var(--border);
         border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
         display: flex; align-items: center; gap: 14px;
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .history-row:hover { transform: translateY(-2px); box-shadow: var(--glow-ring); }
     .history-icon { font-size: 1.4rem; flex-shrink: 0; opacity: 0.8; }
     .history-badge { font-size: 0.76rem; font-weight: 600; padding: 3px 10px;
         border-radius: 20px; white-space: nowrap; }
@@ -199,7 +174,6 @@ st.markdown("""
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 18px;
         margin: 12px 0;
-        box-shadow: 0 8px 22px -10px rgba(192,138,46,0.35);
     }
     .remedy-organic {
         background: var(--accent-soft);
@@ -207,7 +181,6 @@ st.markdown("""
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 18px;
         margin: 12px 0;
-        box-shadow: 0 8px 22px -10px rgba(47,107,62,0.35);
     }
 
     /* Chat Box */
@@ -220,7 +193,6 @@ st.markdown("""
         font-size: 1rem;
         line-height: 1.75;
         border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
-        box-shadow: var(--glow-ring);
     }
 
     /* Alert box */
@@ -230,7 +202,6 @@ st.markdown("""
         border-radius: var(--radius);
         padding: 16px 20px;
         margin: 12px 0;
-        box-shadow: 0 8px 22px -10px rgba(160,101,26,0.3);
     }
 
     /* Audio section */
@@ -240,23 +211,17 @@ st.markdown("""
         border-radius: var(--radius);
         padding: 16px;
         margin: 12px 0;
-        box-shadow: 0 8px 22px -10px rgba(60,110,150,0.25);
     }
 
     /* Scheme Card */
     .scheme-card {
-        position: relative;
         background: var(--surface);
-        background-image: var(--sheen);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 20px;
         height: 100%;
-        box-shadow: var(--glow-ring);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        overflow: hidden;
+        box-shadow: var(--shadow-sm);
     }
-    .scheme-card:hover { transform: translateY(-4px); box-shadow: var(--glow-ring-hover); }
     .scheme-card h4 { color: var(--text); margin-top: 0; }
 
     /* Contact Card */
@@ -266,10 +231,7 @@ st.markdown("""
         border-radius: var(--radius);
         padding: 16px;
         margin-bottom: 12px;
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .contact-card:hover { transform: translateY(-2px); box-shadow: var(--glow-ring); }
 
     /* Status dot */
     .status-dot {
@@ -285,13 +247,12 @@ st.markdown("""
 
     /* Buttons */
     .stButton > button {
-        border-radius: 14px !important;
-        box-shadow: var(--shadow-sm) !important;
+        border-radius: 10px !important;
         transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
     }
     .stButton > button:hover {
         transform: translateY(-1px) !important;
-        box-shadow: var(--glow-ring-hover) !important;
+        box-shadow: var(--shadow-md) !important;
         border-color: var(--accent) !important;
     }
     .stButton > button:active { transform: translateY(0) scale(0.98) !important; }
@@ -1785,8 +1746,10 @@ with tab_detect:
                         st.progress(conf / 100)
 
                         with st.expander("Probable AI Top 3 Matches"):
+                            rank_icons = ["🥇", "🥈", "🥉"]
                             for i, r in enumerate(results):
-                                st.markdown(f"{''[i]} **{r['name']}** — `{r['confidence']:.1f}%`")
+                                icon = rank_icons[i] if i < len(rank_icons) else "•"
+                                st.markdown(f"{icon} **{r['name']}** — `{r['confidence']:.1f}%`")
                                 st.progress(r["confidence"] / 100)
 
                         # ── ALERT NEARBY FARMERS (only for disease/pest, conf >= threshold) ──
