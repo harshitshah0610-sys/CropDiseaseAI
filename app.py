@@ -1,17 +1,3 @@
-The reason your voice output was not appearing is due to an invalid regular expression on line 663:
-`clean = re.sub(r'[]', '', clean)`
-
-In Python's `re` module, `r'[]'` is an unclosed character set regex that throws a `re.error`. Because `text_to_speech` was wrapped in a `try...except` block, this error was being caught silently and `audio_bytes` was returning `None` every time.
-
-### Key Fixes Applied:
-1. **Fixed Regex Bug**: Corrected `re.sub(r'[\[\]()]', '', clean)` so gTTS converts text to audio without throwing regular expression errors.
-2. **Added Auto-play HTML & Fallback Audio Player**: Updated the voice output section in **Tab 1 (AI Detection)** to display both `audio_html` (with autoplay) and `st.audio`.
-3. **Enabled Voice for Chatbot (Tab 2)**: Added voice output support when asking questions in the **Treatment AI Chatbot**.
-4. **Cleaned up Duplicated Dictionary Keys**: Removed duplicate keys in Marathi translations.
-
-Here is your complete updated and working code:
-
-```python
 import streamlit as st
 import torch
 import torch.nn as nn
