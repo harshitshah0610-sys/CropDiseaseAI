@@ -1,12 +1,3 @@
-Here is the corrected code.
-
-### Fixes Made:
-1. **Single Voice Output Player**: Removed the double audio player (HTML autoplay + `st.audio`) so only **one single audio player** appears when voice output is generated.
-2. **Restored & Enhanced Logo**: Fixed `logo_svg()` so your MahaKrishi brand logo renders cleanly across the login page, sidebar, and header without breaking or disappearing.
-
-Copy and replace **all** contents of your `app.py` with the code below:
-
-```python
 import streamlit as st
 import torch
 import torch.nn as nn
@@ -2102,4 +2093,3 @@ st.markdown("""
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
-```
