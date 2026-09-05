@@ -45,255 +45,333 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    /* Fonts — elegant modern pairing */
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+    /* Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
     :root {
-        --bg: #060807;
-        --bg-elevated: #0B0F0C;
-        --surface: #0E1310;
-        --surface-2: #131917;
-        --border: rgba(120, 255, 160, 0.14);
-        --border-soft: rgba(255, 255, 255, 0.06);
-        --text: #EAF3EC;
-        --text-muted: #8FA398;
-        --accent: #39E77A;
-        --accent-dark: #1F7A44;
-        --accent-bright: #6BFFA6;
-        --accent-soft: rgba(57, 231, 122, 0.10);
-        --accent-glow: rgba(57, 231, 122, 0.35);
-        --radius: 12px;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
-        --shadow-md: 0 8px 28px rgba(0,0,0,0.55), 0 0 22px rgba(57,231,122,0.10);
-        --shadow-glow: 0 0 0 1px var(--border), 0 0 24px rgba(57,231,122,0.14), 0 10px 30px rgba(0,0,0,0.5);
+        --bg: radial-gradient(1200px circle at 8% -10%, #eafaf1 0%, transparent 55%),
+              radial-gradient(1000px circle at 105% 0%, #fff6df 0%, transparent 55%),
+              linear-gradient(180deg, #f3f8f4 0%, #eaf2ec 100%);
+        --surface: linear-gradient(160deg, #ffffff 0%, #f8fbf8 100%);
+        --border: #e0e8e1;
+        --text: #16241a;
+        --text-muted: #5c6b60;
+        --accent: #1f8a4c;
+        --accent-dark: #0f5c30;
+        --accent-soft: #e6f5ec;
+        --gold: #d4af37;
+        --gold-soft: #fbf1cf;
+        --radius: 16px;
+        --shadow-sm: 0 2px 6px rgba(16,40,26,0.07);
+        --shadow-md: 0 10px 26px rgba(16,40,26,0.13);
+        --shadow-lg: 0 24px 48px rgba(16,40,26,0.22);
+        --glow-accent: 0 0 0 1px rgba(31,138,76,0.15), 0 0 22px rgba(31,138,76,0.35);
+        --glow-gold: 0 0 22px rgba(212,175,55,0.45);
     }
 
     html, body, [class*="css"] {
         font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
         color: var(--text);
     }
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Manrope', 'Noto Sans Devanagari', sans-serif;
-        letter-spacing: -0.015em;
-    }
-
-    /* AMOLED base + subtle grain texture + soft glow blobs */
     .stApp {
-        background:
-            radial-gradient(1100px 550px at 12% -8%, rgba(57,231,122,0.08), transparent 60%),
-            radial-gradient(900px 500px at 105% 15%, rgba(76,175,255,0.05), transparent 55%),
-            var(--bg);
-        position: relative;
+        background: var(--bg);
+        background-attachment: fixed;
     }
-    .stApp::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNuKSIvPjwvc3ZnPg==");
-        background-size: 160px 160px;
-    }
-    .main .block-container { position: relative; z-index: 1; }
 
     /* Header */
     .figma-header {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        padding: 22px 28px;
+        background: var(--surface);
+        padding: 24px 30px;
         border-radius: var(--radius);
         margin-bottom: 22px;
         border: 1px solid var(--border);
-        box-shadow: var(--shadow-glow);
+        box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.7);
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 12px;
+        position: relative;
+        overflow: hidden;
+        transform: perspective(900px) rotateX(0.4deg);
+        transition: box-shadow 0.35s ease, transform 0.35s ease;
     }
-    .figma-header-title { font-family: 'Manrope', sans-serif; font-size: 1.7rem; font-weight: 800; margin: 0; color: var(--text); letter-spacing: -0.02em; text-shadow: 0 0 18px rgba(57,231,122,0.18); }
+    .figma-header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 20%, rgba(212,175,55,0.10) 45%, transparent 70%);
+        pointer-events: none;
+    }
+    .figma-header:hover {
+        box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.8);
+        transform: perspective(900px) rotateX(0deg) translateY(-2px);
+    }
+    .figma-header-title {
+        font-family: 'Playfair Display', 'Inter', serif;
+        font-size: 1.8rem; font-weight: 700; margin: 0;
+        background: linear-gradient(100deg, var(--accent-dark), var(--accent) 55%, #2fae66);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        letter-spacing: -0.01em;
+    }
     .figma-header-sub { font-size: 0.92rem; color: var(--text-muted); margin-top: 4px; }
 
     .figma-badge {
-        background: var(--accent-soft);
-        padding: 7px 14px;
+        background: linear-gradient(135deg, var(--accent-soft), #ffffff);
+        padding: 7px 15px;
         border-radius: 20px;
         font-size: 0.8rem;
-        font-weight: 700;
-        color: var(--accent-bright);
-        border: 1px solid var(--border);
+        font-weight: 600;
+        color: var(--accent-dark);
+        border: 1px solid #d3e9d8;
+        box-shadow: var(--shadow-sm);
         white-space: nowrap;
         flex-shrink: 0;
-        box-shadow: 0 0 14px rgba(57,231,122,0.12);
     }
 
     /* Cards */
     .figma-card {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
+        background: var(--surface);
         border-radius: var(--radius);
-        padding: 22px;
-        margin-bottom: 18px;
-        border: 1px solid var(--border-soft);
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-        animation: cardRiseIn 0.4s ease both;
+        padding: 24px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.6);
+        transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease;
+        animation: cardRiseIn 0.45s ease both;
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
     }
+    .figma-card::after {
+        content: "";
+        position: absolute; top: 0; left: -60%;
+        width: 40%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.7s ease;
+        pointer-events: none;
+    }
+    .figma-card:hover::after { left: 130%; }
     .figma-card:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-glow);
-        border-color: var(--border);
+        transform: translateY(-6px) rotateX(1.5deg) rotateY(-1.5deg) scale(1.008);
+        box-shadow: var(--shadow-lg), var(--glow-accent);
     }
     @keyframes cardRiseIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(14px) rotateX(4deg); }
+        to   { opacity: 1; transform: translateY(0) rotateX(0); }
     }
 
     /* Login Card */
     .login-card {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        border-radius: 16px;
-        padding: 36px 40px;
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 38px 42px;
         border: 1px solid var(--border);
-        box-shadow: var(--shadow-glow);
+        box-shadow: var(--shadow-lg), 0 0 0 1px rgba(212,175,55,0.08);
         max-width: 480px;
         margin: 0 auto;
+        position: relative;
+        transform: perspective(1000px) rotateX(0.6deg);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .login-card:hover {
+        transform: perspective(1000px) rotateX(0deg) translateY(-3px);
+        box-shadow: var(--shadow-lg), var(--glow-gold);
     }
 
     /* Status Badges */
-    .badge-emergency { background: rgba(239,68,68,0.12); color: #FF8A80; border: 1px solid rgba(239,68,68,0.3); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
-    .badge-warning   { background: rgba(245,158,11,0.12); color: #FFC078; border: 1px solid rgba(245,158,11,0.3); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
-    .badge-success   { background: var(--accent-soft); color: var(--accent-bright); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
-    .badge-low-conf  { background: rgba(234,179,8,0.12); color: #FFD666; border: 1px solid rgba(234,179,8,0.3); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+    .badge-emergency { background: linear-gradient(135deg,#FBEBEA,#f7d9d6); color: #A23B34; border: 1px solid #F0D3D0; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: var(--shadow-sm); }
+    .badge-warning   { background: linear-gradient(135deg,#FBF1E4,#f6e3c2); color: #A0651A; border: 1px solid #F0E0C6; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: var(--shadow-sm); }
+    .badge-success   { background: linear-gradient(135deg,var(--accent-soft),#d7f0e0); color: var(--accent-dark); border: 1px solid #DCE8DD; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: var(--shadow-sm); }
+    .badge-low-conf  { background: linear-gradient(135deg,#FBF6E0,#f3e8ba); color: #8A6D14; border: 1px solid #EFE4B8; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; box-shadow: var(--shadow-sm); }
 
     /* Profile Page */
     .profile-hero {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        border-radius: 16px; padding: 30px; margin-bottom: 22px;
-        border: 1px solid var(--border); box-shadow: var(--shadow-glow);
+        background: var(--surface);
+        border-radius: 20px; padding: 32px; margin-bottom: 22px;
+        border: 1px solid var(--border); box-shadow: var(--shadow-md);
         display: flex; align-items: center; gap: 22px;
+        position: relative; overflow: hidden;
+        transition: box-shadow 0.35s ease, transform 0.35s ease;
     }
+    .profile-hero:hover { box-shadow: var(--shadow-lg), var(--glow-accent); transform: translateY(-2px); }
     .profile-avatar {
-        width: 84px; height: 84px; background: var(--accent-soft);
+        width: 86px; height: 86px;
+        background: linear-gradient(135deg, var(--accent-soft), #ffffff);
         border-radius: 50%; display: flex; align-items: center;
         justify-content: center; font-size: 2.4rem; overflow: hidden;
-        border: 1px solid var(--border); flex-shrink: 0;
-        box-shadow: 0 0 20px rgba(57,231,122,0.18);
+        border: 3px solid #ffffff; flex-shrink: 0;
+        box-shadow: var(--shadow-md), 0 0 0 3px rgba(31,138,76,0.18);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .profile-avatar:hover { transform: scale(1.06) rotateZ(-1deg); box-shadow: var(--shadow-lg), var(--glow-gold); }
     .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .profile-stat-card {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--border-soft);
+        background: var(--surface); border: 1px solid var(--border);
         border-radius: var(--radius); padding: 18px; text-align: center;
         box-shadow: var(--shadow-sm);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        animation: cardRiseIn 0.4s ease both;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: cardRiseIn 0.45s ease both;
     }
-    .profile-stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-glow); border-color: var(--border); }
-    .profile-stat-num { font-family: 'Manrope', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--accent-bright); margin: 0; text-shadow: 0 0 16px rgba(57,231,122,0.25); }
+    .profile-stat-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-lg), var(--glow-accent); }
+    .profile-stat-num {
+        font-size: 1.95rem; font-weight: 800; margin: 0;
+        background: linear-gradient(100deg, var(--accent-dark), var(--accent));
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
     .profile-stat-label { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; margin: 4px 0 0; }
     .history-row {
-        background: var(--bg-elevated); border: 1px solid var(--border-soft);
+        background: var(--bg); border: 1px solid var(--border);
         border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
         display: flex; align-items: center; gap: 14px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .history-icon { font-size: 1.4rem; flex-shrink: 0; opacity: 0.9; }
-    .history-badge { font-size: 0.76rem; font-weight: 700; padding: 3px 10px;
+    .history-row:hover { transform: translateX(2px); box-shadow: var(--shadow-sm); }
+    .history-icon { font-size: 1.4rem; flex-shrink: 0; opacity: 0.85; }
+    .history-badge { font-size: 0.76rem; font-weight: 600; padding: 3px 10px;
         border-radius: 20px; white-space: nowrap; }
 
     /* Remedy Container */
     .remedy-chemical {
-        background: rgba(217,119,6,0.08);
-        border-left: 3px solid #F59E0B;
+        background: linear-gradient(135deg, #FBF6EC, #f5ead1);
+        border-left: 4px solid #C08A2E;
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 18px;
         margin: 12px 0;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+    .remedy-chemical:hover { transform: translateX(3px); box-shadow: var(--shadow-md); }
     .remedy-organic {
-        background: var(--accent-soft);
-        border-left: 3px solid var(--accent);
+        background: linear-gradient(135deg, var(--accent-soft), #d9f1e2);
+        border-left: 4px solid var(--accent);
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 18px;
         margin: 12px 0;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+    .remedy-organic:hover { transform: translateX(3px); box-shadow: var(--shadow-md), var(--glow-accent); }
 
     /* Chat Box */
     .chat-box {
-        background: var(--bg-elevated);
-        border-left: 3px solid var(--accent);
+        background: var(--surface);
+        border-left: 4px solid var(--accent);
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 20px;
         margin: 12px 0;
         font-size: 1rem;
         line-height: 1.75;
-        border-top: 1px solid var(--border-soft); border-right: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);
+        border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
     }
 
     /* Alert box */
     .alert-box {
-        background: rgba(245,158,11,0.08);
-        border: 1px solid rgba(245,158,11,0.28);
+        background: linear-gradient(135deg, #FBF1E4, #f6e6c8);
+        border: 1px solid #EAD3AC;
         border-radius: var(--radius);
         padding: 16px 20px;
         margin: 12px 0;
+        box-shadow: var(--shadow-sm);
     }
 
     /* Audio section */
     .audio-section {
-        background: rgba(96,165,250,0.07);
-        border: 1px solid rgba(96,165,250,0.22);
+        background: linear-gradient(135deg, #F0F4F8, #e2ecf3);
+        border: 1px solid #D7E1E9;
         border-radius: var(--radius);
         padding: 16px;
         margin: 12px 0;
+        box-shadow: var(--shadow-sm);
     }
 
     /* Scheme Card */
     .scheme-card {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        border: 1px solid var(--border-soft);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 20px;
         height: 100%;
         box-shadow: var(--shadow-sm);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
+    .scheme-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg), var(--glow-accent); }
     .scheme-card h4 { color: var(--text); margin-top: 0; }
 
     /* Contact Card */
     .contact-card {
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        border: 1px solid var(--border-soft);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 16px;
         margin-bottom: 12px;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    .contact-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
     /* Status dot */
     .status-dot {
         display: inline-block; width: 7px; height: 7px; border-radius: 50%;
         background: var(--accent); margin-right: 6px; vertical-align: middle;
-        box-shadow: 0 0 8px rgba(57,231,122,0.6);
         animation: statusPulse 2s infinite;
+        box-shadow: 0 0 6px rgba(31,138,76,0.8);
     }
     @keyframes statusPulse {
-        0%   { box-shadow: 0 0 0 0 rgba(57,231,122,0.45); }
-        70%  { box-shadow: 0 0 0 7px rgba(57,231,122,0); }
-        100% { box-shadow: 0 0 0 0 rgba(57,231,122,0); }
+        0%   { box-shadow: 0 0 0 0 rgba(47,107,62,0.35); }
+        70%  { box-shadow: 0 0 0 8px rgba(47,107,62,0); }
+        100% { box-shadow: 0 0 0 0 rgba(47,107,62,0); }
     }
 
-    /* Buttons */
+    /* Buttons — glowing, shiny, 3D */
     .stButton > button {
-        border-radius: 10px !important;
-        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(15,92,48,0.4) !important;
+        background: linear-gradient(155deg, #2fae66 0%, #1f8a4c 55%, #146b3a 100%) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.01em;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 6px 16px rgba(15,92,48,0.35), inset 0 1px 0 rgba(255,255,255,0.3) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+    }
+    .stButton > button::after {
+        content: "";
+        position: absolute; top: 0; left: -75%;
+        width: 45%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.6s ease;
     }
     .stButton > button:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: 0 0 0 1px var(--accent), 0 6px 22px rgba(57,231,122,0.28) !important;
-        border-color: var(--accent) !important;
+        transform: translateY(-2px) scale(1.015) !important;
+        box-shadow: 0 10px 26px rgba(15,92,48,0.45), var(--glow-gold) !important;
+        filter: brightness(1.06);
+        border-color: var(--gold) !important;
     }
-    .stButton > button:active { transform: translateY(0) scale(0.98) !important; }
+    .stButton > button:hover::after { left: 130%; }
+    .stButton > button:active { transform: translateY(0) scale(0.97) !important; filter: brightness(0.98); }
+
+    /* Link buttons (Apply Now etc.) get the same shine */
+    .stLinkButton > a {
+        border-radius: 12px !important;
+        box-shadow: 0 6px 16px rgba(15,92,48,0.25) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    .stLinkButton > a:hover {
+        transform: translateY(-2px) scale(1.015) !important;
+        box-shadow: 0 10px 24px rgba(15,92,48,0.35), var(--glow-gold) !important;
+    }
 
     .stTabs [data-baseweb="tab-highlight"] {
         transition: left 0.25s ease, width 0.25s ease !important;
-        background-color: var(--accent) !important;
-        box-shadow: 0 0 10px rgba(57,231,122,0.6) !important;
+        background: linear-gradient(90deg, var(--accent-dark), var(--accent)) !important;
+        box-shadow: 0 0 10px rgba(31,138,76,0.5) !important;
     }
 
     .main .block-container { animation: pageFadeIn 0.35s ease both; }
@@ -623,9 +701,9 @@ def get_profile_photo_path(phone: str):
 def _default_avatar_data_uri() -> str:
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
-        '<circle cx="50" cy="50" r="50" fill="#131917"/>'
-        '<circle cx="50" cy="40" r="18" fill="#6BFFA6"/>'
-        '<path d="M50 60c-21 0-35 13-35 28v6h70v-6c0-15-14-28-35-28z" fill="#6BFFA6"/>'
+        '<circle cx="50" cy="50" r="50" fill="#DBDBDB"/>'
+        '<circle cx="50" cy="40" r="18" fill="#FFFFFF"/>'
+        '<path d="M50 60c-21 0-35 13-35 28v6h70v-6c0-15-14-28-35-28z" fill="#FFFFFF"/>'
         '</svg>'
     )
     b64 = base64.b64encode(svg.encode("utf-8")).decode("utf-8")
@@ -645,17 +723,17 @@ def get_avatar_data_uri(phone: str) -> str:
     return _default_avatar_data_uri()
 
 
-CHART_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#39E77A" stroke-width="1.6">
+CHART_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8BC34A" stroke-width="1.6">
   <path d="M4 20V10m6 10V4m6 16v-7" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M3 20h18" stroke-linecap="round"/>
 </svg>"""
 
-UPLOAD_ICON_SVG = """<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#39E77A" stroke-width="1.6">
+UPLOAD_ICON_SVG = """<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#558B2F" stroke-width="1.6">
   <path d="M4 16.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M12 3v12m0-12 4 4m-4-4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>"""
 
-SCAN_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#39E77A" stroke-width="1.6">
+SCAN_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8BC34A" stroke-width="1.6">
   <path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0 1 12 4a7 7 0 0 1 7 6.5C19 14.5 16 18 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="12" cy="11" r="2.3"/>
 </svg>"""
@@ -669,8 +747,8 @@ def show_login_page():
     st.markdown("""
     <div style='text-align:center;padding:30px 0 10px'>
         <div style="display:flex;justify-content:center;margin-bottom:10px">""" + logo_svg(96) + """</div>
-        <h1 style='color:#6BFFA6;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
-        <p style='color:#8FA398;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
+        <h1 style='color:#1F4E2B;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
+        <p style='color:#2F6B39;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -761,7 +839,7 @@ def show_login_page():
                         st.rerun()
 
     st.markdown("""
-    <div style='text-align:center;padding:30px;color:#8FA398;font-size:0.82rem;margin-top:20px'>
+    <div style='text-align:center;padding:30px;color:#558B2F;font-size:0.82rem;margin-top:20px'>
         <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
         Maharashtra Government Agri-Tech Initiative
     </div>
@@ -802,21 +880,21 @@ def show_profile_page():
     <div class='profile-hero'>
         <div class='profile-avatar'><img src='{avatar_uri}'/></div>
         <div style='flex:1'>
-            <h2 style='margin:0 0 4px;font-size:1.6rem;color:var(--text,#EAF3EC)'>{farmer_name}</h2>
-            <p style='margin:0;color:var(--text-muted,#8FA398);font-size:0.95rem'>{farmer_phone}</p>
-            <p style='margin:4px 0 0;color:var(--text-muted,#8FA398);font-size:0.88rem'>{farmer_district} District, Maharashtra</p>
+            <h2 style='margin:0 0 4px;font-size:1.6rem;color:var(--text,#1F2320)'>{farmer_name}</h2>
+            <p style='margin:0;color:var(--text-muted,#6B6F6A);font-size:0.95rem'>{farmer_phone}</p>
+            <p style='margin:4px 0 0;color:var(--text-muted,#6B6F6A);font-size:0.88rem'>{farmer_district} District, Maharashtra</p>
             <p style='margin:8px 0 0;'>
-                <span style='background:var(--accent-soft,rgba(57,231,122,0.10));color:var(--accent-dark,#6BFFA6);border-radius:20px;
-                             padding:4px 14px;font-size:0.8rem;font-weight:600;border:1px solid rgba(57,231,122,0.25)'>
+                <span style='background:var(--accent-soft,#EEF3EC);color:var(--accent-dark,#1F4E2B);border-radius:20px;
+                             padding:4px 14px;font-size:0.8rem;font-weight:600;border:1px solid #DCE8DD'>
                     Reg. No: {reg_number}
                 </span>
             </p>
         </div>
         <div style='text-align:right'>
-            <p style='margin:0;font-size:0.78rem;color:var(--text-muted,#8FA398)'>Member Since</p>
-            <p style='margin:0;font-weight:700;font-size:1.05rem;color:var(--text,#EAF3EC)'>{datetime.now().strftime("%b %Y")}</p>
-            <span style='background:var(--accent-soft,rgba(57,231,122,0.10));color:var(--accent-dark,#6BFFA6);border-radius:20px;
-                         padding:3px 12px;font-size:0.76rem;font-weight:600;border:1px solid rgba(57,231,122,0.25)'>Verified Farmer</span>
+            <p style='margin:0;font-size:0.78rem;color:var(--text-muted,#6B6F6A)'>Member Since</p>
+            <p style='margin:0;font-weight:700;font-size:1.05rem;color:var(--text,#1F2320)'>{datetime.now().strftime("%b %Y")}</p>
+            <span style='background:var(--accent-soft,#EEF3EC);color:var(--accent-dark,#1F4E2B);border-radius:20px;
+                         padding:3px 12px;font-size:0.76rem;font-weight:600;border:1px solid #DCE8DD'>Verified Farmer</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -877,33 +955,33 @@ def show_profile_page():
         st.markdown("### Farmer Information")
         st.markdown(f"""
         <table style='width:100%;border-collapse:collapse;font-size:0.92rem'>
-            <tr style='border-bottom:1px solid rgba(255,255,255,0.06)'>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>Full Name</td>
-                <td style='padding:10px 0;color:#6BFFA6;font-weight:700'>{farmer_name}</td>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Full Name</td>
+                <td style='padding:10px 0;color:#1F4E2B;font-weight:700'>{farmer_name}</td>
             </tr>
-            <tr style='border-bottom:1px solid rgba(255,255,255,0.06)'>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>Mobile Number</td>
-                <td style='padding:10px 0;color:#EAF3EC'>{farmer_phone}</td>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Mobile Number</td>
+                <td style='padding:10px 0;color:#1F4E2B'>{farmer_phone}</td>
             </tr>
-            <tr style='border-bottom:1px solid rgba(255,255,255,0.06)'>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>District</td>
-                <td style='padding:10px 0;color:#EAF3EC'>{farmer_district}</td>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>District</td>
+                <td style='padding:10px 0;color:#1F4E2B'>{farmer_district}</td>
             </tr>
-            <tr style='border-bottom:1px solid rgba(255,255,255,0.06)'>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>State</td>
-                <td style='padding:10px 0;color:#EAF3EC'>Maharashtra</td>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>State</td>
+                <td style='padding:10px 0;color:#1F4E2B'>Maharashtra</td>
             </tr>
-            <tr style='border-bottom:1px solid rgba(255,255,255,0.06)'>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>Registration No.</td>
+            <tr style='border-bottom:1px solid #E8F5E9'>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Registration No.</td>
                 <td style='padding:10px 0'>
-                    <span style='background:rgba(57,231,122,0.16);color:#6BFFA6;font-weight:700;
+                    <span style='background:#E8F5E9;color:#1F4E2B;font-weight:700;
                                  padding:3px 10px;border-radius:10px'>{reg_number}</span>
                 </td>
             </tr>
             <tr>
-                <td style='padding:10px 0;color:#8FA398;font-weight:600'>Account Status</td>
+                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Account Status</td>
                 <td style='padding:10px 0'>
-                    <span style='background:rgba(57,231,122,0.24);color:#6BFFA6;font-weight:700;
+                    <span style='background:#C8E6C9;color:#1F4E2B;font-weight:700;
                                  padding:3px 10px;border-radius:10px'>Active</span>
                 </td>
             </tr>
@@ -919,12 +997,12 @@ def show_profile_page():
                 "Count": [disease_count, pest_count, healthy_count]
             }
             df_chart = pd.DataFrame(chart_data)
-            st.bar_chart(df_chart.set_index("Category"), color="#39E77A", use_container_width=True)
+            st.bar_chart(df_chart.set_index("Category"), color="#2F6B39", use_container_width=True)
         else:
             st.markdown("""
-            <div style='text-align:center;padding:30px;background:rgba(57,231,122,0.06);border-radius:12px'>
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
                 <div style='display:flex;justify-content:center'>""" + CHART_ICON_SVG + """</div>
-                <p style='color:#8FA398;margin:8px 0 0'>No scan data yet.<br>
+                <p style='color:#558B2F;margin:8px 0 0'>No scan data yet.<br>
                    <small>Start detecting crop diseases to see your activity chart here.</small></p>
             </div>""", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -935,27 +1013,27 @@ def show_profile_page():
 
         if not history:
             st.markdown("""
-            <div style='text-align:center;padding:30px;background:rgba(57,231,122,0.06);border-radius:12px'>
+            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
                 <div style='display:flex;justify-content:center'>""" + SCAN_ICON_SVG + """</div>
-                <p style='color:#8FA398;margin:8px 0 0'>No detections yet.<br>
+                <p style='color:#558B2F;margin:8px 0 0'>No detections yet.<br>
                    <small>Upload a crop photo on the AI Detection tab to get started.</small></p>
             </div>""", unsafe_allow_html=True)
         else:
             for h in reversed(history[-10:]):
-                badge_color = "rgba(239,68,68,0.14)" if h.get("type") == "disease" else (
-                              "rgba(245,158,11,0.14)" if h.get("type") == "pest" else "rgba(57,231,122,0.14)")
-                badge_text_color = "#FF8A80" if h.get("type") == "disease" else (
-                                   "#FFB74D" if h.get("type") == "pest" else "#6BFFA6")
+                badge_color = "#FFEBEE" if h.get("type") == "disease" else (
+                              "#FFF3E0" if h.get("type") == "pest" else "#E8F5E9")
+                badge_text_color = "#C62828" if h.get("type") == "disease" else (
+                                   "#EF6C00" if h.get("type") == "pest" else "#2F6B39")
                 label = "Disease" if h.get("type") == "disease" else (
                         "Pest" if h.get("type") == "pest" else "Healthy")
                 st.markdown(f"""
                 <div class='history-row'>
                     <div style='flex:1;min-width:0'>
-                        <p style='margin:0;font-weight:600;color:#EAF3EC;
+                        <p style='margin:0;font-weight:600;color:#1F4E2B;
                                   white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
                             {h.get("name","Unknown")}
                         </p>
-                        <p style='margin:2px 0 0;font-size:0.78rem;color:#8FA398'>
+                        <p style='margin:2px 0 0;font-size:0.78rem;color:#558B2F'>
                             {h.get("time","—")} &nbsp;|&nbsp; {h.get("conf",0):.1f}% confidence
                         </p>
                     </div>
@@ -973,23 +1051,23 @@ def show_profile_page():
         st.markdown("### AI Models Used")
         st.markdown("""
         <div style='display:flex;flex-direction:column;gap:10px'>
-            <div style='background:rgba(57,231,122,0.08);border-radius:10px;padding:12px'>
-                <b style='color:#6BFFA6'>Crop Disease Model</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#8FE0A8'>
+            <div style='background:#E8F5E9;border-radius:10px;padding:12px'>
+                <b style='color:#1F4E2B'>Crop Disease Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#33691E'>
                     EfficientNet-B0 · 39 Classes · TTA ×4<br>
                     Rice, Sugarcane, Cotton, Wheat, Tomato, Potato
                 </p>
             </div>
-            <div style='background:rgba(245,158,11,0.08);border-radius:10px;padding:12px'>
-                <b style='color:#FFB74D'>Pest Detection Model</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#FF9E80'>
+            <div style='background:#FFF3E0;border-radius:10px;padding:12px'>
+                <b style='color:#E65100'>Pest Detection Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#BF360C'>
                     EfficientNet-B0 · 14 Classes · TTA ×4<br>
                     Bollworm, Aphids, Stem Borer, Whitefly, Armyworm
                 </p>
             </div>
-            <div style='background:rgba(96,165,250,0.08);border-radius:10px;padding:12px'>
-                <b style='color:#82C4FA'>AI Advisory Engine</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#90CAF9'>
+            <div style='background:#E3F2FD;border-radius:10px;padding:12px'>
+                <b style='color:#1565C0'>AI Advisory Engine</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#0D47A1'>
                     Google Gemini 1.5 Flash + gTTS Voice<br>
                     Supports: Marathi, Hindi, English, Gujarati, Punjabi
                 </p>
@@ -1400,27 +1478,27 @@ with st.sidebar:
     _logo_html = logo_svg(44)
     _sidebar_html = (
         "<div style='text-align:center;padding:18px 16px 14px;"
-        "background:linear-gradient(135deg,rgba(57,231,122,0.14),rgba(57,231,122,0.22));"
-        "border-radius:14px;margin-bottom:15px;border:1px solid rgba(57,231,122,0.35)'>"
+        "background:linear-gradient(135deg,#E8F5E9,#C8E6C9);"
+        "border-radius:14px;margin-bottom:15px;border:1px solid #A5D6A7'>"
         "<div style='display:flex;justify-content:center;margin-bottom:10px'>"
         + _logo_html +
         "</div>"
         "<div style='display:flex;justify-content:center;margin-bottom:10px'>"
         "<img src='" + _sidebar_avatar_uri + "'"
         " style='width:80px;height:80px;border-radius:50%;object-fit:cover;"
-        "border:3px solid rgba(57,231,122,0.4);"
+        "border:3px solid #FFFFFF;"
         "box-shadow:0 3px 12px rgba(31,78,43,0.30);"
-        "background:#131917;'/>"
+        "background:#EEF3EC;'/>"
         "</div>"
-        "<p style='color:#6BFFA6;font-weight:700;font-size:0.95rem;margin:0 0 2px;"
+        "<p style='color:#1F4E2B;font-weight:700;font-size:0.95rem;margin:0 0 2px;"
         "white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>"
         + farmer_name_display +
         "</p>"
-        "<p style='color:#8FA398;font-size:0.78rem;margin:0 0 8px'>"
+        "<p style='color:#558B2F;font-size:0.78rem;margin:0 0 8px'>"
         + farmer_dist_display +
         "</p>"
         "<span class='figma-badge'"
-        " style='background:#1F7A44;color:#EAF3EC;margin-top:2px;display:inline-block;font-size:0.72rem'>"
+        " style='background:#1F4E2B;color:white;margin-top:2px;display:inline-block;font-size:0.72rem'>"
         "Govt. Agri-Tech Initiative"
         "</span>"
         "</div>"
@@ -1448,7 +1526,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style='background:rgba(245,158,11,0.10);border-left:4px solid #FFB74D;padding:10px;border-radius:6px'>
+    <div style='background:#FFF3E0;border-left:4px solid #FF9800;padding:10px;border-radius:6px'>
     <small><b>Emergency Agri Helpline:</b><br>
     Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
     </div>""", unsafe_allow_html=True)
@@ -1508,22 +1586,22 @@ with profile_col:
         height: 52px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid rgba(57,231,122,0.35);
-        box-shadow: 0 2px 10px rgba(31,78,43,0.22);
-        background: #131917;
+        border: 3px solid #ffffff;
+        box-shadow: 0 4px 14px rgba(31,78,43,0.28), 0 0 0 3px rgba(47,107,62,0.18);
+        background: linear-gradient(135deg,#EEF3EC,#ffffff);
         display: block;
         cursor: pointer;
-        transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
         margin-bottom: 3px;
     }}
     #mk-profile-col img.mk-avatar:hover {{
-        border-color: #39E77A;
-        box-shadow: 0 4px 16px rgba(47,107,62,0.35);
-        transform: scale(1.07);
+        border-color: #D4AF37;
+        box-shadow: 0 8px 22px rgba(47,107,62,0.4), 0 0 18px rgba(212,175,55,0.5);
+        transform: scale(1.1) rotateZ(-2deg);
     }}
     #mk-profile-col .mk-name-label {{
         font-size: 0.6rem;
-        color: #6BFFA6;
+        color: #2F6B39;
         font-weight: 600;
         text-align: center;
         max-width: 60px;
@@ -1601,11 +1679,11 @@ with tab_detect:
             analyze_btn = st.button("Analyze with AI | निदान करा", type="primary", use_container_width=True)
         else:
             st.markdown("""
-            <div style='background:rgba(57,231,122,0.05);border:2px dashed #39E77A;border-radius:14px;
+            <div style='background:#F9FBE7;border:2px dashed #8BC34A;border-radius:14px;
                         padding:40px;text-align:center'>
                 <div style='display:flex;justify-content:center'>""" + UPLOAD_ICON_SVG + """</div>
-                <p style='color:#8FE0A8;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
-                <small style='color:#8FA398'>Supports JPG, PNG, WEBP</small>
+                <p style='color:#33691E;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
+                <small style='color:#558B2F'>Supports JPG, PNG, WEBP</small>
             </div>""", unsafe_allow_html=True)
             analyze_btn = False
         st.markdown("</div>", unsafe_allow_html=True)
@@ -1616,10 +1694,10 @@ with tab_detect:
 
         if not uploaded:
             st.markdown("""
-            <div style='background:rgba(57,231,122,0.06);border-radius:12px;padding:30px;text-align:center'>
+            <div style='background:#E8F5E9;border-radius:12px;padding:30px;text-align:center'>
                 <div style='display:flex;justify-content:center'>""" + SCAN_ICON_SVG + """</div>
-                <h4 style='color:#EAF3EC;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
-                <p style='color:#8FA398;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
+                <h4 style='color:#1F4E2B;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
+                <p style='color:#2F6B39;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
             </div>""", unsafe_allow_html=True)
 
         elif analyze_btn:
@@ -1651,18 +1729,18 @@ with tab_detect:
                         st.markdown(f"""
                         <div class='alert-box'>
                             <span class='badge-low-conf'>Low Confidence Detection</span>
-                            <h4 style='color:#FFB74D;margin:10px 0 4px'>Best Match: {name}</h4>
-                            <p style='margin:0;color:#FF9E80'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
+                            <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
+                            <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                         </div>""", unsafe_allow_html=True)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
                         status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
 
                         st.markdown(f"""
-                        <div style='background:#0E1310;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.08)'>
+                        <div style='background:#FAFAFA;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #E0E0E0'>
                             <span class='{badge_cls}'>{status_txt}</span>
-                            <h3 style='color:#EAF3EC;margin:10px 0 4px'>{name}</h3>
-                            <p style='color:#8FA398;font-size:0.88rem;margin:0'>AI Confidence (TTA avg): <b>{conf:.1f}%</b></p>
+                            <h3 style='color:#1F4E2B;margin:10px 0 4px'>{name}</h3>
+                            <p style='color:#558B2F;font-size:0.88rem;margin:0'>AI Confidence (TTA avg): <b>{conf:.1f}%</b></p>
                         </div>""", unsafe_allow_html=True)
                         st.progress(conf / 100)
 
@@ -1895,12 +1973,12 @@ with tab_contacts:
     st.markdown("### Verified Agricultural Specialist Directory & Emergency Helplines")
 
     st.markdown("""
-    <div style='background:rgba(239,68,68,0.10);border:2px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
+    <div style='background:#FFEBEE;border:2px solid #FFCDD2;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
         <div>
-            <h4 style='color:#FF8A80;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
-            <p style='color:#FFAB99;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
+            <h4 style='color:#C62828;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
+            <p style='color:#B71C1C;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
         </div>
-        <a href='tel:18001801551' style='background:#D32F2F;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
+        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
     </div>""", unsafe_allow_html=True)
 
     r1, r2, r3, r4 = st.tabs(["State & National", "Western MH & Pune", "Marathwada & Nashik", "Vidarbha & Cotton"])
@@ -2083,8 +2161,8 @@ with tab_map:
             st.markdown(f"""
             <div class='contact-card'>
                 <span class='{badge_type}'>{ob['severity']}</span>
-                <h4 style='margin:8px 0 2px;color:#6BFFA6'>{ob['district']} — {ob['issue']}</h4>
-                <p style='margin:0;font-size:0.88rem;color:#8FA398'>
+                <h4 style='margin:8px 0 2px;color:#1F4E2B'>{ob['district']} — {ob['issue']}</h4>
+                <p style='margin:0;font-size:0.88rem;color:#558B2F'>
                 <b>Affected Crop:</b> {ob['crop']} | <b>Impact Radius:</b> {ob['radius']//1000} km{reg_info}
                 </p>
             </div>""", unsafe_allow_html=True)
@@ -2197,7 +2275,7 @@ with tab_schemes:
         with target_col:
             st.markdown(f"""
             <div class='scheme-card' style='margin-bottom:16px'>
-                <span class='figma-badge' style='background:#1F7A44;color:#EAF3EC'>{sc['cat']}</span>
+                <span class='figma-badge' style='background:#1F4E2B;color:white'>{sc['cat']}</span>
                 <h4 style='margin-top:10px'>{sc['name']}</h4>
                 <p><b>Benefit:</b> {sc['benefit']}<br>
                 <b>Eligibility:</b> {sc['eligibility']}<br>
@@ -2213,9 +2291,8 @@ with tab_schemes:
 # FOOTER
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
-<div style='text-align:center;padding:20px;color:#8FA398;font-size:0.85rem;border-top:1px solid rgba(57,231,122,0.15);margin-top:40px'>
+<div style='text-align:center;padding:20px;color:#558B2F;font-size:0.85rem;border-top:1px solid #DCEDC8;margin-top:40px'>
 <b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
-
