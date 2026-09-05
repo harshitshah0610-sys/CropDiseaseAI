@@ -72,34 +72,24 @@ st.markdown("""
         color: var(--text);
     }
 
-    /* ── Live animated mesh background ── */
+    /* ── Live animated mesh background (safe, non-overlapping) ── */
     .stApp {
-        background: linear-gradient(160deg, #F4F9F2 0%, #EAF4E6 45%, #F6FAF4 100%);
-        position: relative;
-    }
-    .stApp::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background:
+        background-image:
             radial-gradient(circle at 12% 18%, rgba(139,195,74,0.28) 0%, transparent 42%),
             radial-gradient(circle at 88% 12%, rgba(47,107,62,0.20) 0%, transparent 38%),
             radial-gradient(circle at 22% 88%, rgba(165,214,167,0.28) 0%, transparent 42%),
-            radial-gradient(circle at 92% 82%, rgba(139,195,74,0.22) 0%, transparent 38%);
-        background-size: 200% 200%;
+            radial-gradient(circle at 92% 82%, rgba(139,195,74,0.22) 0%, transparent 38%),
+            linear-gradient(160deg, #F4F9F2 0%, #EAF4E6 45%, #F6FAF4 100%);
+        background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+        background-attachment: fixed, fixed, fixed, fixed, fixed;
         animation: meshDrift 24s ease-in-out infinite;
     }
     @keyframes meshDrift {
-        0%, 100% { background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%; }
-        50%      { background-position: 25% 35%, 75% 15%, 15% 65%, 85% 90%; }
+        0%, 100% { background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%, 0 0; }
+        50%      { background-position: 25% 35%, 75% 15%, 15% 65%, 85% 90%, 0 0; }
     }
     .main .block-container {
-        position: relative;
-        z-index: 1;
         animation: pageFadeIn 0.5s cubic-bezier(.22,1,.36,1) both;
-        perspective: 1400px;
     }
     @keyframes pageFadeIn {
         from { opacity: 0; transform: translateY(10px) scale(0.99); }
@@ -425,7 +415,7 @@ st.markdown("""
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
-        .stApp::before { animation-duration: 34s; opacity: 0.7; }
+        .stApp { animation-duration: 34s; }
         .figma-header { padding: 16px 18px; border-radius: 14px; }
         .figma-header:hover { transform: none; }
         .figma-header-title { font-size: 1.3rem; line-height: 1.2; }
