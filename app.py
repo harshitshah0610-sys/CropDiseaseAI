@@ -453,6 +453,93 @@ st.markdown("""
         img { max-width: 100%; height: auto; }
     }
 
+    /* ── 2026 mobile-first spatial UI ── */
+    :root {
+        --bg: #F3F6F0; --surface: #FFFFFF; --border: #D8E1D4;
+        --text: #162019; --text-muted: #637066; --accent: #2D6A3F;
+        --accent-dark: #183F29; --accent-soft: #E8F2E8; --accent-2: #E6A23C;
+        --accent-glow: rgba(45,106,63,.22); --radius: 8px;
+        --shadow-sm: 0 2px 0 rgba(24,63,41,.04), 0 8px 22px rgba(32,55,39,.07);
+        --shadow-md: 0 4px 0 rgba(24,63,41,.05), 0 18px 42px rgba(32,55,39,.11);
+        --shadow-lg: 0 8px 0 rgba(24,63,41,.05), 0 28px 60px rgba(32,55,39,.16);
+        --glass: rgba(255,255,255,.88); --glass-border: rgba(255,255,255,.92);
+    }
+    html, body, [class*="css"] { letter-spacing: 0 !important; }
+    .stApp {
+        background-color: var(--bg);
+        background-image:
+          linear-gradient(rgba(45,106,63,.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(45,106,63,.035) 1px, transparent 1px),
+          linear-gradient(160deg, #F8FAF6 0%, #EEF4EC 52%, #F7F4EA 100%);
+        background-size: 32px 32px, 32px 32px, 100% 100%;
+        background-attachment: fixed; animation: none;
+    }
+    [data-testid="stAppViewContainer"] > .main .block-container { max-width: 1320px; padding-top: 1.25rem; }
+    [data-testid="stSidebar"] { background: rgba(247,250,245,.96); border-right: 1px solid var(--border); }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { line-height: 1.55; }
+    .figma-header {
+        background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(236,245,233,.9));
+        border: 1px solid rgba(45,106,63,.16); border-radius: 8px; padding: 26px 28px;
+        box-shadow: 0 5px 0 #D6E3D4, 0 22px 46px rgba(35,67,43,.12);
+        overflow: hidden; isolation: isolate;
+    }
+    .figma-header::before { content:""; position:absolute; inset:0 auto 0 0; width:7px; background:linear-gradient(#E6A23C,#2D6A3F); }
+    .figma-header::after { display:none; }
+    .figma-header:hover { transform: translateY(-2px); box-shadow:0 7px 0 #D6E3D4,0 26px 54px rgba(35,67,43,.15); }
+    .figma-header-title { color:var(--accent-dark); background:none; -webkit-text-fill-color:initial; animation:none; font-size:2rem; font-weight:800; }
+    .figma-header-sub { max-width:760px; line-height:1.55; }
+    .figma-badge { border-radius:999px; box-shadow:none; }
+    .figma-card, .profile-hero, .profile-stat-card, .scheme-card, .contact-card {
+        background:rgba(255,255,255,.93); border:1px solid var(--border); border-radius:8px;
+        box-shadow:var(--shadow-sm); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    }
+    .figma-card { padding:24px; }
+    .figma-card:hover, .scheme-card:hover, .contact-card:hover, .profile-stat-card:hover {
+        transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:#BFD1BC;
+    }
+    .profile-hero { border-top:5px solid var(--accent); }
+    .profile-hero::before { display:none; }
+    .profile-avatar { animation:none; box-shadow:0 5px 0 #B8CFB6,0 16px 30px rgba(45,106,63,.18); }
+    .profile-stat-num { background:none; color:var(--accent-dark); -webkit-text-fill-color:initial; }
+    .stTabs [data-baseweb="tab-list"] { gap:6px; background:rgba(255,255,255,.84); border:1px solid var(--border); padding:6px; border-radius:8px; box-shadow:var(--shadow-sm); }
+    .stTabs [data-baseweb="tab"] { min-height:46px; border-radius:6px; padding:0 16px; font-weight:700; color:var(--text-muted); }
+    .stTabs [aria-selected="true"] { background:var(--accent-soft); color:var(--accent-dark); }
+    .stTabs [data-baseweb="tab-highlight"] { display:none; }
+    .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] a {
+        min-height:46px; border-radius:7px !important; font-weight:750 !important;
+        box-shadow:0 4px 0 #173D27,0 12px 24px rgba(45,106,63,.16) !important;
+    }
+    .stButton > button:active, .stFormSubmitButton > button:active { transform:translateY(3px) !important; box-shadow:0 1px 0 #173D27 !important; }
+    [data-testid="stFileUploader"] { background:#F8FBF6; border:1px dashed #8DB28D; border-radius:8px; padding:8px; }
+    [data-testid="stFileUploaderDropzone"] { background:transparent; }
+    .remedy-chemical, .remedy-organic, .chat-box, .alert-box, .audio-section { border-radius:7px; box-shadow:var(--shadow-sm); }
+    .scheme-card { border-top:4px solid var(--accent); }
+    .contact-card { border-left:4px solid #91AD7E; }
+    [data-testid="stMetric"] { background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px; box-shadow:var(--shadow-sm); }
+    [data-testid="stImage"] img { border-radius:8px; box-shadow:var(--shadow-md); }
+    .mk-mobile-intro { display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:10px; margin:0 0 18px; }
+    .mk-intro-main,.mk-intro-stat { background:rgba(255,255,255,.86); border:1px solid var(--border); border-radius:8px; padding:14px 16px; box-shadow:var(--shadow-sm); }
+    .mk-intro-main strong { color:var(--accent-dark); } .mk-intro-main small,.mk-intro-stat small { color:var(--text-muted); display:block; }
+    .mk-intro-stat b { font-size:1.05rem; color:var(--accent-dark); }
+    @media(max-width:768px){
+      [data-testid="stAppViewContainer"] > .main .block-container { padding:1rem .8rem 5.5rem; }
+      .figma-header { padding:18px 16px 17px 20px; box-shadow:0 4px 0 #D6E3D4,0 15px 30px rgba(35,67,43,.11); }
+      .figma-header-title { font-size:1.45rem !important; }
+      .figma-header-sub { font-size:.78rem; margin-bottom:4px; }
+      .figma-badge { width:100%; text-align:center; }
+      .figma-card { padding:15px; }
+      .mk-mobile-intro { grid-template-columns:1fr 1fr 1fr; }
+      .mk-intro-main { grid-column:1/-1; }
+      .mk-intro-stat { padding:11px 8px; text-align:center; }
+      .mk-intro-stat b { font-size:.9rem; }
+      .mk-intro-stat small { font-size:.66rem; }
+      .stTabs [data-baseweb="tab-list"] { position:sticky; top:0; z-index:50; overflow-x:auto; justify-content:flex-start; }
+      .stTabs [data-baseweb="tab"] { min-width:max-content; padding:0 12px; font-size:.78rem; }
+      [data-testid="column"] { min-width:0 !important; }
+      .stButton > button,.stFormSubmitButton > button { min-height:48px; }
+    }
+    @media(max-width:380px){ .mk-mobile-intro { gap:6px; } .mk-intro-stat { padding:9px 5px; } }
+
     /* Hide default elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
@@ -787,10 +874,10 @@ SCAN_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" s
 
 def show_login_page():
     st.markdown("""
-    <div style='text-align:center;padding:30px 0 10px'>
+    <div class='figma-header' style='text-align:center;display:block;padding:30px 22px 24px;margin:18px auto 18px;max-width:680px'>
         <div style="display:flex;justify-content:center;margin-bottom:10px">""" + logo_svg(96) + """</div>
-        <h1 style='color:#1F4E2B;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
-        <p style='color:#2F6B39;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
+        <h1 class='figma-header-title' style='font-size:2rem;margin:0'>""" + _t('title') + """</h1>
+        <p class='figma-header-sub' style='font-size:1rem;margin:6px 0 0'>""" + _t('subtitle') + """</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1688,7 +1775,14 @@ with profile_col:
         st.session_state["show_profile"] = True
         st.rerun()
 
-st.markdown("<div style='margin-bottom:18px'></div>", unsafe_allow_html=True)
+st.markdown("""
+<div class="mk-mobile-intro">
+  <div class="mk-intro-main"><strong>Protect your crop in minutes</strong><small>Capture a clear leaf or pest photo for an AI-assisted field assessment.</small></div>
+  <div class="mk-intro-stat"><b>39</b><small>Disease classes</small></div>
+  <div class="mk-intro-stat"><b>14</b><small>Pest classes</small></div>
+  <div class="mk-intro-stat"><b>TTA ×4</b><small>AI analysis</small></div>
+</div>
+""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────
 # TAB NAVIGATION (FIGMA DASHBOARD SYSTEM)
