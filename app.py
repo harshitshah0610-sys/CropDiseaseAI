@@ -15,8 +15,6 @@ import hashlib
 import pydeck as pdk
 import pandas as pd
 from datetime import datetime
-import openpyxl
-from openpyxl import Workbook, load_workbook
 
 # ─────────────────────────────────────────────────────────────
 # CUSTOM BRAND MARK — real MahaKrishi logo image
@@ -438,11 +436,8 @@ DEVICE   = torch.device("cpu")
 EXCEL_SIGNIN_FILE = os.path.join(os.path.dirname(__file__), "farmer_signins.xlsx")
 EXCEL_ALERTS_FILE = os.path.join(os.path.dirname(__file__), "disease_alerts.xlsx")
 
-CONF_THRESHOLD_LOW    = 45.0  # Below this show blurry-image popup
-CONF_THRESHOLD_EXPERT = 20.0  # Below this show consult-an-expert popup
-CONF_THRESHOLD_ALERT  = 60.0  # Above this show "Alert Nearby Farmers" button
-
-REGISTER_LOG_FILE = os.path.join(os.path.dirname(__file__), "user_register_log.xlsx")
+CONF_THRESHOLD_LOW  = 45.0   # Below this show low-confidence warning
+CONF_THRESHOLD_ALERT = 60.0  # Above this show "Alert Nearby Farmers" button
 
 ALL_DISTRICTS = [
     "Pune", "Nashik", "Kolhapur", "Solapur", "Chhatrapati Sambhajinagar",
@@ -467,67 +462,6 @@ if GEMINI_KEY:
 
 
 # ─────────────────────────────────────────────────────────────
-# CONFIDENCE POP-UPS
-# (Rendered as a non-blocking animated overlay using the app's own
-#  cardRiseIn / pageFadeIn keyframes — NOT st.dialog, so it never
-#  pauses script execution and every other animation on the page
-#  keeps working exactly as before.)
-# ─────────────────────────────────────────────────────────────
-def show_blurry_image_popup(conf: float, popup_id: str):
-    st.markdown(f"""
-    <div id="{popup_id}" style="position:fixed;inset:0;z-index:9999;
-         background:rgba(0,0,0,0.45);display:flex;align-items:center;
-         justify-content:center;animation:pageFadeIn 0.25s ease both;">
-      <div style="background:#fff;border-radius:16px;max-width:380px;width:90%;
-           padding:26px 24px;text-align:center;animation:cardRiseIn 0.35s ease both;
-           box-shadow:0 10px 40px rgba(0,0,0,0.28);">
-        <h3 style="color:#E65100;margin:0 0 10px">⚠️ Image is Blurry / Not Clear</h3>
-        <p style="color:#444;font-size:0.92rem;margin:0 0 8px">
-          Our AI could only detect this with <b>{conf:.1f}%</b> confidence — below the reliable
-          threshold (45%).
-        </p>
-        <p style="color:#444;font-size:0.92rem;margin:0 0 18px">
-          📸 Please upload a <b>clear photo of the crop</b> — hold the camera steady, use bright
-          natural light, and make sure the leaf fills most of the frame.
-        </p>
-        <button onclick="document.getElementById('{popup_id}').style.display='none'"
-          style="background:#2F6B39;color:#fff;border:none;padding:10px 24px;border-radius:8px;
-          font-weight:600;cursor:pointer;width:100%;font-size:0.95rem;">
-          OK, I'll Retake the Photo
-        </button>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-def show_consult_expert_popup(conf: float, popup_id: str):
-    st.markdown(f"""
-    <div id="{popup_id}" style="position:fixed;inset:0;z-index:9999;
-         background:rgba(0,0,0,0.45);display:flex;align-items:center;
-         justify-content:center;animation:pageFadeIn 0.25s ease both;">
-      <div style="background:#fff;border-radius:16px;max-width:380px;width:90%;
-           padding:26px 24px;text-align:center;animation:cardRiseIn 0.35s ease both;
-           box-shadow:0 10px 40px rgba(0,0,0,0.28);">
-        <h3 style="color:#BF360C;margin:0 0 10px">🩺 Consult an Expert</h3>
-        <p style="color:#444;font-size:0.92rem;margin:0 0 8px">
-          The AI's confidence for this image is only <b>{conf:.1f}%</b> — too low (below 20%)
-          for a reliable diagnosis.
-        </p>
-        <p style="color:#444;font-size:0.92rem;margin:0 0 18px">
-          👨‍🌾 We recommend you <b>consult an agriculture expert</b> or your nearest Krishi
-          Vigyan Kendra for an accurate assessment of your crop.
-        </p>
-        <button onclick="document.getElementById('{popup_id}').style.display='none'"
-          style="background:#BF360C;color:#fff;border:none;padding:10px 24px;border-radius:8px;
-          font-weight:600;cursor:pointer;width:100%;font-size:0.95rem;">
-          OK, Got It
-        </button>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-# ─────────────────────────────────────────────────────────────
 # EXCEL HELPER FUNCTIONS
 # ─────────────────────────────────────────────────────────────
 def append_signin_to_excel(name: str, phone: str, district: str, action: str, password_hash: str = ""):
@@ -549,54 +483,6 @@ def append_signin_to_excel(name: str, phone: str, district: str, action: str, pa
     else:
         updated = pd.DataFrame([new_row])
     updated.to_excel(EXCEL_SIGNIN_FILE, index=False)
-
-
-def log_registration_with_openpyxl(name: str, phone: str, district: str):
-    """
-    Log every new user registration into a dedicated Excel sheet using
-    openpyxl directly (as opposed to the pandas-based helper above).
-    Creates the workbook with a header row on first use, then appends
-    one row per registration.
-    """
-    headers = ["Timestamp", "Name", "Phone", "District"]
-    row = [datetime.now().strftime("%Y-%m-%d %H:%M:%S"), name, phone, district]
-
-    try:
-        if os.path.exists(REGISTER_LOG_FILE):
-            wb = load_workbook(REGISTER_LOG_FILE)
-            ws = wb.active
-        else:
-            wb = Workbook()
-            ws = wb.active
-            ws.title = "Registrations"
-            ws.append(headers)
-
-        ws.append(row)
-        wb.save(REGISTER_LOG_FILE)
-    except Exception as e:
-        # Don't block registration if the log write fails; just warn.
-        st.warning(f"Could not log registration to Excel: {e}")
-
-
-def init_register_log_excel():
-    """
-    Make sure user_register_log.xlsx exists (with header row) as soon as
-    the app starts, instead of only being created after the very first
-    registration. Safe to call on every run — it's a no-op if the file
-    is already there.
-    """
-    if not os.path.exists(REGISTER_LOG_FILE):
-        try:
-            wb = Workbook()
-            ws = wb.active
-            ws.title = "Registrations"
-            ws.append(["Timestamp", "Name", "Phone", "District"])
-            wb.save(REGISTER_LOG_FILE)
-        except Exception as e:
-            st.warning(f"Could not create registration log Excel file: {e}")
-
-
-init_register_log_excel()
 
 
 def append_alert_to_excel(reporter_name: str, reporter_phone: str, district: str,
@@ -834,7 +720,6 @@ def show_login_page():
                     else:
                         append_signin_to_excel(name_clean, phone_clean, rg_district, "Register",
                                                password_hash=hash_password(pwd_clean))
-                        log_registration_with_openpyxl(name_clean, phone_clean, rg_district)
                         st.session_state["logged_in"] = True
                         st.session_state["farmer_name"] = name_clean
                         st.session_state["farmer_phone"] = phone_clean
@@ -1735,15 +1620,6 @@ with tab_detect:
                             <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
                             <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                         </div>""", unsafe_allow_html=True)
-
-                        popup_key = f"popup_shown_{uploaded.name}_{conf:.1f}"
-                        if not st.session_state.get(popup_key, False):
-                            st.session_state[popup_key] = True
-                            popup_id = "popup_" + hashlib.md5(popup_key.encode()).hexdigest()[:10]
-                            if conf < CONF_THRESHOLD_EXPERT:
-                                show_consult_expert_popup(conf, popup_id)
-                            else:
-                                show_blurry_image_popup(conf, popup_id)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
                         status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
@@ -2308,3 +2184,4 @@ st.markdown("""
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
+
