@@ -49,17 +49,17 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
 
     :root {
-        --bg: #FAFAF8;
+        --bg: #F5F7F2;
         --surface: #FFFFFF;
-        --border: #E4E2DC;
-        --text: #1F2320;
-        --text-muted: #6B6F6A;
-        --accent: #2F6B3E;
-        --accent-dark: #1F4E2B;
-        --accent-soft: #EEF3EC;
+        --border: #D8E0D3;
+        --text: #17251B;
+        --text-muted: #667166;
+        --accent: #2E6A3D;
+        --accent-dark: #184D2B;
+        --accent-soft: #EAF3E8;
         --radius: 12px;
-        --shadow-sm: 0 1px 2px rgba(20,20,15,0.05);
-        --shadow-md: 0 4px 14px rgba(20,20,15,0.06);
+        --shadow-sm: 0 1px 2px rgba(24,77,43,0.06);
+        --shadow-md: 0 4px 14px rgba(24,77,43,0.10);
     }
 
     html, body, [class*="css"] {
@@ -92,7 +92,7 @@ st.markdown("""
         font-size: 0.8rem;
         font-weight: 600;
         color: var(--accent-dark);
-        border: 1px solid #DCE8DD;
+        border: 1px solid #CFE0CC;
         white-space: nowrap;
         flex-shrink: 0;
     }
@@ -129,10 +129,10 @@ st.markdown("""
     }
 
     /* Status Badges */
-    .badge-emergency { background: #FBEBEA; color: #A23B34; border: 1px solid #F0D3D0; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
-    .badge-warning   { background: #FBF1E4; color: #A0651A; border: 1px solid #F0E0C6; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
-    .badge-success   { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #DCE8DD; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
-    .badge-low-conf  { background: #FBF6E0; color: #8A6D14; border: 1px solid #EFE4B8; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-emergency { background: #FCECE8; color: #A83C32; border: 1px solid #EFCFC9; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-warning   { background: #FFF4DF; color: #8A5A12; border: 1px solid #E9D5AA; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-success   { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #CFE0CC; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+    .badge-low-conf  { background: #FFF7D9; color: #765B0A; border: 1px solid #E7D69B; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
 
     /* Profile Page */
     .profile-hero {
@@ -169,8 +169,8 @@ st.markdown("""
 
     /* Remedy Container */
     .remedy-chemical {
-        background: #FBF6EC;
-        border-left: 3px solid #C08A2E;
+        background: #FFF8E8;
+        border-left: 3px solid #B7791F;
         border-radius: 0 var(--radius) var(--radius) 0;
         padding: 18px;
         margin: 12px 0;
@@ -197,8 +197,8 @@ st.markdown("""
 
     /* Alert box */
     .alert-box {
-        background: #FBF1E4;
-        border: 1px solid #EAD3AC;
+        background: #FFF4DF;
+        border: 1px solid #E7CF9E;
         border-radius: var(--radius);
         padding: 16px 20px;
         margin: 12px 0;
@@ -206,8 +206,8 @@ st.markdown("""
 
     /* Audio section */
     .audio-section {
-        background: #F0F4F8;
-        border: 1px solid #D7E1E9;
+        background: #EDF4F0;
+        border: 1px solid #D3E2DA;
         border-radius: var(--radius);
         padding: 16px;
         margin: 12px 0;
@@ -240,9 +240,9 @@ st.markdown("""
         animation: statusPulse 2s infinite;
     }
     @keyframes statusPulse {
-        0%   { box-shadow: 0 0 0 0 rgba(47,107,62,0.35); }
-        70%  { box-shadow: 0 0 0 6px rgba(47,107,62,0); }
-        100% { box-shadow: 0 0 0 0 rgba(47,107,62,0); }
+        0%   { box-shadow: 0 0 0 0 rgba(46,106,61,0.35); }
+        70%  { box-shadow: 0 0 0 6px rgba(46,106,61,0); }
+        100% { box-shadow: 0 0 0 0 rgba(46,106,61,0); }
     }
 
     /* Buttons */
@@ -298,6 +298,54 @@ st.markdown("""
         .figma-header-title { font-size: 1.15rem; }
         img { max-width: 100%; height: auto; }
     }
+
+    /* Unified crop-health colour treatment for native Streamlit controls */
+    [data-testid="stSidebar"] {
+        background: #EEF4EA;
+        border-right: 1px solid var(--border);
+    }
+    [data-testid="stSidebar"] hr, hr { border-color: var(--border); }
+    .stButton > button[kind="primary"],
+    .stFormSubmitButton > button[kind="primary"] {
+        background: var(--accent) !important;
+        color: #FFFFFF !important;
+        border-color: var(--accent) !important;
+    }
+    .stButton > button[kind="primary"]:hover,
+    .stFormSubmitButton > button[kind="primary"]:hover {
+        background: var(--accent-dark) !important;
+        border-color: var(--accent-dark) !important;
+    }
+    .stButton > button:not([kind="primary"]),
+    .stFormSubmitButton > button:not([kind="primary"]),
+    .stLinkButton > a {
+        color: var(--accent-dark) !important;
+        border-color: var(--border) !important;
+        background: var(--surface) !important;
+    }
+    .stButton > button:not([kind="primary"]):hover,
+    .stFormSubmitButton > button:not([kind="primary"]):hover,
+    .stLinkButton > a:hover {
+        color: var(--accent-dark) !important;
+        border-color: var(--accent) !important;
+        background: var(--accent-soft) !important;
+    }
+    [data-baseweb="tab"] { color: var(--text-muted) !important; }
+    [data-baseweb="tab"][aria-selected="true"] { color: var(--accent-dark) !important; }
+    [data-baseweb="input"] > div,
+    [data-baseweb="select"] > div,
+    [data-baseweb="textarea"] > div {
+        background: var(--surface) !important;
+        border-color: var(--border) !important;
+    }
+    [data-baseweb="input"]:focus-within > div,
+    [data-baseweb="select"]:focus-within > div,
+    [data-baseweb="textarea"]:focus-within > div {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 1px var(--accent) !important;
+    }
+    .stProgress > div > div > div > div { background: var(--accent) !important; }
+    a { color: var(--accent-dark); }
 
     /* Hide default elements */
     #MainMenu {visibility: hidden;}
@@ -589,7 +637,7 @@ def get_profile_photo_path(phone: str):
 def _default_avatar_data_uri() -> str:
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
-        '<circle cx="50" cy="50" r="50" fill="#DBDBDB"/>'
+        '<circle cx="50" cy="50" r="50" fill="#D7E2D3"/>'
         '<circle cx="50" cy="40" r="18" fill="#FFFFFF"/>'
         '<path d="M50 60c-21 0-35 13-35 28v6h70v-6c0-15-14-28-35-28z" fill="#FFFFFF"/>'
         '</svg>'
@@ -611,17 +659,17 @@ def get_avatar_data_uri(phone: str) -> str:
     return _default_avatar_data_uri()
 
 
-CHART_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8BC34A" stroke-width="1.6">
+CHART_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#5D8A3C" stroke-width="1.6">
   <path d="M4 20V10m6 10V4m6 16v-7" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M3 20h18" stroke-linecap="round"/>
 </svg>"""
 
-UPLOAD_ICON_SVG = """<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#558B2F" stroke-width="1.6">
+UPLOAD_ICON_SVG = """<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#477A38" stroke-width="1.6">
   <path d="M4 16.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M12 3v12m0-12 4 4m-4-4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>"""
 
-SCAN_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8BC34A" stroke-width="1.6">
+SCAN_ICON_SVG = """<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#5D8A3C" stroke-width="1.6">
   <path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0 1 12 4a7 7 0 0 1 7 6.5C19 14.5 16 18 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="12" cy="11" r="2.3"/>
 </svg>"""
@@ -635,8 +683,8 @@ def show_login_page():
     st.markdown("""
     <div style='text-align:center;padding:30px 0 10px'>
         <div style="display:flex;justify-content:center;margin-bottom:10px">""" + logo_svg(96) + """</div>
-        <h1 style='color:#1F4E2B;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
-        <p style='color:#2F6B39;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
+        <h1 style='color:#184D2B;font-size:2rem;margin:0'>""" + _t('title') + """</h1>
+        <p style='color:#2E6A3D;font-size:1rem;margin:4px 0 0'>""" + _t('subtitle') + """</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -727,7 +775,7 @@ def show_login_page():
                         st.rerun()
 
     st.markdown("""
-    <div style='text-align:center;padding:30px;color:#558B2F;font-size:0.82rem;margin-top:20px'>
+    <div style='text-align:center;padding:30px;color:#477A38;font-size:0.82rem;margin-top:20px'>
         <b>MahaKrishi AI</b> | Powered by PyTorch + Google Gemini AI<br>
         Maharashtra Government Agri-Tech Initiative
     </div>
@@ -768,21 +816,21 @@ def show_profile_page():
     <div class='profile-hero'>
         <div class='profile-avatar'><img src='{avatar_uri}'/></div>
         <div style='flex:1'>
-            <h2 style='margin:0 0 4px;font-size:1.6rem;color:var(--text,#1F2320)'>{farmer_name}</h2>
-            <p style='margin:0;color:var(--text-muted,#6B6F6A);font-size:0.95rem'>{farmer_phone}</p>
-            <p style='margin:4px 0 0;color:var(--text-muted,#6B6F6A);font-size:0.88rem'>{farmer_district} District, Maharashtra</p>
+            <h2 style='margin:0 0 4px;font-size:1.6rem;color:var(--text,#17251B)'>{farmer_name}</h2>
+            <p style='margin:0;color:var(--text-muted,#667166);font-size:0.95rem'>{farmer_phone}</p>
+            <p style='margin:4px 0 0;color:var(--text-muted,#667166);font-size:0.88rem'>{farmer_district} District, Maharashtra</p>
             <p style='margin:8px 0 0;'>
-                <span style='background:var(--accent-soft,#EEF3EC);color:var(--accent-dark,#1F4E2B);border-radius:20px;
-                             padding:4px 14px;font-size:0.8rem;font-weight:600;border:1px solid #DCE8DD'>
+                <span style='background:var(--accent-soft,#EAF3E8);color:var(--accent-dark,#184D2B);border-radius:20px;
+                             padding:4px 14px;font-size:0.8rem;font-weight:600;border:1px solid #CFE0CC'>
                     Reg. No: {reg_number}
                 </span>
             </p>
         </div>
         <div style='text-align:right'>
-            <p style='margin:0;font-size:0.78rem;color:var(--text-muted,#6B6F6A)'>Member Since</p>
-            <p style='margin:0;font-weight:700;font-size:1.05rem;color:var(--text,#1F2320)'>{datetime.now().strftime("%b %Y")}</p>
-            <span style='background:var(--accent-soft,#EEF3EC);color:var(--accent-dark,#1F4E2B);border-radius:20px;
-                         padding:3px 12px;font-size:0.76rem;font-weight:600;border:1px solid #DCE8DD'>Verified Farmer</span>
+            <p style='margin:0;font-size:0.78rem;color:var(--text-muted,#667166)'>Member Since</p>
+            <p style='margin:0;font-weight:700;font-size:1.05rem;color:var(--text,#17251B)'>{datetime.now().strftime("%b %Y")}</p>
+            <span style='background:var(--accent-soft,#EAF3E8);color:var(--accent-dark,#184D2B);border-radius:20px;
+                         padding:3px 12px;font-size:0.76rem;font-weight:600;border:1px solid #CFE0CC'>Verified Farmer</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -843,33 +891,33 @@ def show_profile_page():
         st.markdown("### Farmer Information")
         st.markdown(f"""
         <table style='width:100%;border-collapse:collapse;font-size:0.92rem'>
-            <tr style='border-bottom:1px solid #E8F5E9'>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Full Name</td>
-                <td style='padding:10px 0;color:#1F4E2B;font-weight:700'>{farmer_name}</td>
+            <tr style='border-bottom:1px solid #EAF3E8'>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>Full Name</td>
+                <td style='padding:10px 0;color:#184D2B;font-weight:700'>{farmer_name}</td>
             </tr>
-            <tr style='border-bottom:1px solid #E8F5E9'>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Mobile Number</td>
-                <td style='padding:10px 0;color:#1F4E2B'>{farmer_phone}</td>
+            <tr style='border-bottom:1px solid #EAF3E8'>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>Mobile Number</td>
+                <td style='padding:10px 0;color:#184D2B'>{farmer_phone}</td>
             </tr>
-            <tr style='border-bottom:1px solid #E8F5E9'>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>District</td>
-                <td style='padding:10px 0;color:#1F4E2B'>{farmer_district}</td>
+            <tr style='border-bottom:1px solid #EAF3E8'>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>District</td>
+                <td style='padding:10px 0;color:#184D2B'>{farmer_district}</td>
             </tr>
-            <tr style='border-bottom:1px solid #E8F5E9'>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>State</td>
-                <td style='padding:10px 0;color:#1F4E2B'>Maharashtra</td>
+            <tr style='border-bottom:1px solid #EAF3E8'>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>State</td>
+                <td style='padding:10px 0;color:#184D2B'>Maharashtra</td>
             </tr>
-            <tr style='border-bottom:1px solid #E8F5E9'>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Registration No.</td>
+            <tr style='border-bottom:1px solid #EAF3E8'>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>Registration No.</td>
                 <td style='padding:10px 0'>
-                    <span style='background:#E8F5E9;color:#1F4E2B;font-weight:700;
+                    <span style='background:#EAF3E8;color:#184D2B;font-weight:700;
                                  padding:3px 10px;border-radius:10px'>{reg_number}</span>
                 </td>
             </tr>
             <tr>
-                <td style='padding:10px 0;color:#558B2F;font-weight:600'>Account Status</td>
+                <td style='padding:10px 0;color:#477A38;font-weight:600'>Account Status</td>
                 <td style='padding:10px 0'>
-                    <span style='background:#C8E6C9;color:#1F4E2B;font-weight:700;
+                    <span style='background:#D5E8D2;color:#184D2B;font-weight:700;
                                  padding:3px 10px;border-radius:10px'>Active</span>
                 </td>
             </tr>
@@ -885,12 +933,12 @@ def show_profile_page():
                 "Count": [disease_count, pest_count, healthy_count]
             }
             df_chart = pd.DataFrame(chart_data)
-            st.bar_chart(df_chart.set_index("Category"), color="#2F6B39", use_container_width=True)
+            st.bar_chart(df_chart.set_index("Category"), color="#2E6A3D", use_container_width=True)
         else:
             st.markdown("""
-            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+            <div style='text-align:center;padding:30px;background:#F3F7ED;border-radius:12px'>
                 <div style='display:flex;justify-content:center'>""" + CHART_ICON_SVG + """</div>
-                <p style='color:#558B2F;margin:8px 0 0'>No scan data yet.<br>
+                <p style='color:#477A38;margin:8px 0 0'>No scan data yet.<br>
                    <small>Start detecting crop diseases to see your activity chart here.</small></p>
             </div>""", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -901,27 +949,27 @@ def show_profile_page():
 
         if not history:
             st.markdown("""
-            <div style='text-align:center;padding:30px;background:#F9FBE7;border-radius:12px'>
+            <div style='text-align:center;padding:30px;background:#F3F7ED;border-radius:12px'>
                 <div style='display:flex;justify-content:center'>""" + SCAN_ICON_SVG + """</div>
-                <p style='color:#558B2F;margin:8px 0 0'>No detections yet.<br>
+                <p style='color:#477A38;margin:8px 0 0'>No detections yet.<br>
                    <small>Upload a crop photo on the AI Detection tab to get started.</small></p>
             </div>""", unsafe_allow_html=True)
         else:
             for h in reversed(history[-10:]):
-                badge_color = "#FFEBEE" if h.get("type") == "disease" else (
-                              "#FFF3E0" if h.get("type") == "pest" else "#E8F5E9")
-                badge_text_color = "#C62828" if h.get("type") == "disease" else (
-                                   "#EF6C00" if h.get("type") == "pest" else "#2F6B39")
+                badge_color = "#FCECE8" if h.get("type") == "disease" else (
+                              "#FFF4DF" if h.get("type") == "pest" else "#EAF3E8")
+                badge_text_color = "#A83C32" if h.get("type") == "disease" else (
+                                   "#9A5A0A" if h.get("type") == "pest" else "#2E6A3D")
                 label = "Disease" if h.get("type") == "disease" else (
                         "Pest" if h.get("type") == "pest" else "Healthy")
                 st.markdown(f"""
                 <div class='history-row'>
                     <div style='flex:1;min-width:0'>
-                        <p style='margin:0;font-weight:600;color:#1F4E2B;
+                        <p style='margin:0;font-weight:600;color:#184D2B;
                                   white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>
                             {h.get("name","Unknown")}
                         </p>
-                        <p style='margin:2px 0 0;font-size:0.78rem;color:#558B2F'>
+                        <p style='margin:2px 0 0;font-size:0.78rem;color:#477A38'>
                             {h.get("time","—")} &nbsp;|&nbsp; {h.get("conf",0):.1f}% confidence
                         </p>
                     </div>
@@ -939,23 +987,23 @@ def show_profile_page():
         st.markdown("### AI Models Used")
         st.markdown("""
         <div style='display:flex;flex-direction:column;gap:10px'>
-            <div style='background:#E8F5E9;border-radius:10px;padding:12px'>
-                <b style='color:#1F4E2B'>Crop Disease Model</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#33691E'>
+            <div style='background:#EAF3E8;border-radius:10px;padding:12px'>
+                <b style='color:#184D2B'>Crop Disease Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#35662E'>
                     EfficientNet-B0 · 39 Classes · TTA ×4<br>
                     Rice, Sugarcane, Cotton, Wheat, Tomato, Potato
                 </p>
             </div>
-            <div style='background:#FFF3E0;border-radius:10px;padding:12px'>
-                <b style='color:#E65100'>Pest Detection Model</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#BF360C'>
+            <div style='background:#FFF4DF;border-radius:10px;padding:12px'>
+                <b style='color:#8F4D08'>Pest Detection Model</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#8F3B1F'>
                     EfficientNet-B0 · 14 Classes · TTA ×4<br>
                     Bollworm, Aphids, Stem Borer, Whitefly, Armyworm
                 </p>
             </div>
-            <div style='background:#E3F2FD;border-radius:10px;padding:12px'>
-                <b style='color:#1565C0'>AI Advisory Engine</b>
-                <p style='margin:4px 0 0;font-size:0.82rem;color:#0D47A1'>
+            <div style='background:#E7F2EF;border-radius:10px;padding:12px'>
+                <b style='color:#1F665A'>AI Advisory Engine</b>
+                <p style='margin:4px 0 0;font-size:0.82rem;color:#24594F'>
                     Google Gemini 1.5 Flash + gTTS Voice<br>
                     Supports: Marathi, Hindi, English, Gujarati, Punjabi
                 </p>
@@ -1096,7 +1144,7 @@ def show_low_confidence_dialog(name: str, conf: float):
     """Popup shown when AI diagnosis confidence is below CONF_THRESHOLD_LOW."""
     st.markdown(f"""
     <div style='text-align:center;padding:6px 0 14px'>
-        <p style='color:#BF360C;font-size:0.95rem;margin:0'>
+        <p style='color:#8F3B1F;font-size:0.95rem;margin:0'>
             The AI's best guess was <b>{name}</b>, but it is only
             <b>{conf:.1f}%</b> confident — below the {CONF_THRESHOLD_LOW:.0f}% reliability threshold.
         </p>
@@ -1398,8 +1446,8 @@ with st.sidebar:
     _logo_html = logo_svg(44)
     _sidebar_html = (
         "<div style='text-align:center;padding:18px 16px 14px;"
-        "background:linear-gradient(135deg,#E8F5E9,#C8E6C9);"
-        "border-radius:14px;margin-bottom:15px;border:1px solid #A5D6A7'>"
+        "background:linear-gradient(135deg,#EAF3E8,#D5E8D2);"
+        "border-radius:14px;margin-bottom:15px;border:1px solid #B8D4B3'>"
         "<div style='display:flex;justify-content:center;margin-bottom:10px'>"
         + _logo_html +
         "</div>"
@@ -1408,17 +1456,17 @@ with st.sidebar:
         " style='width:80px;height:80px;border-radius:50%;object-fit:cover;"
         "border:3px solid #FFFFFF;"
         "box-shadow:0 3px 12px rgba(31,78,43,0.30);"
-        "background:#EEF3EC;'/>"
+        "background:#EAF3E8;'/>"
         "</div>"
-        "<p style='color:#1F4E2B;font-weight:700;font-size:0.95rem;margin:0 0 2px;"
+        "<p style='color:#184D2B;font-weight:700;font-size:0.95rem;margin:0 0 2px;"
         "white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>"
         + farmer_name_display +
         "</p>"
-        "<p style='color:#558B2F;font-size:0.78rem;margin:0 0 8px'>"
+        "<p style='color:#477A38;font-size:0.78rem;margin:0 0 8px'>"
         + farmer_dist_display +
         "</p>"
         "<span class='figma-badge'"
-        " style='background:#1F4E2B;color:white;margin-top:2px;display:inline-block;font-size:0.72rem'>"
+        " style='background:#184D2B;color:white;margin-top:2px;display:inline-block;font-size:0.72rem'>"
         "Govt. Agri-Tech Initiative"
         "</span>"
         "</div>"
@@ -1446,7 +1494,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style='background:#FFF3E0;border-left:4px solid #FF9800;padding:10px;border-radius:6px'>
+    <div style='background:#FFF4DF;border-left:4px solid #B7791F;padding:10px;border-radius:6px'>
     <small><b>Emergency Agri Helpline:</b><br>
     Kisan Call Center: <b>1800-180-1551</b> (Toll-Free)</small>
     </div>""", unsafe_allow_html=True)
@@ -1506,22 +1554,22 @@ with profile_col:
         height: 52px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid #A5D6A7;
+        border: 3px solid #B8D4B3;
         box-shadow: 0 2px 10px rgba(31,78,43,0.22);
-        background: #EEF3EC;
+        background: #EAF3E8;
         display: block;
         cursor: pointer;
         transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
         margin-bottom: 3px;
     }}
     #mk-profile-col img.mk-avatar:hover {{
-        border-color: #2F6B3E;
-        box-shadow: 0 4px 16px rgba(47,107,62,0.35);
+        border-color: #2E6A3D;
+        box-shadow: 0 4px 16px rgba(46,106,61,0.35);
         transform: scale(1.07);
     }}
     #mk-profile-col .mk-name-label {{
         font-size: 0.6rem;
-        color: #2F6B39;
+        color: #2E6A3D;
         font-weight: 600;
         text-align: center;
         max-width: 60px;
@@ -1599,11 +1647,11 @@ with tab_detect:
             analyze_btn = st.button("Analyze with AI | निदान करा", type="primary", use_container_width=True)
         else:
             st.markdown("""
-            <div style='background:#F9FBE7;border:2px dashed #8BC34A;border-radius:14px;
+            <div style='background:#F3F7ED;border:2px dashed #5D8A3C;border-radius:14px;
                         padding:40px;text-align:center'>
                 <div style='display:flex;justify-content:center'>""" + UPLOAD_ICON_SVG + """</div>
-                <p style='color:#33691E;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
-                <small style='color:#558B2F'>Supports JPG, PNG, WEBP</small>
+                <p style='color:#35662E;font-weight:600;margin:10px 0 2px'>Upload a photo of crop leaf or pest</p>
+                <small style='color:#477A38'>Supports JPG, PNG, WEBP</small>
             </div>""", unsafe_allow_html=True)
             analyze_btn = False
         st.markdown("</div>", unsafe_allow_html=True)
@@ -1614,10 +1662,10 @@ with tab_detect:
 
         if not uploaded:
             st.markdown("""
-            <div style='background:#E8F5E9;border-radius:12px;padding:30px;text-align:center'>
+            <div style='background:#EAF3E8;border-radius:12px;padding:30px;text-align:center'>
                 <div style='display:flex;justify-content:center'>""" + SCAN_ICON_SVG + """</div>
-                <h4 style='color:#1F4E2B;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
-                <p style='color:#2F6B39;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
+                <h4 style='color:#184D2B;margin:8px 0 4px'>Ready for Instant AI Diagnosis</h4>
+                <p style='color:#2E6A3D;font-size:0.9rem'>Upload an image on the left and click 'Analyze with AI'</p>
             </div>""", unsafe_allow_html=True)
 
         elif analyze_btn:
@@ -1649,8 +1697,8 @@ with tab_detect:
                         st.markdown(f"""
                         <div class='alert-box'>
                             <span class='badge-low-conf'>Low Confidence Detection</span>
-                            <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
-                            <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
+                            <h4 style='color:#8F4D08;margin:10px 0 4px'>Best Match: {name}</h4>
+                            <p style='margin:0;color:#8F3B1F'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                         </div>""", unsafe_allow_html=True)
                         show_low_confidence_dialog(name, conf)
                     else:
@@ -1658,10 +1706,10 @@ with tab_detect:
                         status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
 
                         st.markdown(f"""
-                        <div style='background:#FAFAFA;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #E0E0E0'>
+                        <div style='background:#F7F9F5;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #D8E0D3'>
                             <span class='{badge_cls}'>{status_txt}</span>
-                            <h3 style='color:#1F4E2B;margin:10px 0 4px'>{name}</h3>
-                            <p style='color:#558B2F;font-size:0.88rem;margin:0'>AI Confidence (TTA avg): <b>{conf:.1f}%</b></p>
+                            <h3 style='color:#184D2B;margin:10px 0 4px'>{name}</h3>
+                            <p style='color:#477A38;font-size:0.88rem;margin:0'>AI Confidence (TTA avg): <b>{conf:.1f}%</b></p>
                         </div>""", unsafe_allow_html=True)
                         st.progress(conf / 100)
 
@@ -1894,12 +1942,12 @@ with tab_contacts:
     st.markdown("### Verified Agricultural Specialist Directory & Emergency Helplines")
 
     st.markdown("""
-    <div style='background:#FFEBEE;border:2px solid #FFCDD2;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
+    <div style='background:#FCECE8;border:2px solid #EFCFC9;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center'>
         <div>
-            <h4 style='color:#C62828;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
-            <p style='color:#B71C1C;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
+            <h4 style='color:#A83C32;margin:0'>Toll-Free Kisan Call Center (राष्ट्रीय कृषी हेल्पलाइन)</h4>
+            <p style='color:#8F3029;margin:2px 0 0;font-size:0.9rem'>Call for free instant expert advice in Marathi, Hindi & English (6 AM - 10 PM)</p>
         </div>
-        <a href='tel:18001801551' style='background:#C62828;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
+        <a href='tel:18001801551' style='background:#A83C32;color:white;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:bold'>1800-180-1551</a>
     </div>""", unsafe_allow_html=True)
 
     r1, r2, r3, r4 = st.tabs(["State & National", "Western MH & Pune", "Marathwada & Nashik", "Vidarbha & Cotton"])
@@ -2034,12 +2082,12 @@ with tab_map:
             pass
 
     outbreaks = [
-        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "Emergency Outbreak", "radius": 15000, "color": [211, 47, 47, 180]},
-        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "Warning", "radius": 20000, "color": [245, 124, 0, 180]},
-        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "Emergency Outbreak", "radius": 12000, "color": [211, 47, 47, 180]},
-        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "Emergency Outbreak", "radius": 25000, "color": [211, 47, 47, 180]},
-        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "Advisory Watch", "radius": 18000, "color": [251, 192, 45, 180]},
-        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "Warning", "radius": 10000, "color": [245, 124, 0, 180]}
+        {"district": "Nashik", "lat": 20.0059, "lon": 73.7898, "issue": "Fall Armyworm (लष्करी अळी)", "crop": "Maize / मका", "severity": "Emergency Outbreak", "radius": 15000, "color": [174, 60, 50, 180]},
+        {"district": "Kolhapur", "lat": 16.7050, "lon": 74.2433, "issue": "Sugarcane Red Rot (ऊस तांबेरा)", "crop": "Sugarcane / ऊस", "severity": "Warning", "radius": 20000, "color": [183, 121, 31, 180]},
+        {"district": "Pune (Baramati)", "lat": 18.1519, "lon": 74.5768, "issue": "Early Shoot Borer (खोड कीड)", "crop": "Sugarcane / ऊस", "severity": "Emergency Outbreak", "radius": 12000, "color": [174, 60, 50, 180]},
+        {"district": "Nagpur", "lat": 21.1458, "lon": 79.0882, "issue": "Pink Bollworm (गुलाबी बोंडअळी)", "crop": "Cotton / कापूस", "severity": "Emergency Outbreak", "radius": 25000, "color": [174, 60, 50, 180]},
+        {"district": "Sambhajinagar", "lat": 19.8762, "lon": 75.3433, "issue": "Whitefly Pest (पांढरी माशी)", "crop": "Cotton / कापूस", "severity": "Advisory Watch", "radius": 18000, "color": [180, 146, 38, 180]},
+        {"district": "Solapur", "lat": 17.6599, "lon": 75.9064, "issue": "Aphids Damage (मावा)", "crop": "Vegetables / भाजीपाला", "severity": "Warning", "radius": 10000, "color": [183, 121, 31, 180]}
     ]
 
     layer = pdk.Layer(
@@ -2082,8 +2130,8 @@ with tab_map:
             st.markdown(f"""
             <div class='contact-card'>
                 <span class='{badge_type}'>{ob['severity']}</span>
-                <h4 style='margin:8px 0 2px;color:#1F4E2B'>{ob['district']} — {ob['issue']}</h4>
-                <p style='margin:0;font-size:0.88rem;color:#558B2F'>
+                <h4 style='margin:8px 0 2px;color:#184D2B'>{ob['district']} — {ob['issue']}</h4>
+                <p style='margin:0;font-size:0.88rem;color:#477A38'>
                 <b>Affected Crop:</b> {ob['crop']} | <b>Impact Radius:</b> {ob['radius']//1000} km{reg_info}
                 </p>
             </div>""", unsafe_allow_html=True)
@@ -2196,7 +2244,7 @@ with tab_schemes:
         with target_col:
             st.markdown(f"""
             <div class='scheme-card' style='margin-bottom:16px'>
-                <span class='figma-badge' style='background:#1F4E2B;color:white'>{sc['cat']}</span>
+                <span class='figma-badge' style='background:#184D2B;color:white'>{sc['cat']}</span>
                 <h4 style='margin-top:10px'>{sc['name']}</h4>
                 <p><b>Benefit:</b> {sc['benefit']}<br>
                 <b>Eligibility:</b> {sc['eligibility']}<br>
@@ -2212,7 +2260,7 @@ with tab_schemes:
 # FOOTER
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
-<div style='text-align:center;padding:20px;color:#558B2F;font-size:0.85rem;border-top:1px solid #DCEDC8;margin-top:40px'>
+<div style='text-align:center;padding:20px;color:#477A38;font-size:0.85rem;border-top:1px solid #D5E3CF;margin-top:40px'>
 <b>MahaKrishi AI</b> | महाकृषि | Maharashtra Government Hackathon Initiative<br>
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
