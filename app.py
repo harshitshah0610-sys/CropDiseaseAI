@@ -468,43 +468,63 @@ if GEMINI_KEY:
 
 # ─────────────────────────────────────────────────────────────
 # CONFIDENCE POP-UPS
+# (Rendered as a non-blocking animated overlay using the app's own
+#  cardRiseIn / pageFadeIn keyframes — NOT st.dialog, so it never
+#  pauses script execution and every other animation on the page
+#  keeps working exactly as before.)
 # ─────────────────────────────────────────────────────────────
-@st.dialog("⚠️ Image Not Clear")
-def show_blurry_image_popup(conf: float):
+def show_blurry_image_popup(conf: float, popup_id: str):
     st.markdown(f"""
-    <div style='text-align:center;padding:8px 0'>
-        <h3 style='color:#E65100;margin-bottom:6px'>Image is Blurry / Not Clear</h3>
-        <p style='color:#444;font-size:0.95rem'>
-            Our AI could only detect this with <b>{conf:.1f}%</b> confidence, which is below the
-            reliable threshold (45%).
+    <div id="{popup_id}" style="position:fixed;inset:0;z-index:9999;
+         background:rgba(0,0,0,0.45);display:flex;align-items:center;
+         justify-content:center;animation:pageFadeIn 0.25s ease both;">
+      <div style="background:#fff;border-radius:16px;max-width:380px;width:90%;
+           padding:26px 24px;text-align:center;animation:cardRiseIn 0.35s ease both;
+           box-shadow:0 10px 40px rgba(0,0,0,0.28);">
+        <h3 style="color:#E65100;margin:0 0 10px">⚠️ Image is Blurry / Not Clear</h3>
+        <p style="color:#444;font-size:0.92rem;margin:0 0 8px">
+          Our AI could only detect this with <b>{conf:.1f}%</b> confidence — below the reliable
+          threshold (45%).
         </p>
-        <p style='color:#444;font-size:0.95rem'>
-            📸 Please upload a <b>clear photo of the crop</b> — hold the camera steady, use bright
-            natural light, and make sure the leaf fills most of the frame.
+        <p style="color:#444;font-size:0.92rem;margin:0 0 18px">
+          📸 Please upload a <b>clear photo of the crop</b> — hold the camera steady, use bright
+          natural light, and make sure the leaf fills most of the frame.
         </p>
+        <button onclick="document.getElementById('{popup_id}').style.display='none'"
+          style="background:#2F6B39;color:#fff;border:none;padding:10px 24px;border-radius:8px;
+          font-weight:600;cursor:pointer;width:100%;font-size:0.95rem;">
+          OK, I'll Retake the Photo
+        </button>
+      </div>
     </div>
     """, unsafe_allow_html=True)
-    if st.button("OK, I'll Retake the Photo", type="primary", use_container_width=True):
-        st.rerun()
 
 
-@st.dialog("🩺 Consult an Expert")
-def show_consult_expert_popup(conf: float):
+def show_consult_expert_popup(conf: float, popup_id: str):
     st.markdown(f"""
-    <div style='text-align:center;padding:8px 0'>
-        <h3 style='color:#BF360C;margin-bottom:6px'>AI Confidence Too Low</h3>
-        <p style='color:#444;font-size:0.95rem'>
-            The AI's confidence for this image is only <b>{conf:.1f}%</b>, which is too low
-            (below 20%) to give a reliable diagnosis.
+    <div id="{popup_id}" style="position:fixed;inset:0;z-index:9999;
+         background:rgba(0,0,0,0.45);display:flex;align-items:center;
+         justify-content:center;animation:pageFadeIn 0.25s ease both;">
+      <div style="background:#fff;border-radius:16px;max-width:380px;width:90%;
+           padding:26px 24px;text-align:center;animation:cardRiseIn 0.35s ease both;
+           box-shadow:0 10px 40px rgba(0,0,0,0.28);">
+        <h3 style="color:#BF360C;margin:0 0 10px">🩺 Consult an Expert</h3>
+        <p style="color:#444;font-size:0.92rem;margin:0 0 8px">
+          The AI's confidence for this image is only <b>{conf:.1f}%</b> — too low (below 20%)
+          for a reliable diagnosis.
         </p>
-        <p style='color:#444;font-size:0.95rem'>
-            👨‍🌾 We recommend you <b>consult an agriculture expert</b> or your nearest
-            Krishi Vigyan Kendra for an accurate assessment of your crop.
+        <p style="color:#444;font-size:0.92rem;margin:0 0 18px">
+          👨‍🌾 We recommend you <b>consult an agriculture expert</b> or your nearest Krishi
+          Vigyan Kendra for an accurate assessment of your crop.
         </p>
+        <button onclick="document.getElementById('{popup_id}').style.display='none'"
+          style="background:#BF360C;color:#fff;border:none;padding:10px 24px;border-radius:8px;
+          font-weight:600;cursor:pointer;width:100%;font-size:0.95rem;">
+          OK, Got It
+        </button>
+      </div>
     </div>
     """, unsafe_allow_html=True)
-    if st.button("OK, Got It", type="primary", use_container_width=True):
-        st.rerun()
 
 
 # ─────────────────────────────────────────────────────────────
@@ -556,6 +576,27 @@ def log_registration_with_openpyxl(name: str, phone: str, district: str):
     except Exception as e:
         # Don't block registration if the log write fails; just warn.
         st.warning(f"Could not log registration to Excel: {e}")
+
+
+def init_register_log_excel():
+    """
+    Make sure user_register_log.xlsx exists (with header row) as soon as
+    the app starts, instead of only being created after the very first
+    registration. Safe to call on every run — it's a no-op if the file
+    is already there.
+    """
+    if not os.path.exists(REGISTER_LOG_FILE):
+        try:
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Registrations"
+            ws.append(["Timestamp", "Name", "Phone", "District"])
+            wb.save(REGISTER_LOG_FILE)
+        except Exception as e:
+            st.warning(f"Could not create registration log Excel file: {e}")
+
+
+init_register_log_excel()
 
 
 def append_alert_to_excel(reporter_name: str, reporter_phone: str, district: str,
@@ -1698,10 +1739,11 @@ with tab_detect:
                         popup_key = f"popup_shown_{uploaded.name}_{conf:.1f}"
                         if not st.session_state.get(popup_key, False):
                             st.session_state[popup_key] = True
+                            popup_id = "popup_" + hashlib.md5(popup_key.encode()).hexdigest()[:10]
                             if conf < CONF_THRESHOLD_EXPERT:
-                                show_consult_expert_popup(conf)
+                                show_consult_expert_popup(conf, popup_id)
                             else:
-                                show_blurry_image_popup(conf)
+                                show_blurry_image_popup(conf, popup_id)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
                         status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
