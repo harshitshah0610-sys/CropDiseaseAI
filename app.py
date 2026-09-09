@@ -15,6 +15,8 @@ import hashlib
 import pydeck as pdk
 import pandas as pd
 from datetime import datetime
+import openpyxl
+from openpyxl import Workbook, load_workbook
 
 # ─────────────────────────────────────────────────────────────
 # CUSTOM BRAND MARK — real MahaKrishi logo image
@@ -436,8 +438,11 @@ DEVICE   = torch.device("cpu")
 EXCEL_SIGNIN_FILE = os.path.join(os.path.dirname(__file__), "farmer_signins.xlsx")
 EXCEL_ALERTS_FILE = os.path.join(os.path.dirname(__file__), "disease_alerts.xlsx")
 
-CONF_THRESHOLD_LOW  = 45.0   # Below this show low-confidence warning
-CONF_THRESHOLD_ALERT = 60.0  # Above this show "Alert Nearby Farmers" button
+CONF_THRESHOLD_LOW    = 45.0  # Below this show blurry-image popup
+CONF_THRESHOLD_EXPERT = 20.0  # Below this show consult-an-expert popup
+CONF_THRESHOLD_ALERT  = 60.0  # Above this show "Alert Nearby Farmers" button
+
+REGISTER_LOG_FILE = os.path.join(os.path.dirname(__file__), "user_register_log.xlsx")
 
 ALL_DISTRICTS = [
     "Pune", "Nashik", "Kolhapur", "Solapur", "Chhatrapati Sambhajinagar",
@@ -462,6 +467,47 @@ if GEMINI_KEY:
 
 
 # ─────────────────────────────────────────────────────────────
+# CONFIDENCE POP-UPS
+# ─────────────────────────────────────────────────────────────
+@st.dialog("⚠️ Image Not Clear")
+def show_blurry_image_popup(conf: float):
+    st.markdown(f"""
+    <div style='text-align:center;padding:8px 0'>
+        <h3 style='color:#E65100;margin-bottom:6px'>Image is Blurry / Not Clear</h3>
+        <p style='color:#444;font-size:0.95rem'>
+            Our AI could only detect this with <b>{conf:.1f}%</b> confidence, which is below the
+            reliable threshold (45%).
+        </p>
+        <p style='color:#444;font-size:0.95rem'>
+            📸 Please upload a <b>clear photo of the crop</b> — hold the camera steady, use bright
+            natural light, and make sure the leaf fills most of the frame.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("OK, I'll Retake the Photo", type="primary", use_container_width=True):
+        st.rerun()
+
+
+@st.dialog("🩺 Consult an Expert")
+def show_consult_expert_popup(conf: float):
+    st.markdown(f"""
+    <div style='text-align:center;padding:8px 0'>
+        <h3 style='color:#BF360C;margin-bottom:6px'>AI Confidence Too Low</h3>
+        <p style='color:#444;font-size:0.95rem'>
+            The AI's confidence for this image is only <b>{conf:.1f}%</b>, which is too low
+            (below 20%) to give a reliable diagnosis.
+        </p>
+        <p style='color:#444;font-size:0.95rem'>
+            👨‍🌾 We recommend you <b>consult an agriculture expert</b> or your nearest
+            Krishi Vigyan Kendra for an accurate assessment of your crop.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("OK, Got It", type="primary", use_container_width=True):
+        st.rerun()
+
+
+# ─────────────────────────────────────────────────────────────
 # EXCEL HELPER FUNCTIONS
 # ─────────────────────────────────────────────────────────────
 def append_signin_to_excel(name: str, phone: str, district: str, action: str, password_hash: str = ""):
@@ -483,6 +529,33 @@ def append_signin_to_excel(name: str, phone: str, district: str, action: str, pa
     else:
         updated = pd.DataFrame([new_row])
     updated.to_excel(EXCEL_SIGNIN_FILE, index=False)
+
+
+def log_registration_with_openpyxl(name: str, phone: str, district: str):
+    """
+    Log every new user registration into a dedicated Excel sheet using
+    openpyxl directly (as opposed to the pandas-based helper above).
+    Creates the workbook with a header row on first use, then appends
+    one row per registration.
+    """
+    headers = ["Timestamp", "Name", "Phone", "District"]
+    row = [datetime.now().strftime("%Y-%m-%d %H:%M:%S"), name, phone, district]
+
+    try:
+        if os.path.exists(REGISTER_LOG_FILE):
+            wb = load_workbook(REGISTER_LOG_FILE)
+            ws = wb.active
+        else:
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Registrations"
+            ws.append(headers)
+
+        ws.append(row)
+        wb.save(REGISTER_LOG_FILE)
+    except Exception as e:
+        # Don't block registration if the log write fails; just warn.
+        st.warning(f"Could not log registration to Excel: {e}")
 
 
 def append_alert_to_excel(reporter_name: str, reporter_phone: str, district: str,
@@ -720,6 +793,7 @@ def show_login_page():
                     else:
                         append_signin_to_excel(name_clean, phone_clean, rg_district, "Register",
                                                password_hash=hash_password(pwd_clean))
+                        log_registration_with_openpyxl(name_clean, phone_clean, rg_district)
                         st.session_state["logged_in"] = True
                         st.session_state["farmer_name"] = name_clean
                         st.session_state["farmer_phone"] = phone_clean
@@ -1089,38 +1163,6 @@ def check_image_quality(pil_image: Image.Image) -> tuple[bool, str]:
         )
 
     return True, ""
-
-
-@st.dialog("⚠️ Low Confidence Detection")
-def show_low_confidence_dialog(name: str, conf: float):
-    """Popup shown when AI diagnosis confidence is below CONF_THRESHOLD_LOW."""
-    st.markdown(f"""
-    <div style='text-align:center;padding:6px 0 14px'>
-        <p style='color:#BF360C;font-size:0.95rem;margin:0'>
-            The AI's best guess was <b>{name}</b>, but it is only
-            <b>{conf:.1f}%</b> confident — below the {CONF_THRESHOLD_LOW:.0f}% reliability threshold.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.info(
-        "**Tip for a better result:** Retake the photo in bright natural daylight, "
-        "hold the camera steady, and make sure a single leaf/affected area fills most "
-        "of the frame without shadows or blur."
-    )
-
-    st.markdown("<div style='margin-top:6px'></div>", unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("📷 Retake Photo", use_container_width=True, type="primary"):
-            st.rerun()
-    with col2:
-        st.link_button(
-            "☎️ Consult an Expert",
-            "tel:18001801551",
-            use_container_width=True
-        )
-    st.caption("Toll-Free Kisan Call Center: 1800-180-1551 · or open the **Helpline** tab for the full specialist directory.")
 
 
 def predict_crop_issue(model, class_names, pil_image: Image.Image):
@@ -1652,7 +1694,14 @@ with tab_detect:
                             <h4 style='color:#E65100;margin:10px 0 4px'>Best Match: {name}</h4>
                             <p style='margin:0;color:#BF360C'>AI Confidence: <b>{conf:.1f}%</b> — This is below the reliable threshold (45%)</p>
                         </div>""", unsafe_allow_html=True)
-                        show_low_confidence_dialog(name, conf)
+
+                        popup_key = f"popup_shown_{uploaded.name}_{conf:.1f}"
+                        if not st.session_state.get(popup_key, False):
+                            st.session_state[popup_key] = True
+                            if conf < CONF_THRESHOLD_EXPERT:
+                                show_consult_expert_popup(conf)
+                            else:
+                                show_blurry_image_popup(conf)
                     else:
                         badge_cls = "badge-success" if healthy else ("badge-warning" if is_pest_mode else "badge-emergency")
                         status_txt = "Healthy Crop! " if healthy else ("Pest Detected! " if is_pest_mode else "Disease Detected! ")
@@ -2217,4 +2266,3 @@ st.markdown("""
 Powered by PyTorch EfficientNet-B0 + Google Gemini AI + gTTS Voice Advisory + PyDeck Outbreak Maps
 </div>
 """, unsafe_allow_html=True)
-
